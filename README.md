@@ -1,2 +1,2 @@
 # Practical Alloy
-## An hands-on guide to formal software design
+## A hands-on guide to formal software design
