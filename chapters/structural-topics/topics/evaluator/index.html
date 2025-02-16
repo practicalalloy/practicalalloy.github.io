@@ -1,0 +1,546 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2025-02-16T20:25:24+00:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Arrow multiplicity constraints" href="../bestiary/index.html" /><link rel="prev" title="Higher-arity relations" href="../nary-relations/index.html" />
+
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>The instance evaluator - Practical Alloy</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
+    <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #2a5adf;
+  --color-brand-content: #2a5adf;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">Practical Alloy</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Practical Alloy</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Preface</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-alloy/index.html">About Alloy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-book/index.html">About this book</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../structural-modeling/index.html">Structural modeling</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Advanced topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../subset-signatures/index.html">Subset signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../enumerations/index.html">Enumeration signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">Commands in detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization/index.html">Visualization customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nary-relations/index.html">Higher-arity relations</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">The instance evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bestiary/index.html">Arrow multiplicity constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type-system/index.html">Type system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/index.html">Module system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ordering/index.html">The predefined <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../relational-logic/index.html">A relational logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model-finding/index.html">Model finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing-instances/index.html">Encoding test instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recursion/index.html">Handling recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integers/index.html">Working with integers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../signature-facts/index.html">Signature facts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../behavioral-modeling/index.html">Behavioral modeling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../behavioral-topics/index.html">Advanced topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/temporal-logic/index.html">A temporal logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/mutable-toplevel-signatures/index.html">Mutable top-level signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/pointwise-effects/index.html">Pointwise effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/macros/index.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/meta/index.html">Meta-capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/event-depiction/index.html">An idiom for event depiction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/scenarios/index.html">Encoding trace scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/evaluator/index.html">The trace evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/fairness/index.html">Safety, liveness, and fairness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/inductive-invariants/index.html">Inductive invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/sequences/index.html">Sequences</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocol-design/index.html">Protocol design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Index</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../_sources/chapters/structural-topics/topics/evaluator/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="the-instance-evaluator">
+<span id="index-0"></span><span id="evaluator-instance"></span><h1>The instance evaluator<a class="headerlink" href="#the-instance-evaluator" title="Link to this heading">¶</a></h1>
+<p>The Alloy instance visualizer has an evaluator that can be used to compute the
+value of any relational expression or formula over the instance being inspected
+in the visualizer. For more complex instances and counter-examples, this feature
+is helpful to support their interpretation.</p>
+<section id="evaluating-expressions">
+<h2>Evaluating expressions<a class="headerlink" href="#evaluating-expressions" title="Link to this heading">¶</a></h2>
+<p id="index-1">To access this evaluator just press the <span class="guilabel">Evaluator</span> button in the toolbar of the instance visualizer window.  To close the evaluator and return to the normal instance visualizer just press the <span class="guilabel">Close Evaluator</span> button in the toolbar.</p>
+<p>To illustrate this feature, we will use an instance that could have been returned as the result of the empty
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> from <a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a> chapter. While this is clearly
+a simple instance that could perhaps be easily understood through the
+visualization, as models and instances become more complex, so does the
+evaluator become more relevant.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator12.png" style="width: 600px;" />
+</a>
+<p>To ask for the value of an expression just type it in the evaluator and press
+<kbd class="kbd docutils literal notranslate">Enter</kbd>. Every relational expression denotes a relation of a certain arity.
+By default, the visualizer depicts the values of the signatures and fields of an
+instance as labelled graphs. The visualizer can also be set to depict the value
+of a relation (of any arity) as a table where each line is one of the tuples
+contained in it. The evaluator uses this latter representation to show the
+values of relational expressions.</p>
+<p>A basic use of the evaluator is to just ask for the values of the signatures and
+fields of the model, such as <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code>. However, we can
+actually evaluate the value of any relational expression. For instance, we can
+ask for the value of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">objects</span></code> to get the relation between
+directories and the objects they contain, or
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span><span class="o">.^(</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">)</span></code> to get all objects indirectly contained inside
+the root using the transitive closure. We can also refer any auxiliary function
+defined in the model, so we can also just call function <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">descendants</span></code> to
+get the descendants of the root. The result is shown below. Note that you can
+navigate through the evaluator log with <kbd class="kbd docutils literal notranslate">↑</kbd> and <kbd class="kbd docutils literal notranslate">↓</kbd>.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator21.png" style="width: 600px;" />
+</a>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/evaluating-expressions"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/evaluating-expressions</span></a></div>
+</div>
+</section>
+<section id="evaluating-formulas">
+<h2>Evaluating formulas<a class="headerlink" href="#evaluating-formulas" title="Link to this heading">¶</a></h2>
+<p>The evaluator can also be used to ask for the values of arbitrary formulas,
+which makes it very useful and convenient to debug constraints. For example,
+when inspecting a counter-example, we can use the evaluator to find out which
+sub-formulas of a constraint have been broken in that particular case. Below is
+an example where we evaluate certain formulas over this instance, such as
+testing whether there are any directories besides the root, or whether the root
+is indirectly contained in itself. As expected, you can also call any auxiliary functions and predicates defined in the model to ease this process. So we test whether the root is in its own descendants using function <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">descendants</span></code>, or even using the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">reachable</span></code> predicate directly.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator31.png" style="width: 600px;" />
+</a>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/evaluating-formulas"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/evaluating-formulas</span></a></div>
+</div>
+</section>
+<section id="referring-to-atoms">
+<h2>Referring to atoms<a class="headerlink" href="#referring-to-atoms" title="Link to this heading">¶</a></h2>
+<p id="index-2">Another feature of the evaluator that is sometimes helpful is that, when
+inspecting an instance, unlike when writing a specification, we can refer to
+concrete atoms in expressions. This is possible because the universe of atoms
+for a specific instance is known during evaluation. To refer to a concrete atom
+in the evaluator, you should use the label of its most specific extension signature as
+the prefix and its numerical identifier as a suffix, separated by a <code class="code docutils literal notranslate"><span class="pre">$</span></code>
+mark (except for special atoms such as those from <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kt">Int</span></code>). Note that subset
+signatures do not affect the name of an atom (since each atom may belong to
+multiple subsets). Back to the example, you can for instance query the object of
+entry <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry$</span><span class="mi">2</span></code> with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry$</span><span class="mi">2</span><span class="o">.</span><span class="n">object</span></code>, or find out all objects that
+have name <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name$</span><span class="mi">1</span></code> with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="n">Name$</span><span class="mi">1</span><span class="o">).</span><span class="n">object</span></code>. Or you can call <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">descendants</span></code> on <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir$</span><span class="mi">0</span></code> to find out the indirect contents of that directory.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator4.png" style="width: 600px;" />
+</a>
+<p id="index-3">You might have noticed that in this instance, the atoms of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code> do not appear numbered in the visualization. This is because, by
+default, the visualizer does not number the atoms of  signatures that directly contain just one atom to improve
+readability (in this case signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> actually has 2 atoms, but one
+of them is in a more specific extension, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code>). To refer to those
+atoms, you can use index 0, namely <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir$</span><span class="mi">0</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File$</span><span class="mi">0</span></code> (note that
+a call to <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> refers to the signature and will actually return
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir$</span><span class="mi">0</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root$</span><span class="mi">0</span></code>).</p>
+<p>This mismatch between the names of the atoms in the evaluator, and the
+pretty-printed version in the graphical visualizer can be a source of confusion.
+For instance, if you try to call <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry2</span></code> you’ll get an error as that atom
+does not exist (and it could actually refer to another signature since signature
+names are alpha-numerical). In fact, we can even change the name of the atoms in
+the graphical visualization through theme customizations, but these do not apply
+to the evaluator, and the new name of atoms in the graph will not be recognized
+by the evaluator. If this gets confusing, you can always temporarily tick the
+option <span class="guilabel">Use original atom names</span> in the theme customizer, and all
+atoms in the visualization will be shown with their original name as in the
+evaluator. Below is the result after changing this option in the theme.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator5.png" style="width: 600px;" />
+</a>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/referring-to-atoms"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/referring-to-atoms</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Visualization customization</div>
+<p class="sd-card-text">We’ve mentioned that the visualizer can be customized. Learn in more
+detail how this can simplify the understanding of instances.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../visualization/index.html#viz-customization"><span class="std std-ref">Visualization customization</span></a></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../bestiary/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Arrow multiplicity constraints</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../nary-relations/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Higher-arity relations</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021-2025, Alcino Cunha, Nuno Macedo, Julien Brunel, David Chemouil
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Feb 16, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">The instance evaluator</a><ul>
+<li><a class="reference internal" href="#evaluating-expressions">Evaluating expressions</a></li>
+<li><a class="reference internal" href="#evaluating-formulas">Evaluating formulas</a></li>
+<li><a class="reference internal" href="#referring-to-atoms">Referring to atoms</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "practicalalloy/practicalalloy.github.io");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

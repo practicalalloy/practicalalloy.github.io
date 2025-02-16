@@ -1,0 +1,279 @@
+.. _event-depiction: 
+
+An idiom for event depiction
+==============================
+
+.. index::
+  event; visualization
+  trace; visualization
+
+When validating the file sharing example model in chapter
+:ref:`behavioral-modeling`, the reader has probably realized that the Alloy visualizer
+does not show the event (or events) occurring in a given transition. This is
+because, as customary in Alloy, events were modeled as regular predicates
+restricting two succeeding states, and Alloy has no way of knowing that those
+particular predicates should be interpreted as events. In this section we will devise an *idiom*
+(a modeling pattern) that allows the depiction of events in the visualizer. As
+an useful side effect, it also eases the specifications of certain classes of
+constraints. 
+
+Let's consider an instance returned when executing command :alloy:`example`, whose transitions are shown below.
+
+.. image:: instance1.png
+   :width: 500px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :alt: Get the code to generate this instance.
+
+.. image:: instance2.png
+   :width: 500px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :alt: Get the code to generate this instance.
+
+.. image:: instance3.png
+   :width: 500px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :alt: Get the code to generate this instance.
+
+.. image:: instance4.png
+   :width: 500px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :alt: Get the code to generate this instance.
+
+After a short examination, and based upon our knowledge of the specification, we
+can determine that this trace uploads a file, shares it, deletes it, empties the trash and then stutters forever. However, in the general
+case, for more complex specifications, the fact that events aren't displayed
+makes their interpretation tedious and error-prone. 
+
+
+.. card-carousel:: 2
+
+   .. card:: Visualization customization
+      :link-type: ref
+      :link: viz-customization
+
+      :octicon:`beaker` Further reading
+      ^^^
+      This topic builds on the standard visualization theme customization features of the Analyzer. Learn in detail how they work.
+
+
+
+Depicting parameterless events
+---------------------------------
+
+The crux of the idiom presented here is to use *derived relations* to represent
+the events happening in a given state. In particular, the value of these
+relations is calculated for each particular state, so their value may change
+over the trace. Yet, it may not seem immediately obvious how to use them since
+derived relations define relations based on existing signatures, while we
+haven't got any such signature for events, only predicates. No problem! Let's
+introduce a signature (more precisely: an enumeration, since the required atoms
+are known and we won't need to add fields) representing event names. Observe how
+we use the capitalized names of predicates (corresponding to events) as elements
+of the enumeration, in order to enhance readability. 
+
+.. code-block::
+
+  enum Event { 
+    // event names
+    Empty, Upload, Delete, Restore, Share, Download, Stutter
+  }
+
+.. index::
+  Hide unconnected nodes option
+
+Also, in the theme customization menu, change the shape and color of events, for instance to a blue parallelogram. Then set :guilabel:`Hide unconnected nodes` to :guilabel:`On` for :alloy:`Event` nodes, as we don't want to see all event names at all states, but only those corresponding to events *occurring in a given state*.
+
+
+Now, let's introduce a first derived relation. Let us start with the simplest case, the events that take no parameters, :alloy:`empty` and :alloy:`stutter`.
+
+
+.. code-block::
+
+  fun empty_happens : set Event { 
+    { e : Empty | empty }
+  }
+
+  fun stutter_happens : set Event { 
+    { e : Stutter | stutter }
+  }
+
+This definition may seem strange at first but this is indeed what we want. Sets by comprehension retrieve a set of atoms for which a certain formula is true; if this formula is temporal, a different set may be returned in each state. So the :alloy:`empty_happens` derived relation yields, in every state, a subset of :alloy:`Event` that will be populated (exactly by singleton :alloy:`Empty`) if the :alloy:`empty` predicate is true, and empty otherwise.
+
+Let us observe the effect of adding this derived relation to the visualization. First, open the theme customization menu and set both :guilabel:`Hide unconnected nodes` and :guilabel:`Show as labels` to :guilabel:`Off` for the subsets :alloy:`$empty_happens` and :alloy:`$stutter_happens`. This will override the hiding of :alloy:`Event` nodes that belong to those subsets. 
+
+.. image:: instance5.png
+   :width: 750px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84
+   :alt: Get the code to generate this instance.
+
+Then head to the last states of the trace (where the :alloy:`empty` and :alloy:`stutter` events occur). You will now be able to observe the event happening, as shown below. You'll notice that in the last state both the `Stutter` and `Empty` atoms are shown. This is because the current version of the *empty* action has no guard, and thus can be applied even if there is no file in the trash. In those cases, its effect is indistinguishable from stuttering: nothing happens.
+
+.. image:: instance6.png
+   :width: 550px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-parameterless-events
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Depicting events with parameters
+---------------------------------
+
+Now, let's consider events that have parameters, such as the :alloy:`upload` event that takes a file as a parameter. In this case, the derived relation shouldn't just yield the :alloy:`Upload` name as we wouldn't be able to tell for which file (or files) it is satisfied. We rather return the set of all pairs whose first coordinate is the :alloy:`Upload` name and whose second coordinate is a file on which the *upload* event happens. And likewise for the other events that take a single parameter.
+
+.. code-block::
+
+  fun upload_happens : Event -> File {
+    { e : Upload, f : File | upload[f] }
+  }
+
+  fun delete_happens : Event -> File {
+    { e : Delete, f : File | delete[f] }
+  }
+
+  fun restore_happens : Event -> File {
+    { e : Restore, f : File | restore[f] }
+  }
+
+  fun download_happens : Event -> Token {
+    { e : Share, t : Token | download[t] }
+  }
+
+Now the first state of the trace is as follows. Since :alloy:`Event` nodes related by :alloy:`upload_happens` are no longer unconnected, they will show up in the visualization without needing to change the theme as was the case for the events without parameters.
+
+.. image:: instance7.png
+   :width: 650px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84
+   :alt: Get the code to generate this instance.
+
+Finally, we can proceed with the last event, *share*. Since this event takes two parameters, the derived relation representing it will now be ternary, the first coordinate having the :alloy:`Share` name and the other two the file and the token on which the *share* event occurs.
+
+.. code-block::
+
+  fun share_happens : Event -> File -> Token {
+    { e : Share, f : File, t : Token | share[f, t] }
+  }
+
+The result is as follows.
+
+.. image:: instance8.png
+   :width: 650px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84
+   :alt: Get the code to generate this instance.
+
+As you start visualizing a trace, you may realize that the depiction of events without further theme customization is deficient when an event takes two parameters or more. A possible alternative visualization is to show event parameters as labels of the event name rather than edges. However, we need to somehow identify which events occur in each state without relying on those edges and the :guilabel:`Hide unconnected nodes` option. To do so, we can introduce a further derived relation that just returns the set of names of events occurring in a state.
+
+.. code-block::
+
+  fun events : set Event { 
+    empty_happens + stutter_happens + 
+    (upload_happens + delete_happens + restore_happens).File + 
+    download_happens.Token + share_happens.Token.File
+  }  
+
+Note that, for instance, expression :alloy:`upload_happens.File` projects away any parameter of upload events and keeps only the event name. Then the following theme can be configured:
+
+- Uncheck :guilabel:`Hide unconnected nodes` for the :alloy:`$events` set and set :guilabel:`Show as labels` to :guilabel:`Off`.
+- In the :guilabel:`relations` part, set all derived relations for events to :guilabel:`Show as attribute` and change the displayed name for the derived relations to :alloy:`args` (shown below for :alloy:`$upload_happens`).
+
+.. image:: instance9.png
+   :width: 750px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_9/filesharing.als#L78-L84
+   :alt: Get the code to generate this instance.
+   
+Notice how the arguments of events can be seen clearly (namely :alloy:`File1` for the :alloy:`upload` event in state 0, and :alloy:`File1` and :alloy:`Token1` for the :alloy:`share` event in state 1).
+
+On a last note, in our file sharing example all events are interleaved, meaning that exactly one event occurs in each state (except for *empty* actions indistinguishable from stuttering). This is not necessarily the case, and models that allow true concurrency may allow many events to occur simultaneously, which hinders even further the identification of the occurring events without a proper visualization. Luckily, the idiom we just presented will work exactly the same if multiple events occur in a state: the derived relations will just return additional tuples, which will be depicted as well.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-events-with-parameters
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Uses of the event idiom beyond visualization
+--------------------------------------------
+
+This idiom is also useful to specify certain classes of formulas in a nicer way. First, the idiom allows to greatly simplify the :alloy:`transitions` fact.
+
+.. code-block::
+
+  fact transitions {
+    // The system either evolves according to the defined actions or stutters
+    always some events
+  }
+
+You may also check that it is never possible to witness the occurrence of two indistinguishable events in the same state, which is true in this case.
+
+.. code-block::
+
+  check at_most_one_event {
+    always lone events
+  } for 3
+
+This will return a counter-example since, as we've seen above, *empty* can occur with an empty trash and in that case is indistinguishable from stuttering. However, if we've added a guard to the `empty` action predicate, it would become a valid property.
+
+Now suppose you want to see the example of a trace in which two :alloy:`share` events happen in a row (for arbitrary arguments). Until now, you would have had to write this in a rather contrived way, for instance as follows.
+
+.. code-block::
+
+  run two_shares_in_a_row {
+    eventually (
+      (some f : File, t : Token | share[f, t]) and 
+      after (some f : File, t : Token | share[f, t])
+    )
+  } for 3
+
+The derived relations defined above are also useful to specify that an event occurs (for some parameters). It suffices  to specify that the corresponding derived relation is non-empty. So, the above run could be specified just as follows.
+
+.. code-block::
+
+  run two_shares_in_a_row {
+    eventually (some share_happens and after some share_happens)
+  } for 3
+
+Predicates and functions belong to different namespaces in Alloy, and they can always be disambiguated based on the syntactic context. For this reason, it is possible to give to the functions defined above the same name as the respective predicate events.
+If we did so, to check that event :alloy:`e` occurs, we just need  to check :alloy:`some e`.
+
+As a final remark, notice that this idiom doesn't entail any performance penalty:
+
+- If derived relations are only used for the depiction of events, they are only computed when visualizing instances.
+- If they are also used in formulas, for example to check if an event occurs, they actually use less variables than the version where a predicate is passed arguments quantified existentially.
+
+Thus, the only price to pay is a small but systematic inflation, albeit admittedly tedious, of our models. In the future, an extension to Alloy could easily be proposed to automate this task.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/event-idiom-beyond-visualization
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Encoding trace scenarios
+      :link-type: ref
+      :link: scenarios
+
+      :octicon:`beaker` Further reading
+      ^^^
+      The event idiom is also helpful when we are trying to encode concrete execution scenarios.
+

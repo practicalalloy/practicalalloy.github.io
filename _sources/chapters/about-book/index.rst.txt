@@ -1,0 +1,65 @@
+****************************************
+About this book
+****************************************
+
+How to read this book
+========================
+
+This book is organized in two parts, the first introducing the basics of modeling with Alloy, and the second exploring its application in the formal design of different kinds of software systems. 
+
+The part about the basics is divided in two chapters, one about :ref:`structural-modeling` and the other about :ref:`behavioral-modeling`, each illustrated with a simple case study. If you want to get a quick introduction to Alloy you can just read these two chapters. If you want to know a bit more, then you can read the advanced topics that complement them. Each of these advanced topics builds on the case study of the respective main chapter, and each can be read separately in any order at your own pace. You can also interleave the reading of the main chapters and the advanced topics, as each section of the main chapters wraps up by pointing to related advanced topics. 
+
+The part about formal design applications will have a chapter for each application domain. For example, we currently already have a chapter about :ref:`protocol-design`, where we present idioms and tips to help you model and analyze distributed software, such as suggestions on how to model message passing. In the future we intend to add more chapters covering different application domains, such as a chapter about how to use Alloy to design apps using Daniel Jackson's concepts [JAC21]_. Since these are more advanced chapters, we assume the reader already read before both chapters in the basics part, as well as some of the advanced topics. 
+
+..
+	The required advanced topics will be listed at the beginning of each application chapter.
+
+How to leave feedback
+========================
+
+The book has a comment system that allows you to leave comments or suggestions for each chapter and each advanced topic. This comment system requires you to have a `GitHub <https://github.com/>`_ account and they will appear as issues in the public book repository.
+
+Where to find the examples
+==========================
+
+All the examples in this book are available in a `public GitHub repository <https://github.com/practicalalloy/models>`_. This repository has a directory for each chapter (or advanced topic) in the book containing the example models at that chapter. Each chapter also includes direct links to the respective directory in this repository, as well as the themes that were used to customize the visualization of instances. Since running a command may result in different instances depending on the configuration, we also provide in this repository the exact command that generates all instances shown throughout the book. These can be accessed by clicking on the instance figures along the book.
+ 
+About the authors
+========================
+
+.. image:: alcino.jpg
+   :width: 110 px
+   :align: right
+
+.. image:: nuno.jpeg
+   :width: 110 px
+   :align: right
+
+.. image:: julien.jpg
+   :width: 110 px
+   :align: right
+
+.. image:: david.jpg
+   :width: 110 px
+   :align: right
+
+The authors are researchers in formal methods, focusing on making these methods more accessible to software engineers. They are the designers of Alloy 6, which introduced native behavioral modeling and verification capabilities to Alloy and its Analyzer. They have extensive experience teaching Alloy to master’s students, researchers at summer schools and conferences, and industry practitioners. Alcino and Nuno also developed the `Alloy4Fun <http://alloy4fun.inesctec.pt>`_ platform for learning Alloy.
+
+
+
+`Alcino Cunha <https://alcinocunha.github.io>`_ is an Associate Professor with Habilitation at the University of Minho and also member of the High-Assurance Software Laboratory of INESC TEC. 
+
+`Nuno Macedo <https://nmacedo.github.io/>`_ (PhD) is an Assistant Professor at the Faculty of Engineering of the University of Porto and a member of the High-Assurance Software Laboratory of INESC TEC. 
+
+
+`Julien Brunel <https://www.onera.fr/fr/staff/julien-brunel>`_  is a Senior Researcher at ONERA, the French aerospace research center, and also a member of University of Toulouse. He is also adjunct faculty at ISAE-SUPAERO, INP-ENSEEIHT and IMT-Mines Alès.
+   
+
+`David Chemouil <https://www.onera.fr/fr/staff/david-chemouil>`_ is a Senior Researcher with Habilitation at ONERA, the French aerospace research center, and also a member of University of Toulouse. He's also adjunct faculty at ENSEEIHT and ISAE Supaéro.
+
+Acknowledgements
+========================
+
+We would like to thank Daniel Jackson for his advice and support during the development of Alloy 6 and while writing this book.
+
+Some of the work on developing Alloy 6 was financed by the ERDF – European Regional Development Fund through the Operational Programme for Competitiveness and Internationalization - COMPETE 2020 Programme and by National Funds through the Portuguese funding agency, FCT - Fundação para a Ciência e a Tecnologia, within project `POCI-01-0145-FEDER-016826 <http://haslab.github.io/TRUST/>`_; and by French projects Cx (ANR-13-ASTR-0006) and FORMEDICIS (ANR-16-CE25-0007).

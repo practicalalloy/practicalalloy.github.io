@@ -1,0 +1,70 @@
+.. _pointwise-effects: 
+
+Pointwise effects
+----------------------------------------
+
+.. index::
+  event; effect
+  event; frame condition
+
+When an action modifies the value of a mutable field, one must usually specify how one part of the field is changed by the action, and how another part is left unchanged (as seen in the :ref:`behavioral-modeling` chapter, this part is called a *frame condition*). For instance, the action `share` associates a new sharing token `t` to file `f`, but other files are left unchanged by this operation.
+
+.. code::
+
+  pred share [f : File, t : Token] {
+    f in uploaded - trashed             // guard
+    historically t not in File.shared   // guard
+    shared' = shared + f->t             // effect on shared
+    uploaded' = uploaded                // no effect on uploaded
+    trashed' = trashed                  // no effect on trashed
+  }
+
+.. index::
+  relational logic; pointfree style
+  relational logic; pointwise style
+
+In the specification above, the complete effect on relation `shared`, that is the modification part and the frame condition, is specified all at once by saying how the whole field, viewed as a binary relation, is to be updated. We call this style of effect purely relational or *pointfree*.
+
+An alternative approach to the specification of effects is to rely on what we call a *pointwise* update. In this style, rather than specifying how `shared` evolves all at once, we make a distinction between the change for input file `f` specifically, and the frame condition for files other than `f`. This would result in the following alternative specification of `share`.
+
+.. code::
+
+  pred share [f : File, t : Token] {
+    f in uploaded - trashed                  // guard
+    historically t not in File.shared        // guard
+    f.shared' = f.shared + t                 // effect on f.shared
+    all g : File - f | g.shared' = g.shared  // no effect on other shared files
+    uploaded' = uploaded                     // no effect on uploaded
+    trashed' = trashed                       // no effect on trashed
+  }
+
+The same style can be used for action predicates `delete` and `download`. Notice that the latter updates relation `shared` if token `t` is in its range. Nonetheless, the pointwise style can be used even if the join is performed on the right column of the relation.
+
+.. code::
+
+  pred delete [f : File] {
+    f in uploaded - trashed                  // guard
+    trashed' = trashed + f                   // effect on trashed
+    no f.shared'                             // effect on f.shared
+    all g : File - f | g.shared' = g.shared  // no effect on other shared files
+    uploaded' = uploaded                     // no effect on uploaded
+  }
+
+  pred download [t : Token] {
+    some shared.t                             // guard
+    no shared'.t                              // effect on shared.t
+    all u : Token - t | shared'.u = shared.u  // effect on other shared tokens
+    uploaded' = uploaded                      // no effect on uploaded
+    trashed' = trashed                        // no effect on trashed
+  }
+
+Both styles are equivalent, so which one should you favor? Some people prefer the pointwise style because the modification of a field for a specific variable is arguably more salient. On the other hand, the relational style is shorter. Some people like this terseness because they can spot the effect of an action on a field in a single stroke. Ultimately, there are good arguments for both styles, so this is mainly a matter of personal taste!
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/pointwise-effects
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.

@@ -1,0 +1,226 @@
+.. _fairness:
+
+:tocdepth: 2
+
+Safety, liveness, and fairness
+==================================
+
+The temporal logic supported by Alloy is rich and allows for the definition of both safety and liveness properties. This section explores the difference between these two classes.
+
+.. index::
+  temporal logic
+  safety
+  liveness
+
+Safety vs liveness 
+-----------------------------
+
+When considering temporal properties, there is an important theoretical distinction between two categories concerning the way one can prove them. These categories were introduced by Lamport [TSE77]_ and developed by Halpern and Schneider [IPL85]_. Roughly speaking, we can distinguish between *safety* properties, that state that *something bad will not happen*, and *liveness* properties, that state that *something good will happen*. 
+
+In order to define these categories in a more formal way, let us recall that we consider that an execution trace of a system consists in an infinite sequence of states. Then, a *property* is simply a set of infinite sequences of states. Note that when using Alloy, we can specify a property using a logic formula (the property is then the set of infinite sequences of states that satisfy this formula). In the following, if :math:`\pi` is an finite sequence of states (also called prefix) and :math:`\tau` is an infinite sequence of states (a continuation of :math:`\pi`) then :math:`\pi \cdot \tau` denotes the concatenation of :math:`\pi` and :math:`\tau`.
+
+Now, let us define safety and liveness categories. In the definition of a safety property, the focus is made on the *bad thing* that the property prohibits: 
+
+   A property `P` is a safety property if any trace that violates `P` includes a *bad* prefix :math:`\pi`, that is, a prefix such that for any possible infinite continuation :math:`\tau`, :math:`\pi \cdot \tau` does not satisfy `P`. Intuitively, the only way to violate a safety property is by doing something bad which is unrecoverable. 
+
+
+In the definition of a liveness property, the prescribed *good thing* does not appear explicitly:
+
+   A property `P` is a liveness property if, for any possible prefix :math:`\pi`, there exists some infinite continuation :math:`\tau` such that :math:`\pi \cdot \tau` satisfies `P`. In other words, it is always possible to postpone the satisfaction of the *good* thing.
+
+Given a property (which, in our case, is specified using a logic formula) it is not obvious to determine whether it falls into safety or liveness category (or into none). There exist some syntactic fragments of Linear Temporal Logic that are known to be pure safety or pure liveness, such as the ones studied in [FAC94]_. For instance, if `P` is a formula not including any temporal connective, then `always P`, which is called an invariant, is a safety property, and `eventually P` and `eventually always P` are liveness properties. 
+
+Let us consider the following property from the file sharing example:
+
+.. code-block::
+
+  assert shared_are_accessible {
+    always shared.Token in uploaded - trashed
+  }
+
+This is clearly a safety property, because the formula that is in the scope of `always` does not include any temporal connective.
+
+Similarly, the following (obviously invalid) property, which states that all files will eventually be in `uploaded`, is clearly a liveness property.
+
+.. code-block::
+
+  assert all_files_in_uploaded {
+    all f : File | eventually f in uploaded
+  }
+
+For the following property, the decision wether it is a safety or liveness property is trickier:
+
+.. code-block::
+
+  assert restore_undoes_delete {
+    all f : File | always (
+      delete[f] and after restore[f] implies
+        uploaded'' = uploaded and trashed'' = trashed and shared'' = shared
+    )
+  }
+
+Indeed, the formula that is in the scope of `always` includes `after` and `'` (prime) connectives, plus whatever connective is present in the event predicates `delete` and `restore`. In order to be convinced that this is a safety or  a liveness property, an interesting perspective is to think about the possible violations of this property. Indeed, if it is a safety property, then you simply need to look at a finite prefix of a trace to be convinced that the bad thing happens (meaning that the property is violated). However, if it is a liveness property, you necessarily have to see the whole infinite trace to be convinced that the good thing does not happen. This is the reason why safety properties can be monitored (a system observer, or monitor, can detect a violation) whereas liveness properties cannot.
+
+In the case of `restore_undoes_delete`, you can convince yourself that a violation consists in a trace where some file is deleted, then restored and such that `uploaded`, `trashed` or `shared` differ between the state which is before the deletion and the state which is after the restoration. So a violation is characterized by a finite prefix (which goes until the restoration), and this prefix is unrecoverable. Thus, `restore_undoes_delete` is a safety property.
+
+Now, let us consider the property `non_restored_files_will_disappear`, which states that every file that is deleted and never again restored will eventually disappear.
+
+.. code-block::
+  
+  assert non_restored_files_will_disappear {
+    all f : File | always (
+      delete[f] and after always not restore[f] implies
+        eventually f not in uploaded
+    )
+  }
+
+Let us again consider a possible scenario that violates this property. This would be a trace where a file is deleted, never restored and present in `uploaded` forever. If you observe such a trace, the only way to be convinced that it violates the property is to inspect the whole infinite trace. Thus, `non_restored_files_will_disappear` is a liveness property. Note that inspecting infinite traces is feasible because in Alloy they are represented as finite "lasso traces", where at some point we have a loop back to a previous state. 
+
+Notice that some properties are neither safety nor liveness properties. For these properties, some violations are characterized by an unrecoverable prefix, and some other violations are only characterized by a full infinite trace. In other words, they have both safety and liveness aspects. An interesting result, called decomposition theorem [IPL14]_, states that any property is the conjunction of a safety property and a liveness property.
+
+The distinction between safety and liveness properties has a direct impact on the activity of the Alloy user when it comes to verification. Indeed, as already explained in chapter :ref:`behavioral-modeling`, verifying a safety property can be done directly using the `check` command whereas verifying a liveness property requires additional assumptions, called *fairness* assumptions, which are in charge of imposing a kind of progress of the system. 
+
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/fairness/safety-vs-liveness
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Inductive invariants
+      :link-type: ref
+      :link: inductive-invariants
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Read about a common particular case of safety properties.
+
+.. index::
+  fairness
+
+Fairness properties
+-------------------------------------------
+
+Let us look at the verification of `non_restored_files_will_disappear`. In order to satisfy it, we need to assume that the system periodically empties the trash to free up resources. In the real system, this would probably be implemented using some kind of timer. This assumption is specified with the fact `fairness_on_empty` in chapter :ref:`behavioral-modeling`.
+
+.. code-block::
+
+  fact fairness_on_empty {
+    always eventually empty
+  }
+
+
+A first remark is that this fairness assumption is imposed for all the traces of the system. So even for the verification of safety properties the solver has to take them into account, which can slow down the verification procedure significantly. To overcome this issue, a good practice is to define a fairness assumption in a predicate so that it is only considered for the verification of the liveness property.
+
+.. code-block::
+
+  pred fairness_on_empty {
+    always eventually empty
+  }
+  pred non_restored_files_will_disappear {
+    all f : File | always (
+      delete[f] and after always not restore[f] implies
+        eventually f not in uploaded
+    )
+  }
+
+Then, you can check `non_restored_files_will_disappear` under the fairness assumption.
+
+.. code-block::
+
+  check non_restored_files_will_disappear_fair {
+    fairness_on_empty implies non_restored_files_will_disappear
+  }
+
+Another remark is that, with a slightly different system, we would need a different fairness assumption. Indeed, let us consider a different version of the action `empty`, such that it can only occur if some file is in the trash. This corresponds to what is implemented in most software desktops managers, where you cannot empty the trash if it is already empty. 
+
+.. code-block::
+
+  pred empty {
+    some trashed                     // guard
+    no trashed'                      // effect on trashed
+    uploaded' = uploaded - trashed   // effect on uploaded
+    shared' = shared                 // no effect on shared
+  }
+
+With this version of `empty`, the assumption `always eventually empty` does not make sense anymore. Indeed, this would impose a constraint on the user behavior: the user has to upload and delete a file an infinite number of times. However, we still need a fairness assumption in order to satisfy `non_restored_files_will_disappear`. A relevant one is to require `empty` to eventually occur if at some point it becomes continuously enabled. Like the first fairness assumption, this one could be implemented using some kind of timer, which would start when a file is put in the trash. In fact, it corresponds to a common type of fairness called *weak fairness*, whereas the first fairness assumption that we used corresponds to a so-called *unconditional fairness* assumption.
+
+.. code-block::
+
+  pred weak_fairness_on_empty {
+    always (
+      always some trashed implies
+        eventually empty
+    )
+  }
+
+.. index::
+  event; guard
+  event; enabled
+
+Let us notice that we have specified the fact that `empty` is enabled by `some trashed`, which is the guard of event predicate `empty`. Most of the time, the guard of an action is indeed equivalent to its enabled condition but it is not true in general. Besides, extracting the guard of an action may be more than extracting one conjunct from the body of the action. For instance, if the body of an action is inside a quantifier `some x : E | ...` then the enabled condition should check for the non-emptiness of `E`, that is, it should include condition `some E`.
+
+So, you can now check `non_restored_files_will_disappear` under the weak fairness assumption. 
+
+.. code-block::
+
+  check non_restored_files_will_disappear_fair {
+    weak_fairness_on_empty implies non_restored_files_will_disappear
+  }
+
+
+There exists another common kind of fairness assumption called *strong fairness*. In the context of our file sharing app, we could illustrate it as follows. Suppose that we wanted the system to prevent files to be repeatedly put in the trash and restored again, without the trash being emptied. Such an assumption could be abstracted by the following specification.
+
+.. code-block::
+
+  pred strong_fairness_on_empty {
+    (always eventually some trashed)
+      implies always eventually empty
+  }
+
+Of course, `non_restored_files_will_disappear`, which is true under the weak fairness assumption, is also true under strong and unconditional fairness assumptions, which are both stronger than weak fairness. So our strong fairness assumption is not needed in the process of verifying `non_restored_files_will_disappear`. 
+
+A natural question is then: what is the interest of strong fairness? In fact, although it is not needed to verify this particular liveness property, the strong fairness assumption is can still be useful as a requirement, if for some reason, the specifier of the system wants to prevent any delete-restore loop without an occurrence of empty. Besides, for other systems, it happens that some expected liveness properties do not hold under a weak fairness assumption, and might require stronger  fairness. 
+
+.. index::
+  fairness; unconditional
+  fairness; strong
+  fairness; weak
+
+Assuming that we have an action `A` and that predicate `enabled[A]` specifies when `A` is enabled, the following table summarizes how the three kinds of fairness can be expressed. We recall that most of the time `enabled[A]` can be expressed by the guard of `A`. 
+
++------------------------+--------------------------------------------------------------+
+| *Type of fairness*     | *Corresponding specification*                                |
++------------------------+--------------------------------------------------------------+
+| Unconditional fairness | `always eventually A`                                        |
++------------------------+--------------------------------------------------------------+
+| Strong fairness        | `(always eventually enabled[A]) implies always eventually A` |
++------------------------+--------------------------------------------------------------+
+| Weak fairness          | `always ((always enabled[A]) implies always eventually A)`   |
++------------------------+--------------------------------------------------------------+
+
+
+You can find a more detailed discussion about fairness properties in the literature [FAC94]_, [TCS91]_, [TOPLAS94]_. 
+
+
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/fairness/fairness-properties
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+
+   .. card:: A temporal logic primer
+      :link-type: ref
+      :link: temporal-logic
+
+      :octicon:`beaker` Further reading
+      ^^^
+      In this topic we used some complex temporal logic formulas. Learn the details of the formal semantics of Alloy's temporal logic.

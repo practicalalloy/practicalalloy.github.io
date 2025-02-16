@@ -1,0 +1,422 @@
+.. _type-system:
+
+.. index::
+   type-system
+
+Type system
+===========
+
+
+The Alloy language is notably flexible, and so is its type system. Alloy's type
+system was designed to detect three types of errors that can occur in relational expressions:
+
+* *arity errors*, when an operator is applied to relations of incorrect   
+  or mismatching arities;  
+* *irrelevance warnings*, when an expression always yields an empty set 
+  regardless of the instance and thus is irrelevant; 
+* *ambiguity errors*, when the type system cannot disambiguate between various overloaded relations.
+
+
+
+.. index::
+   type-system; arity error
+   relation; arity
+
+Arity errors
+------------
+
+
+In Alloy, all relations must have a uniform arity greater than 0 (i.e., all its
+tuples must have the same positive arity). A first consequence of this, is that
+relational operations union :alloy:`+`, intersection :alloy:`&`, difference
+:alloy:`-` and override :alloy:`++`, are only well-typed if applied two to
+relations of the same arity. For instance, the following throws an arity error,
+since :alloy:`File` is unary and :alloy:`entries` binary.
+
+.. code-block::
+
+     no File + entries 
+
+.. image:: log1.png
+   :width: 400 px
+   :align: center
+
+To ensure the positive arity, you also cannot compose two relations of arity 1
+(recall that the composition of an *n*-ary and an *m*-ary relation results in a
+relation of arity *n+m-2*). So formulas such as the following are invalid in Alloy.
+
+.. code-block::
+
+     all o : Object | o.Dir
+
+Finally, some operators can only be applied to relations with a specific arity.
+Namely, the transpose :alloy:`~`, transitive closure :alloy:`^` and reflexive
+transitive closure :alloy:`*` can only be applied to binary relations, while the
+domain restriction :alloy:`<:` and range restriction :alloy:`:>` require a unary
+relation on the left-hand and right-hand side, respectively.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/type-system/arity-errors
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+.. index::
+   type-system; irrelevance warning
+
+Irrelevance warnings
+-----------------------
+
+
+
+Alloy allows relations between different signatures to be combined, as long as
+they have the same arity. For instance, even though field :alloy:`entries` is
+only defined for directories, we've actually applied it to arbitrary objects in the
+fact :alloy:`no_indirect_containment`, by calculating the closure of
+:alloy:`entries.object`: it just happens that `entries` will return an empty set for files. Likewise,
+expressions such as :alloy:`Object.entries` are also perfectly acceptable. You
+can also put together atoms of signatures that are completely unrelated. The union
+:alloy:`Object + Name` is a valid expression even though objects and names belong
+to distinct top-level signatures. And :alloy:`(Object + Name).entries` is also
+acceptable, although it is not particularly useful since only the :alloy:`Dir`
+atoms of :alloy:`Object` will contribute to the final result.
+
+Concerning "mismatching" types, Alloy type system only reports warning to the user when an
+expression will necessarily result in the empty set, and in which case it is considered
+*irrelevant*. For instance, suppose we add the following fact to our model.
+
+.. code-block::
+
+   fact irrelevance_warning { 
+     no Dir.name 
+   }
+   
+If we now execute any command we would get a warning: the Analyzer refuses to
+execute the command and tells us that the :alloy:`.` operator  will always yield an empty set. 
+
+.. image:: log2.png
+   :width: 450 px
+   :align: center
+
+You'll get similar warning if you write an expression such as :alloy:`Dir &
+File`, since the two relations being intersected are always disjoint. This
+warning issued by Alloy's type system is one of the advantages of using
+:alloy:`extends` to declare disjoint subset signatures, instead of relying on
+:alloy:`in` and additional facts. 
+
+.. index::
+   Allow warnings menu option
+
+Note however that this is merely a warning to the user, and that the Analyzer
+can actually still execute the requested command. By
+default that option is disabled, but you can enable it through menu option
+:menuselection:`Options --> Allow warnings`. This will also allow models with
+other kinds of warnings to be executed (such as unused variable warnings). But
+in general irrelevance warnings are most likely specification errors made by the
+user and should be fixed. For instance, :alloy:`Dir.name` could be a mistake
+easily introduced by a distracted user. If the user effectively wants to write
+an expression that always denotes an empty set, then the special constant :alloy:`none`
+should be used instead, making that intention explicit. 
+
+.. index::
+   type-system; bounding type
+
+To detect irrelevant expressions, Alloy type system calculates an expression
+*bounding type*, an upper-bound on the value of that expression. If that
+bounding type is empty, the expression is irrelevant and a warning is thrown.
+Bounding type inference is guided by the abstract syntax and is bottom-up. What
+is interesting is that the type inference uses the same operators as the
+expressions for which the type is being inferred, but rather than manipulating
+tuple sets of atoms, it manipulates tuple sets of types. 
+
+The type of an expression is a tuple set of *atomic* types. There is an atomic
+type :alloy:`A` for every extension signature :alloy:`A` that is not
+extended further. For a non-abstract signature :alloy:`A` that has some extension, an atomic type is also created to denote the atoms that do not
+belong to any of its extensions. This remainder atomic type is denoted by
+:alloy:`$A`. For our example, the atomic types corresponding to declared signatures are
+:alloy:`Root`, :alloy:`File`, :alloy:`Name` and :alloy:`Entry`, while :alloy:`$Dir`
+represents the remainder directories (i.e., directories other than the root).
+
+The bounding type of each signature and field is then specified by a tuple set
+of atomic types. The bottom-level signatures simply have its own type. For
+instance, :alloy:`File` has type :alloy:`{(File)}` and :alloy:`Name` type
+:alloy:`{(Name)}`. Other signatures have a type that is the union of its
+sub-signatures. So for our example, :alloy:`Dir` has type :alloy:`{(Root),($Dir)}`
+and :alloy:`Object` type :alloy:`{(Root),($Dir),(File)}`. The bounding type of
+fields is defined in a similar way considering the type of the related
+signatures. For instance, :alloy:`name` simply has type :alloy:`{(Entry,Name)}`,
+while :alloy:`entries` has type :alloy:`{(Root,Entry),($Dir,Entry)}`. The bounding
+type of an expression is calculated by directly applying the operation at the
+bounding type level. Below is the process for expression :alloy:`(Object +
+Name).entries`. For each sub-expression, the application of the operator
+at the type level is shown to depict how the bounding type is calculated.
+
+.. table:: 
+  :align: center
+
+  +----------------------------+------------------+---------------------------------+
+  | `Object`                   | `Name`           |                                 |
+  |                            |                  |                                 |
+  | `{(Root),($Dir),(File)}`   | `{(Name)}`       |                                 |
+  +----------------------------+------------------+---------------------------------+
+  | `Object + Name`                               | `entries`                       |
+  |                                               |                                 |
+  | `{(Root),($Dir),(File)} + {(Name)}`           | `{(Root,Entry),($Dir,Entry)}`   |
+  |                                               |                                 |
+  | `{(Root),($Dir),(File),(Name)}`               |                                 |
+  +-----------------------------------------------+---------------------------------+
+  | `(Object + Name).entries`                                                       |
+  |                                                                                 |
+  | `{(Root),($Dir),(File),(Name)}.{(Root,Entry),($Dir,Entry)}`                     |
+  |                                                                                 |
+  | `{(Entry)}`                                                                     |
+  +---------------------------------------------------------------------------------+
+
+In the end, an expression (other
+than :alloy:`none`) is considered irrelevant, if its bounding type an empty tuple set. For instance, below is the bounding type calculation 
+for irrelevant expression :alloy:`Dir.name`.
+
+.. table:: 
+  :align: center
+
+  +--------------------+------------------+
+  | `Dir`              | `name`           |
+  |                    |                  |
+  | `{(Root),($Dir)}`  | `{(Entry,Name)}` |
+  +--------------------+------------------+
+  | `Dir.name`                            |
+  |                                       |
+  | `{(Root),($Dir)}.{(Entry,Name)}`      |
+  |                                       |
+  | `{}`                                  |
+  +---------------------------------------+
+  
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/type-system/irrelevance-warnings
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+.. index::
+   type-system; ambiguity error
+   overloading
+
+Ambiguity errors
+-------------------
+
+
+
+Alloy models can contain overloaded fields as long as the type system is able to
+disambiguate which version is being called in each expression. Let us consider
+an alternative version of our file system model, where both field
+:alloy:`entries` of directories and field :alloy:`object` of entries happened to
+have the same name :alloy:`contents`.
+
+.. code::
+
+  sig Dir extends Object {
+    contents : set Entry
+  }
+    
+  sig Entry {
+    contents : one Object,
+    name     : one Name
+  }
+  
+Commands such as the following are perfectly acceptable, because the Analyzer is
+able to infer that the relevant :alloy:`contents` field in that case is the one 
+for directories.
+
+.. code::
+
+  run not_ambiguous { 
+    some Root.contents 
+  }    
+
+In fact, Alloy is able to disambiguate all occurrences of `entries` and `object` in the definitions of the system model after they are both renamed to `contents`. However, if you call field :alloy:`contents` in a context that does not allow for
+disambiguation, you will get an ambiguity error due to multiple matches, such as
+in the command below.
+
+.. code::
+
+  run ambiguous { 
+    some contents 
+  }
+
+.. image:: log3.png
+   :width: 350 px
+   :align: center
+
+.. index::
+   type-system; relevance type
+
+To perform this disambiguation, Alloy builds on the inference of the bounding
+types presented above to calculate the *relevance type* of an expression.  After
+the bounding type of an expression is calculated, a top-down phase determines
+which expressions contributed to that bound. The relevance type of the outermost
+expression is its bounding type, and the relevance type of a sub-expression is the
+subset of its bounding type that contributed to the parent expression relevance
+type. Unlike the bounding type, the relevance type of an expression depends on
+the context it occurs, so the same expression can have different relevance types
+in different contexts. As an example, below is the calculus of the relevance
+types for expression :alloy:`(Object + Name).entries`. For each expression, the
+bounding type is shown, and also the subset of that that corresponds to its relevance
+type.
+
+.. table:: 
+  :align: center
+
+  +---------------------------------------------------------------------------------+
+  | `(Object + Name).entries`                                                       |
+  |                                                                                 |
+  | `{(Entry)}`                                                                     |
+  |                                                                                 |
+  | `{(Entry)}`                                                                     |
+  +-----------------------------------------------+---------------------------------+
+  | `Object + Name`                               | `entries`                       |
+  |                                               |                                 |
+  | `{(Root),($Dir),(File),(Name)}`               | `{(Root,Entry),($Dir,Entry)}`   |
+  |                                               |                                 |
+  | `{(Root),($Dir)}`                             | `{(Root,Entry),($Dir,Entry)}`   |
+  +----------------------------+------------------+---------------------------------+
+  | `Object`                   | `Name`           |                                 |
+  |                            |                  |                                 |
+  | `{(Root),($Dir),(File)}`   | `{(Name)}`       |                                 |
+  |                            |                  |                                 |
+  | `{(Root),($Dir)}`          | `{}`             |                                 |
+  +----------------------------+------------------+---------------------------------+
+
+So :alloy:`Name` does not contribute to the final expression, nor does the :alloy:`File`
+portion of :alloy:`Object`.
+
+
+To disambiguate between overloaded fields, the call to an overloaded field is replaced by
+the union of all fields with the same name. Then, when calculating the relevance
+type of the expression, if only one of those fields contributed to the final
+value, the overloading is disambiguated. Otherwise an ambiguity error is thrown. Below is the process for expression
+:alloy:`Root.contents`.
+
+.. table:: 
+  :align: center
+
+  +-------------------------------------------------------------------------------------------------+
+  | `Root.(contents + contents)`                                                                    |
+  |                                                                                                 |
+  | `{(Entry)}`                                                                                     |
+  |                                                                                                 |
+  | `{(Entry)}`                                                                                     |
+  +--------------------+----------------------------------------------------------------------------+
+  | `Root`             | `contents + contents`                                                      |
+  |                    |                                                                            |
+  | `{(Root)}`         | `{(Root,Entry),($Dir,Entry),(Entry,Root),(Entry,$Dir),(Entry,File)}`       |
+  |                    |                                                                            |
+  | `{(Root)}`         | `{(Root,Entry)}`                                                           |
+  +--------------------+-------------------------------+--------------------------------------------+
+  |                    | `contents`                    | `contents`                                 |
+  |                    |                               |                                            |
+  |                    | `{(Root,Entry),($Dir,Entry)}` | `{(Entry,Root),(Entry,$Dir),(Entry,File)}` |
+  |                    |                               |                                            |
+  |                    | `{(Root,Entry)}`              | `{}`                                       |
+  +--------------------+-------------------------------+--------------------------------------------+
+  
+So the Analyzer infers that the :alloy:`contents` of :alloy:`Object` is the only one that contributes
+to the expression, so there is no ambiguity.
+
+More information about Alloy's type system can be found in [FSE04]_.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/type-system/ambiguity-errors
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+.. _built-in:
+
+.. index::
+   Int signature
+   String signature
+   signature; predefined
+
+A note on predefined types
+----------------------------
+
+
+This chapter focused mostly on how Alloy's type system deals with user defined
+signatures. But the reader may wonder if Alloy has any predefined types, such as
+integers or strings. And if that is the case, why haven't we used, for instance,
+strings to represent names of objects in our file system example, instead of
+declaring a new signature :alloy:`Name`? 
+
+Alloy does indeed have a couple of predefined types, namely 
+signatures :alloy:`Int` for (bounded) integers and :alloy:`String` for strings.
+However, these types should be avoided as much as possible, because their
+semantics is substantially more tricky than that of regular signatures, and
+analysis can be confusing and somehow crippled when using them (in particular
+with strings). 
+
+The fact is that in many cases, the semantics of such signatures is just too
+rich for the intended use: for example, strings can be concatenated and there is
+the notion of one string being a substring of another, but for the file system
+specification none of this is of interest when specifying the abstract concept
+of a name. The only thing we will need in this case is to check for name
+equality, and normal signatures and atoms already provide us that basic
+semantics. 
+
+People also tend to use integers when they actually need something much simpler,
+semantics-wise. For example, we sometimes need to specify a signature where
+there is some total order imposed over its atoms and, at first sight, integers
+are very convenient for that. However, integers have a richer semantics than
+just being a total order, and we can easily axiomatise a total order on a
+regular signature with some simple facts and thus avoid the analysis drawbacks
+that come with using integers.
+
+So, when should you use :alloy:`String` or :alloy:`Int`? The former has very
+little use, and actually, even if recognized by the Analyzer, is not even part
+of standard Alloy. The latter is sometimes useful, for example when you
+effectively need to perform arithmetic operations in the specification, such as
+additions or subtractions. The :alloy:`Int` type is discussed in detail in a
+dedicated advanced topic.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/type-system/a-note-on-built-in-types
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: A relational logic primer
+      :link-type: ref
+      :link: relational-logic
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Learn about all operators provided by Alloy's relational logic and their arity restrictions.
+
+   .. card:: Working with integers
+      :link-type: ref
+      :link: integers   
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Some models effectively require integers. Learn what are their limitations and how to properly use them in Alloy.
+
+   .. card:: The predefined :alloy:`ordering` module
+      :link-type: ref
+      :link: ordering
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Learn how to impose a total order on a signature and avoid using integers unless absolutely necessary.
+
+

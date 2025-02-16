@@ -1,0 +1,189 @@
+.. _mutable-toplevel-signatures:
+
+Mutable top-level signatures
+----------------------------------------
+
+In the specification of our file sharing app in chapter :ref:`behavioral-modeling`: we've seen mutable signature as subsets of static signatures. In Alloy it is also possible to declare mutable top-level signatures. Although this sometimes makes for more natural models, there are some nuances of these signatures that must be taken into consideration.
+
+Declaring top-level signatures
+###############################
+
+.. index::
+  signature; mutable
+  signature; subset
+  signature; declaration
+  signature; top-level
+  var keyword
+  in keyword; in signature declaration
+
+In our file sharing model, :alloy:`uploaded` files were modelled using a mutable subset of :alloy:`File`, the top-level signature that contains the universe of all possible files that can exist in a trace. Instead, we could argue that the universe of files known to the system is exactly the set of uploaded files, and that the value of :alloy:`File` itself in each state corresponds to the set of uploaded files. In that case, we could have declared :alloy:`File` itself as mutable instead of adding a new mutable subset signature. The signature declarations would then look as follows.
+
+.. code-block::
+
+  sig Token {}
+  var sig File {
+    var shared : set Token
+  }
+  var sig trashed in File {}
+
+There are some important points to note when top-level signatures are used:
+  - The scope of a mutable top-level signature is the maximum number of different atoms it can contain in the full trace, and not the maximum at each different state. For example, with the default scope of 3, we can have at most 3 different uploaded files in each trace. For example, if at some state :alloy:`File` contains 3 uploaded files, no more different files can be uploaded (of course, we can delete a file a re-uploaded it again later).
+  - In Alloy all top-level and extension signatures are disjoint. The same is true for mutable top-level and extension signatures: they are always disjoint, even at different points in time, meaning that an atom cannot move from one top-level signature to another one in a state transition. For example, if :alloy:`Token` was also mutable, an atom contained in :alloy:`File` at some state could never be part of :alloy:`Token` in a different state.
+  - When there are mutable top-level signatures the :alloy:`univ` is mutable as well, containing, in each state, all atoms contained in all signatures at that state. Similarly, the :alloy:`iden` relation also becomes mutable. 
+
+.. index::
+   transition system; initial state
+
+Updating the rest of the specification to accommodate this change is not just a matter of replacing :alloy:`uploaded` with :alloy:`File`. In most formulas that will be the case, but in some formulas the changes are more subtle. As an example of the former case, consider fact :alloy:`init` after replacing `uploaded` with `File`, that specifies the valid initial states.
+
+.. code-block::
+
+   fact init {
+     // Initially there are no files uploaded nor shared
+     no File
+     no shared
+   }
+
+Although this is a correct specification, the second constraint is now redundant. If in the initial state there are no atoms in :alloy:`File` it will be impossible for relation :alloy:`shared` between files and tokens to have any tuples, so we can can simplify it as follows.
+
+.. code-block::
+
+   fact init {
+     // Initially there are no files uploaded nor shared
+     no File
+   }
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/mutable-toplevel-signatures/declaring-top-level-signatures
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Adding new atoms to the universe 
+################################
+
+.. index::
+   event
+
+In the file sharing example, for most action predicates we get the intended specification by just replacing :alloy:`uploaded` by :alloy:`File`. As an example, consider action predicate :alloy:`empty`, that specifies the action of emptying the trash bin.
+
+.. code-block::
+
+   pred empty {
+     no trashed'              // effect on trashed
+     File' = File - trashed   // effect on File
+     shared' = shared         // no effect on shared
+   }
+
+Here, the effect on :alloy:`uploaded` was just replaced by the same effect on :alloy:`File`. 
+
+However, specifying action predicate :alloy:`upload` is a bit more tricky, and cannot be updated by simply replacing :alloy:`uploaded` by :alloy:`File`. In particular, it no longer makes sense to parametrize it by the file that will be uploaded, since that file will not even exist before the action occurs. Instead, we can have a non-parametrized predicate whose effect is to upload any new file. To enforce that signature :alloy:`File` will contain a new uploaded file in the post-state we could, for example, use constraint :alloy:`one File' - File` or, alternatively, :alloy:`some f : File' | File' = File + f`. The latter version is more convenient if we need to refer to the newly created atom in later effects, but that is not the case of :alloy:`upload`. The new specification of :alloy:`upload` could thus be as follows.
+
+.. code-block::
+
+   pred upload {
+     one File' - File     // effect on File
+     trashed' = trashed   // no effect on trashed
+     shared' = shared     // no effect on shared
+   }
+
+The fact that specifies the valid transitions will then look as follows.
+
+.. code-block::
+
+   fact transitions {
+     // The system must only evolve according to the defined actions 
+     always (
+       upload or
+       (some f : File | delete[f] or restore[f]) or
+       (some f : File, t : Token | share[f, t]) or
+       (some t : Token | download[t]) or
+       empty or
+       stutter
+     )
+   }
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/mutable-toplevel-signatures/adding-new-atoms-to-the-universe
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Quantifying over mutable signatures 
+###################################
+
+.. index::
+  quantifier; over mutable set
+
+Concerning assertions, again it might not suffice to just replace :alloy:`uploaded` by :alloy:`File`. In particular, special care is needed with quantifications over mutable signatures. For example, consider assertion :alloy:`restore_undoes_delete`.
+
+.. code-block::
+
+   assert restore_undoes_delete {
+     all f : File | always (
+       delete[f] and after restore[f] implies
+       File'' = File and trashed'' = trashed and shared'' = shared
+     )
+   }
+   check restore_undoes_delete
+
+This assertion is now trivially true, because the quantification :alloy:`all f : File` is outside any temporal operator, and thus only needs to hold in the initial state where :alloy:`File` is still empty because no files were yet uploaded, as enforced by fact :alloy:`init`. To correctly specify the desired assertion we need to move the quantification inside the :alloy:`always` temporal operator, as follows.
+
+.. code-block::
+
+   assert restore_undoes_delete {
+     always all f : File | (
+       delete[f] and after restore[f] implies
+       File'' = File and trashed'' = trashed and shared'' = shared
+     )
+   }
+   check restore_undoes_delete
+
+Now, at each state the quantified property must hold for all files that are currently uploaded at that state.
+
+The specification of assertion :alloy:`one_download_per_token` used function `downloaded` shown below, to compute the set of files that were once downloaded with a given token. For similar reasons, its specification no longer makes sense, because the function will now only return the files that are also currently uploaded.
+
+.. code-block::
+
+   fun downloaded [t : Token] : set File {
+     { f : File | once (download[t] and t in f.shared) }
+   }
+
+As an alternative, for this assertion we can still use the first formulation from the :ref:`behavioral-modeling` chapter that did not use this function.
+  
+.. code-block::
+
+   assert one_download_per_token {
+     all t : Token | always (
+       download[t] implies 
+       after always not download[t]
+     )
+   }
+   check one_download_per_token
+
+Here the quantification :alloy:`all t : Token` can still be outside :alloy:`always`, because :alloy:`Token` is immutable and thus already contains all possible tokens in the initial state. Of course, it could also be moved inside the :alloy:`always` because its value is the same in every state.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/mutable-toplevel-signatures/quantifying-over-mutable-signatures
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: A temporal logic primer
+      :link-type: ref
+      :link: temporal-logic
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Learn in the detail the formal semantics of the temporal logic connectives used in Alloy.
+
+

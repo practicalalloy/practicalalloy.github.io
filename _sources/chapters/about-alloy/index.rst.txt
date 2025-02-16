@@ -1,0 +1,61 @@
+****************************************
+About Alloy
+****************************************
+
+Alloy is a formal modeling language proposed by `Daniel Jackson <http://people.csail.mit.edu/dnj/>`_ at MIT in the late 90s.
+Initially is was mainly tailored at describing software structures, but the latest Alloy 6 version also natively supports behavioral design. Alloy 6 is the version of Alloy used in this book.
+
+Installing Alloy
+================
+
+.. index::
+    Alloy Analyzer
+
+Alloy models can be automatically analyzed with a tool called Alloy Analyzer that can be downloaded `here <https://alloytools.org/download.html>`_. The Analyzer is implemented in Java and for most platforms the downloaded `jar` can be directly executed with the :code:`java -jar` command. For macOS, a :code:`dmg` installer is also available.
+
+.. index::
+    Alloy4Fun
+
+You can also try Alloy online in the `Alloy4Fun <http://alloy4fun.inesctec.pt>`_ web application. This online version allows the easy sharing of models with permalinks, and can also be used to share specification challenges in educational concepts. But it has some limitations when compared to the standalone Analyzer, namely in the validation of behavioral specifications. To learn more about how to use Alloy4Fun in education, read `Experiences on teaching alloy with an automated assessment platform <https://doi.org/10.1016/j.scico.2021.102690>`_ [SCP21]_.
+
+Installing unbounded model-checkers
+=============================================
+
+.. index::
+    model checking; complete
+    NuSMV
+    nuXmv
+    Solver menu option
+
+Alloy 6 already comes with embedded solvers and is therefore self-contained. However, it can optionally leverage so-called unbounded, or complete, model-checking to increase the breadth of verification (more on that in the :ref:`behavioral-modeling` chapter). Currently, Alloy 6 supports `NuSMV <https://nusmv.fbk.eu/>`_ (free/open-source) and `nuXmv <https://nuxmv.fbk.eu/>`_ (proprietary, free for non-commercial or academic purpose): these tools must be installed in addition to Alloy (check their respective web pages for installation instructions). Provided they appear in the path of executable programs (`PATH` environment variable), they will be available as :code:`electrod.nusmv` or :code:`electrod.nuxmv` in the list of solvers available in the :menuselection:`Options --> Solver` menu.
+
+
+Alloy versions
+====================
+
+.. index::
+    Alloy; versions
+    Electrum
+
+The main novel feature in Alloy 6, when compared to previous versions of Alloy, is native support for behavioral design, namely the possibility to declare mutable structures and reason over these.  The reader may wonder if the previous Alloy 5 version, where all structures were immutable, was useful in any way. In fact, in many software systems the main design problem concerns just structural aspects. This book starts precisely by explaining how Alloy can be used for structural design (in the :ref:`structural-modeling` chapter). 
+
+With Alloy 5, it was still possible to reason about behavior, by explicitly specifying the notion of time and of execution traces. However, this was often a rather time-consuming and error-prone task. The `Electrum <http://haslab.github.io/Electrum/>`_ extension [FSE16]_ [ASE18]_ was proposed precisely to address this shortcoming. Electrum added an implicit notion of time, allowed the declaration of mutable structures, and the specification of properties with temporal logic. With Alloy 6, these extensions became a standard part of Alloy. 
+
+For an overview of Alloy 5, check `Alloy: A Language and Tool for Exploring Software Designs <https://cacm.acm.org/magazines/2019/9/238969-alloy/fulltext>`_ [CACM19]_ by Daniel Jackson, or his book `Software Abstractions: Logic, Language, and Analysis <https://mitpress.mit.edu/books/software-abstractions-revised-edition>`_ [MIT12]_. 
+
+Alloy extensions
+=================
+
+.. index::
+    Alloy; extensions
+    Alloy*
+    AlloyMax
+    DynAlloy
+    QAlloy
+
+Many extensions of Alloy were proposed in the past, that are not part of Alloy 6. To try them out, you should download the respective versions of the Analyzer. Note that most of these extensions were derived from Alloy 5, so they do not support the behavioral specification constructs of Alloy 6. Here is a non-exhaustive list of extensions:
+
+- `Alloy* <https://aleksandarmilicevic.github.io/hola/>`_, an extension that supports the specification and analysis of higher-order constraints, and that can be used, for example, to implement program synthesis [FMSD19]_.
+- `AlloyMax <https://github.com/cmu-soda/AlloyMax>`_, an extension that supports the specification and analysis of problems with optimal solutions [FSE21]_.
+- `DynAlloy <https://sites.google.com/site/dynalloy/home>`_, an extension for the specification of behavioral models using an idiom inspired by dynamic logic [FSE17]_.
+- `QAlloy <https://github.com/pf7/QAlloy>`_, an extension for the specification and analysis of quantitative requirements [FSE22]_.

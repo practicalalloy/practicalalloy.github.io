@@ -1,0 +1,344 @@
+.. _commands:
+
+.. index::
+  command
+
+Commands in detail
+===================
+
+.. index::
+  command; definition
+
+Commands are an essential feature of an Alloy model, since they are what
+triggers the automatic analyses of our model by the Analyzer. There are two
+types of commands in Alloy: :alloy:`run` commands search for instances that satisfy
+certain constraints, while :alloy:`check` commands search for
+counter-examples that violate assertions. Commands also
+include the scope of the analyses, which determines the maximum size of the
+signatures and of the universe of discourse. In the :ref:`structural-modeling` chapter we have already seen the fundamentals of command
+declaration. This chapter explores commands in more detail.
+
+Alternative command syntaxes
+----------------------------
+
+.. index::
+  check keyword
+  run keyword
+
+
+Both :alloy:`run` and :alloy:`check` commands can take two different syntaxes. In the first commands have an optional label and a constraint to be enforced/checked
+between braces. Between the braces any arbitrary constraint can be written. In the :ref:`structural-modeling` chapter we have defined :alloy:`run` commands of this shape, but this could
+also be done for :alloy:`check` commands. For instance, below is a
+:alloy:`check` command equivalent to the one defined in the :ref:`structural-modeling`  chapter to check that the file system has no partitions, given as a contraint in the command rather than defined in an assertion.
+
+.. code-block::
+
+   check no_partitions {
+     all o : Object | reachable[o]
+   } for 6
+
+In the second alternative syntax, a command cannot be labelled and just calls a re-usable formula defined
+elsewhere. For :alloy:`check` commands we've already seen in the :ref:`structural-modeling` chapter
+how that can be done through the definition of assertions; the
+:alloy:`check` command will then search for counter-examples that violate that
+assertion. For :alloy:`run` commands, they can be instructed to generate
+instances for which a certain predicate holds. An advantage of these
+versions is that they ease the definition of multiple commands for the same
+property with different scopes. For instance, let's say that we want to explore
+instances that have a file hierarchy of at least depth 2 but with different
+scopes for `File`. We could do something like the following.
+
+.. code-block::
+
+  pred depth2 {
+    some Root.entries.object.entries.object
+  }
+
+  run depth2 for 4 but 0 File
+  run depth2 for 4 but 1 File
+  run depth2 for 4 but 2 File
+
+An interesting feature of this kind of commands is that, if you :alloy:`run` a
+predicate with parameters, they will be automatically quantified and show an
+instance for which there is some atom that makes the predicate true. For
+instance, let us define a predicate that tests whether a directory is empty, and
+then ask for instances where there is some empty directory.
+
+.. code-block::
+
+  pred empty_dir [d : Dir] {
+    no d.entries
+  }
+
+  run empty_dir for 3
+
+.. index::
+   Skolemization
+   quantifier; higher-order
+
+This will result in instances such as the one below. Notice that there is now a
+subset :alloy:`$empty_dir_d` in the instances, identifying the quantified
+variable that made predicate :alloy:`empty_dir` true. This is because the
+Analyzer performs a process called *Skolemization* whenever outermost
+existential quantifications occur in :alloy:`run` commands (or universal
+quantifications for :alloy:`check` commands), creating additional free relations to represent the quantified variables. This improves the
+efficiency of the analysis procedures, and as a side-effect such relations are
+now also part of the generated instance and can be depicted. 
+
+.. image:: instance1.png
+   :width: 500 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/commands/instance_01/filesystem.als#L90-L102
+   :alt: Get the code to generate this instance.
+   
+Although less common, :alloy:`run` commands can also call a function rather than a predicate. In that case Alloy will search for input variables for which the function is well defined (i.e., it returns a value within its return type).
+
+Note that once you specify a constraint in the command, you are no longer calling an assertion or predicate and just labelling the command. Since commands can have the same label as a predicate name, this can sometime lead to confusions. For instance, the command below is not really checking assertion :alloy:`no_partitions`, but instead the empty constraint within brackets (which is equivalent to true) and obviously never finds any counter-example, possibly leading the distracted user to a false sense of confidence.
+
+.. code-block::
+
+   check no_partitions {}
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/alternative-command-syntaxes
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Model finding
+     :link-type: ref
+     :link: analysis   
+
+     :octicon:`beaker` Further reading
+     ^^^
+     Learn more about the Skolemization process employed by the Analyzer when executing commands.
+
+
+Controlling scopes
+------------------
+
+.. index::
+   scope
+   scope; definition
+   scope; default
+   for keyword
+
+
+When the Analyzer is launched, a non-negative scope must be assigned to every
+signature of the model that determines the maximum number of atoms for that
+signature. These scopes are declared in the analysis commands. 
+
+The overall scope of a command is specified with the keyword :alloy:`for` which
+is applied to all top-level signatures. If omitted, a default overall scope of 3
+is used. Since overall scopes apply only to top-level signatures, they may have
+some unintended results when the signature hierarchy becomes more complex, in
+particular when singleton signatures are introduced and consume part of the
+scope of a top-level signature. For instance, in our running example, a command
+with a overall scope of 3 like the one below will never generate instances with
+3 files. This is because the scope for :alloy:`Object` is 3, but one of those
+atoms is the :alloy:`Root`, so only 2 atoms are free to become files or non-root
+directories.
+
+.. code-block::
+
+   run scope_3 {} for 3
+
+.. index::
+   but keyword
+
+
+After the overall scope, we can assign additional scopes to specific top-level
+and extension sub-signatures that override the overall scope (you cannot assign
+scopes to subset signatures). These additional scopes are declared after the
+overall scope with a keyword :alloy:`but` and separated by commas. For instance,
+the following command overrides the overall scope for signature :alloy:`Name`.
+
+.. code-block::
+
+  run names_2 {} for 3 but 2 Name
+
+If you declare a scope for a specific signature that conflicts with its
+multiplicity constraint, you'll get an error. Namely, :alloy:`one` signatures
+must have scope 1, :alloy:`lone` signatures scope less than or equal to 1, and
+:alloy:`some` signatures greater than 0. Also, you can never declare a scope for
+an enumeration signature. 
+
+
+In general, assigning a specific scope to a signature does not affect the scope
+of its parent nor its siblings. There are however exceptions, namely when specific scopes are assigned to the extensions of a signature. If the extensions have exact scopes (if they are singleton signatures or, as will be explained later, have an exact scope defined in a command) than the scope of the parent signature is automatically increased so be at least the sum of the scopes of the extensions. If the parent signature is abstract and does not have a specified scope then the overall scope will also be automatically overrided to be the sum of the specified scopes of the extensions (even if these scopes are not exact). For example, in the following command, the scope of
+:alloy:`Object` is actually increased from the overall specified scope of 3 up to 6.
+
+.. code-block::
+
+  run files_3_dirs_3 {} for 3 but 3 Dir, 3 File
+
+Note that this second case only happens if all extensions signatures are assigned a specific scope.
+Moreover, there is another corner case implemented in calculating the scope of
+abstract signatures: if all extension signatures are assigned a specific scope except
+one, then that one gets the scope remaining from the abstract parent signature,
+which is not increased. This may have unexpected consequences. For instance, the
+following command yields no instance, because there is a single extension signature of
+:alloy:`Object` without a specific scope assigned, namely :alloy:`File`, so it gets what
+remains of the scope on :alloy:`Object` minus the scope on :alloy:`Dir`, which is
+0.
+
+.. code-block::
+
+  run dirs_3 { some File } for 3 but 3 Dir
+
+The actual scopes being used by the Analyzer can be consulted in the information
+reported by the Analyzer. For instance, for the two commands above, the following
+information would be reported.
+
+.. image:: log1.png
+   :width: 550 px
+   :align: center
+
+.. index::
+   Verbosity menu option
+
+More information about how these scopes were calculated is provided if the
+logging verbosity is increased through menu option :menuselection:`Options -->
+Verbosity`.
+
+If you assign a specific scope for every top-level signature of the model, you
+can actually omit the overall scope; otherwise, an error is thrown. For instance,
+the following command is valid in our running example.
+
+.. code::
+
+  run no_overall {} for 3 Object, 2 Name, 2 Entry
+
+.. index::
+   exactly keyword
+
+All scopes considered until now impose an upper-bound on the number of atoms.
+Specific signature scopes can also be marked with keyword :alloy:`exactly`,
+which forces them to contain exactly that amount of atoms. For instance, the
+following command guarantees that there exist exactly 2 files in every instance.
+
+.. code::
+
+  run files_exact2 {} for 3 but exactly 2 File
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/controlling-scopes
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+
+Documenting expected outcomes
+-------------------------------
+
+.. index::
+  expect keyword
+
+
+A complex model often contains several :alloy:`run` and :alloy:`check` commands.
+Sometimes we want to encode negative :alloy:`run` commands to show that a certain
+class of instances is disallowed, or invalid :alloy:`check` commands to register
+some known issues. We could use comments to annotate which is the case, but
+Alloy allows the user to register what is the expected outcome of a command
+using a keyword :alloy:`expect` after the scope declaration. The expectation is
+that the command is either satisfiable (:alloy:`1`) or unsatisfiable (:alloy:`0`). A command is
+satisfiable when it is able to generate an instance. So a :alloy:`run` command that
+yields instances is satisfiable, and a valid :alloy:`check` command that finds no
+counter-examples is unsatisfiable. When executing such commands, the Analyzer
+will inform the user whether the result was the expected.
+
+Let us recall the file system example developed in the 
+:ref:`structural-modeling` chapter. Let us say that, for demonstration purposes we want
+to be able execute the invalid version of the :alloy:`no_partitions` assertion
+that we encountered when the incorrect fact :alloy:`no_self_containment` was
+enforced rather than the stronger, fixed :alloy:`no_indirect_containment`. This
+would require those constraints to no longer be enforced as a fact (which would
+apply to all commands), but as a predicate that is only enforced in the
+appropriate command. Likewise, we won't be able to use a single :alloy:`assert`
+since we now have two distinct properties to check. A possibility is to encode
+them as follows.
+
+.. code-block::
+
+  pred no_self_containment {
+     // Directories cannot contain themselves
+     all d : Dir | d not in d.entries.object
+  }
+
+  pred no_indirect_containment {
+    // Directories cannot contain themselves directly or indirectly
+    all d : Dir | d not in descendants[d]
+  }
+
+  pred no_partitions {
+    // Every object is reachable from the root
+    all o : Object | reachable[o]
+  }
+
+Then we can call the appropriate restriction as a premise to checking
+:alloy:`no_partitions`. This would be done as follows.
+
+.. code-block::
+  
+  check bad_containment { 
+    no_self_containment implies no_partitions 
+  } for 6 expect 1
+
+  check good_containment { 
+    no_indirect_containment implies no_partitions 
+  } for 6 expect 0
+
+The first command is expected to generate a counter-example, but not the second
+one, as stated by the expected outcome. After execution, the Analyzer would
+report the results as follows.
+
+.. image:: log2.png
+   :width: 550 px
+   :align: center
+
+Recall, however, that once `no_self_containment` becomes a predicate, it is no longer enforced in any command. For instance, to generate valid file systems without any additional constraint, one would have to adapt the `example` `run` command as follows.
+
+.. code-block::
+  
+  run example { no_self_containment }
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/documenting-expected-outcomes
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Encoding test instances
+      :link-type: ref
+      :link: testing-instances
+
+      :octicon:`beaker` Further reading
+      ^^^
+      :alloy:`run` commands can be used to encode unit tests for our specification.
+      Learn how to write commands of that kind. 
+
+   .. card:: Working with integers
+     :link-type: ref
+     :link: integers   
+
+     :octicon:`beaker` Further reading
+     ^^^
+     Scopes for the built-in type :alloy:`Int` work differently. Learn how to 
+     properly handle them.
+
+   .. card:: Model finding
+     :link-type: ref
+     :link: analysis   
+
+     :octicon:`beaker` Further reading
+     ^^^
+     The Analyzer uses a technique called model finding to execute the commands. Learn how this works.
