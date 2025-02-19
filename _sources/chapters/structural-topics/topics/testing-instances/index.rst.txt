@@ -1,0 +1,300 @@
+.. _testing-instances:
+
+Encoding test instances
+=======================
+
+As models evolve, we should always check whether
+instances that were expected to hold are still valid. Using the enumeration
+operation :guilabel:`New` provided by the Analyzer is not feasible for this kind
+of *regression tests* that should be executed automatically every time the model
+changes. This chapter explores how we can write  :alloy:`run` commands
+that search for specific instances and that can thus act as unit tests for our models.
+
+Regression tests for models
+---------------------------
+
+.. index::
+   Execute All menu option
+
+We've already seen that :alloy:`run` commands are very useful to encode and
+explore interesting classes of instances. During validation we often want these
+commands to be loosely defined in order to allow for unexpected instances that
+may exhibit issues of the model. However, we can also write commands that are
+very restrictive and generate a specific instance. These are not as relevant for
+validation, but allow the encoding of a kind of unit tests, which we call a
+*test instance*. When the model suffers any change, we can just hit menu option
+:menuselection:`Execute --> Execute All` and see if expected test instances are
+still valid.
+
+Alloy does not have any particular support to specify concrete instances, so
+they have to be defined using regular relational logic formulas. If we follow a
+well-defined idiom, test instances can be easily encoded as formulas. Let's get
+back to the file system example from chapter
+:ref:`structural-modeling`, and try to encode a very simple test instance where
+the root contains one directory and one file, and the directory another file,
+all with different names. This should obviously be a valid instance in our
+model.
+
+.. index::
+   one keyword; as multiplicity
+
+The first issue we face when encoding an instance is the inability to refer to
+concrete atoms in Alloy specifications.  At first sight, we could feel tempted
+to declare several multiplicity :alloy:`one` signatures to denote distinguished
+atoms in the instance being encoded. However, this approach has a major
+disadvantage: such signatures will now exist in all instances of the model,
+regardless of the executed command. For instance, if we defined a singleton
+files :alloy:`F1` and :alloy:`F2` for this test instance, then the model will no
+longer have instances without any file. Moreover, it would break the symmetry
+between :alloy:`F1`, :alloy:`F2` and the other :alloy:`File` atoms, as the former
+would now belong to a distinct signature, so isomorphic instances would be
+returned. Unless we are dealing with concepts that exist in the domain model
+(such as the :alloy:`Root`), we should not clutter our specifications with
+additional singleton signatures. 
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/testing-instances/regression-tests-for-models
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+The :alloy:`some`/:alloy:`disj` pattern
+-----------------------------------------
+
+.. index::
+   disj keyword
+
+The alternative is to use an idiom based on :alloy:`some`/:alloy:`disj` patterns,
+which will allow instances to be encoded as a formula that is local to each
+command. This pattern works as follows:
+
+* create an existential disjoint quantification for the expected atoms for each signature;
+* restrict the value of all signatures to the union of the respective quantified variables;
+* restrict the value of all fields to the union of tuples created from the quantified variables;
+* define a scope that is sufficient to represent the instance.  
+
+For the test instance described above, this would amount to the following command.
+
+.. code-block::
+
+  run test_root_file_dir {
+    some disj d0, d1 : Dir, disj f0, f1 : File, disj e0, e1, e2 : Entry, disj n0, n1, n2 : Name {
+      Root    = d0
+      Dir     = d0 + d1
+      File    = f0 + f1
+      Entry   = e0 + e1 + e2
+      Name    = n0 + n1 + n2
+      entries = d0 -> e0 + d0 -> e1 + d1 -> e2
+      name    = e0 -> n0 + e1 -> n1 + e2 -> n2
+      object  = e0 -> d1 + e1 -> f0 + e2 -> f1
+    }
+  } for 4 Object, 3 Entry, 3 Name
+
+.. index::
+   symmetry breaking
+
+If we now execute this command, we get the instance below. The command fully
+specifies this instance: if you ask for a different instance with
+:guilabel:`New`, you'll get a message saying there are no more satisfying
+instances. We could perhaps imagine other instances that encode the same
+instance by just permuting the atoms, for instance assigning :alloy:`Name1` to
+:alloy:`File0` and :alloy:`Name0` to :alloy:`File1`. However, as we've seen, atoms
+are uninterpreted  and the Analyzer's symmetry breaking algorithm considers this
+instance to be isomorphic to the one above.
+
+.. image:: instance1.png
+   :width: 500 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/testing-instances/instance_01_02/filesystem.als#L89-L100
+   :alt: Get the code to generate this instance.
+
+Forcing the signatures to be exactly the union of the quantified variables
+guarantees that there are no other atoms in the universe besides the ones
+quantified. Scope 4 on :alloy:`Object` is needed to encode all needed objects
+(recall the default overall scope is 3). The :alloy:`disj` keyword is needed in
+order to avoid the assignment of the same atom to different variables. For
+instance, without :alloy:`disj` the same file atom could be assigned to variables
+:alloy:`f0` and :alloy:`f1` or the same entry atom to :alloy:`e0` and :alloy:`e1`.
+For instance, the instance below would also be generated, which although valid
+in our file system model, is not the test instance we were trying to encode.
+
+.. image:: instance2.png
+   :width: 500 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/testing-instances/instance_01_02/filesystem.als#L102-L113
+   :alt: Get the code to generate this instance.
+
+Note that a :alloy:`disj` keyword must be applied to each group of quantified variables, and not just at the beginning of the quantification. Always make sure that there are enough atoms in the scope to represent the instance, otherwise the command will be trivially inconsistent.
+
+This idiom is the one used throughout the book to encode the presented example instances.
+
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/testing-instances/the-some-disj-pattern
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Commands in detail
+      :link-type: ref
+      :link: commands
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Test instances are encoded with `run` commands. Learn in detail how these are defined.
+
+Skolemization and visualization
+-------------------------------
+
+.. index::
+   Skolemization
+   instance; visualization
+   Show as labels option
+   Hide skolem sigs/relations option
+
+When an Alloy :alloy:`run` command has outermost existential quantifications, the
+Analyzer performs a process called *Skolemization* that solves those variables
+by creating additional free relations that must also be solved. This improves
+the efficiency of the analysis procedures, and as a side-effect such relations
+are now also part of the instance as singleton sets, and appear in the
+visualization. Such Skolemized variables appear prefixed by a :code:`$` and the
+name of the command, as could be seen in the instances above. Such relations can
+be treated as any other element of the instance, including being called in the
+evaluator, or have their visualization customized in the theme. In particular,
+we can just hide this label by unchecking :guilabel:`Show as labels` for those
+subsets. Alternatively, you can check the option :guilabel:`Hide skolem sigs/relations` within :guilabel:`general graph settings`, which will hide all such atoms. Note however that this will also hide derived functions from the visualization, which are treated as Skolemized variables. The result is the
+the following, cleaner visualization. Note that you cannot simply uncheck
+:guilabel:`Show` for those subsets: that would actually remove the atoms in the
+subset from the subset, not only hide the label. If you find it important to know which
+atom corresponds to each variable, you can still show a shorter and more readable
+label by changing the label of those sets in the theme.
+
+.. image:: instance3.png
+   :width: 500 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/testing-instances/instance_03/filesystem.als#L90-L101
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/testing-instances/skolemization-and-visualization
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Model finding
+      :link-type: ref
+      :link: commands
+
+      :octicon:`beaker` Further reading
+      ^^^      
+      Testing instances introduce many Skolomized variables. Learn in more detail how
+      these work.
+
+
+   .. card:: Visualization customization
+      :link-type: ref
+      :link: viz-customization
+
+      :octicon:`beaker` Further reading
+      ^^^
+      We've mentioned some visualization customizations in this topic. Learn
+      how else you can customize the theme.
+
+
+Negative test instances
+-----------------------
+
+Besides encoding tests that are expected to be instances of our model, we should
+also make sure that invalid instances are in fact not allowed by our model. In
+Alloy, these will take the shape of run commands that are not satisfiable, that
+are not able to generate an instance. We can use exactly the same strategy as
+above, but imposing instead invalid constraints.
+
+Let us try to generate an instance similar to the previous one, but where the
+same name is assigned to the file and the directory contained in the root. The
+following is similar to the command :alloy:`test_root_file_dir_same_name` but
+without name  :alloy:`n2`.
+
+.. code::
+
+  run test_root_file_dir_bad_name {
+    some disj d1, d2 : Dir, disj f1, f2 : File, disj e1, e2, e3 : Entry, disj n1, n3 : Name { 
+      Root  = d1
+      Dir   = d1 + d2
+      File  = f1 + f2
+      Entry = e1 + e2 + e3
+      Name  = n1 + n3
+      entries = d1 -> e1 + d1 -> e2 + d2 -> e3
+      name    = e1 -> n1 + e2 -> n1 + e3 -> n3
+      object  = e1 -> d2 + e2 -> f1 + e3 -> f2
+    }
+  } for 4 Object, 3 Entry, 2 Name
+
+When running this command, the Analyzer will now report that there is no
+satisfying instance, which is the expected. 
+
+.. index::
+   expect keyword
+
+If you have many positive and negative test instances, and rely on
+:menuselection:`Execute All`, it may become difficult to detect whether each
+command is supposed to be valid or not. To help manage this, we can annotate the
+commands the expected outcome, namely stating after the scope definition
+:alloy:`expect 1` for positive test instances and :alloy:`expect 0` for negative
+test cases. After running :menuselection:`Execute All` (assuming that there are
+no other commands in the model), we would get the following feedback from the
+Analyzer.
+
+.. image:: log1.png
+   :width: 600 px
+   :align: center
+
+Note only that once you state :alloy:`expect 1`, symmetry breaking is turned off
+for that command, so the argument above that there is a single acceptable instance
+no longer holds (isomorphic instances will be returned).
+
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/testing-instances/negative-test-instances
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Extracting instances from the visualizer
+----------------------------------------
+
+.. index::
+   Export To menu option
+
+As you might have noticed, writing the constraints that encode a scenario can become quite cumbersome. Luckily, the Analyzer provides a feature that can ease this process. When navigating instances in the visualizer, you can export them to another format through menu option :menuselection:`File --> Export To`. Options include exporting to a :menuselection:`DOT` file representing the graph view, or to an :menuselection:`XML` file. But what's more interesting to the context of this chapter is that they can also be exported as a :menuselection:`Predicate` (also available through shortcut :kbd:`cmd-p`). This will provide the user a formula that exactly encodes the instance being visualized. The formula follows precisely the :alloy:`some`/:alloy:`disj` pattern defined above, although it will be a bit more cluttered since it will also define the values of some built-in signatures even if they are not relevant for the current model.
+
+So let's say that when verifying your model a :alloy:`check` command, a
+counter-example was found that was not expected to be an acceptable instance of
+the model. You'll fix the model, and then expect that counter-example to no
+longer be a valid instance. So you can extract the predicate that represents
+that counter-example and define a negative test command in the Alloy model with
+it, which will act as a regression test once the model is fixed. 
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/testing-instances/extracting-instances-from-the-visualizer
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+
+

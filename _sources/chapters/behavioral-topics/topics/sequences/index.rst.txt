@@ -1,0 +1,192 @@
+.. _sequences:
+
+.. index::
+   sequence
+
+Sequences
+----------------------------------------
+
+Consider the file sharing example from chapter :ref:`behavioral-modeling` and suppose we wanted :alloy:`restore` to recover from the trash bin the last file that was deleted, instead of a specific file selected by the user. To allow this, :alloy:`trashed` can no longer be modelled just by a subset of :alloy:`File`. At an abstract level :alloy:`trashed` should now be a *stack* operating under the *last in first out* principle. We could model such a *stack* in many different ways in Alloy, for example by using a binary relation that, given a file in the trash bin, gives us the next oldest file. Fortunately, Alloy has native support for sequences, so we can also use one of those to model the trash. 
+
+.. index::
+   sequence; declaration
+   seq keyword
+
+Declaring sequences
+###################
+
+Sequences can only be used in fields, meaning they must be used as signature attributes. To declare an attribute that is a sequence, the keyword :alloy:`seq` must be used, followed by the signature whose atoms can be contained in it. In our example, we want :alloy:`trashed` to be of type :alloy:`seq File`, the sequence of files in the trash bin, sorted from oldest to newest. Since :alloy:`trashed` must be an attribute of some signature, we will declare a singleton signature :alloy:`Trash` whose only purposed is to contain :alloy:`trashed`. Of course, we want :alloy:`trashed` to still be mutable, so our declarations will look as follows.
+
+.. code-block::
+
+   sig Token {}
+   
+   sig File {
+     var shared : set Token
+   }
+   var sig uploaded in File {}
+
+   one sig Trash {
+     var trashed : seq uploaded
+   }
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/sequences/declaring-sequences
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+
+.. index::
+  util/sequniv module
+
+The `util/sequniv` module
+#########################
+
+When sequences are declared in a model, the standard module :alloy:`util/sequniv` is automatically imported. This module contains many useful functions and predicates to work with sequences, namely:
+   - :alloy:`elems`, a function that given a sequence returns the set of elements contained in it.
+   - :alloy:`isEmpty`, a predicate that checks if a sequence is empty.
+   - :alloy:`first` and :alloy:`last`, functions that given a sequence return its first and last element, respectively (or :alloy:`none` if the sequence is empty).
+   - :alloy:`rest` and :alloy:`butlast`, functions that given a sequence return a new sequence without its first or last elements, respectively.
+   - :alloy:`add`, a function that given a sequence and an element, returns a new sequence with that element appended at the end.
+   - :alloy:`insert` and :alloy:`delete`, functions that allow insertion or deletion of elements at specific positions in a sequence.
+   - :alloy:`hasDups`, a predicate that checks if a sequence has duplicates.
+
+In this module we can also see that a :alloy:`seq A` is implemented using a binary relation of type :alloy:`seq/Int -> A`, where :alloy:`seq/Int` is a subset of :alloy:`Int` containing only a prefix of the non-negative integers (starting at 0). All sequences are guaranteed to range over a prefix of the non-negative integers, for example sequence :alloy:`[x,y,z]` is implemented by binary relation :alloy:`{(0,x),(1,y),(2,z)}`, and if we apply :alloy:`rest` to this sequence we obtain :alloy:`{(0,y),(1,z)}`. This means that we can also use the standard relational operators with sequences, for example to check if a sequence :alloy:`S` is empty we could use :alloy:`no S`, and to obtain the set of its elements we could use :alloy:`seq/Int.S`. However, here we will mainly use the :alloy:`util/sequniv` functions to manipulate sequences.
+
+.. index::
+   scope; for seq
+
+It is also important to know that we can control the size of :alloy:`seq/Int` by setting a scope for :alloy:`seq` in the analysis commands. The default scope for :alloy:`seq` is 4, meaning that sequences can have at most 4 elements. In this case, if a sequence already contains 4 elements and we try to :alloy:`add` another element, the same sequence will be returned, so we should be careful about setting a scope for :alloy:`seq` that is enough for our application (or specify the desired behavior when a sequence is full). In our example, it suffices that the scope of :alloy:`seq` is at least as big as the scope of :alloy:`File`, because the same file cannot deleted again when it is already in the trash bin. We should also be aware that, since :alloy:`seq/Int` is a subset of :alloy:`Int`, the scope of the later must be big enough to accommodate the former. For example, if we run the command :alloy:`run {} for 3 but 5 seq, 3 Int` we will get an error stating that the scope of :alloy:`Int` is not big enough to accommodate the desired scope for :alloy:`seq`, because with 3 bits we can only represent integers from -4 to 3, which is not enough to compute the maximum size of sequences, which in this case would be 5.
+
+
+.. card-carousel:: 2
+
+
+   .. card:: Working with integers
+      :link-type: ref
+      :link: integers
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Sequences are defined using relations from integers indexes to values. Learn how to work with integers in Alloy.
+
+
+
+Replacing sets with sequences
+#############################
+
+Most action predicates in our model must be changed to reflect the change in the declaration of :alloy:`trashed`. For example, the :alloy:`empty` action predicate was previously specified as follows.
+
+.. code-block::
+
+   pred empty {
+     no trashed'                      // effect on trashed
+     uploaded' = uploaded - trashed   // effect on uploaded
+     shared' = shared                 // no effect on shared
+   }
+
+Since now :alloy:`trashed` is in fact a ternary relation of type :alloy:`Trash -> seq/Int -> File`, the guard and effect condition on :alloy:`trashed` using cardinality checks would still work, but we will instead use the :alloy:`util/sequniv` function :alloy:`isEmpty` applied to :alloy:`Trash.trashed`. However, the effect on :alloy:`uploaded` would not work, and would raise a type error due to incompatible types. To determine the set of elements in the trash bin we should now use :alloy:`elems[Trash.trashed]`. The updated specification of :alloy:`empty` would be as follows.
+
+.. code-block::
+
+   pred empty {
+     isEmpty[Trash.trashed']                       // effect on trashed
+     uploaded' = uploaded - elems[Trash.trashed]   // effect on uploaded
+     shared' = shared                              // no effect on shared
+   }
+
+The most relevant changes are, of course, in the :alloy:`delete` and :alloy:`restore` action predicates. The former should add the deleted file to the end of the :alloy:`trashed` sequence, and the latter no longer is parametrized by the file to be restored and should instead recover the last file of :alloy:`trashed`.
+
+.. code-block::
+
+   pred delete [f : File] {
+     f in uploaded - elems[Trash.trashed]    // guard
+     Trash.trashed' = add[Trash.trashed, f]  // effect on trashed
+     shared' = shared - f->Token             // effect on shared
+     uploaded' = uploaded                    // no effect on uploaded
+   }
+
+   pred restore {
+     not isEmpty[Trash.trashed]                // guard
+     Trash.trashed' = butlast[Trash.trashed]   // effect on trashed
+     uploaded' = uploaded                      // no effect on uploaded
+     shared' = shared                          // no effect on shared
+   }
+
+To see how sequences are visualized by the Analyzer, let us ask for instances where eventually there are two deleted files in the trash. This can be achieved with the following command using the `elems` function.
+
+.. code-block::
+
+  run two_deleted {
+    eventually some disj f1, f2 : File | f1 + f2 in elems[Trash.trashed]
+  }
+
+The following is a possibly returned instance where two files are uploaded and then deleted in sequence. Only the transition corresponding to the last deletion is depicted. Notice that, since `trashed` is a ternary relation of type :alloy:`Trash -> seq/Int -> File`, indexes appear as labels in the edges of `trashed`. Also, notice how the last deleted file is added to the end of the sequence, at index 1.
+
+.. image:: instance1.png
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/d6b17667144a090f68df2d1dc651131594d2154b/behavioral-topics/sequences/instance_01/filesharing.als#L83-L93
+   :alt: Get the code to generate this instance.
+
+The change of :alloy:`trashed` to a sequence has no significant impact in the specification of the assertions we checked in the original version, and only some minor and trivial changes are required. For example, to check that all shared files are not in the trash we should use the following assertion, where we just replaced :alloy:`trashed` by :alloy:`elems[Trash.trashed]`.
+
+.. code-block::
+
+   assert shared_are_accessible {
+     always shared.Token in uploaded - elems[Trash.trashed]
+   }
+
+To see an example where the change might not be so trivial, consider the valid assertion that delete undoes restore, which in the original model could have been specified as follows.
+
+.. code-block::
+
+   assert delete_undoes_restore {
+     all f : File | always (
+       restore[f] and after delete[f] implies
+         uploaded'' = uploaded and trashed'' = trashed and shared'' = shared
+     )
+   }
+   check delete_undoes_restore   
+
+Since now :alloy:`restore` has no parameters, we need to identify the file being restored by explicitly checking that it is the last of :alloy:`trashed`, as follows.
+
+.. code-block::
+
+   assert delete_undoes_restore {
+     all f : File | always (
+       f = last[Trash.trashed] and restore and after delete[f] implies
+         uploaded'' = uploaded and trashed'' = trashed and shared'' = shared
+     )
+   }
+   check delete_undoes_restore   
+
+In this version with sequences we can also add a new assertion that checks that indeed the trash bin never contains duplicate files (which was trivial true in the original model, since :alloy:`trashed` was a set).
+
+.. code-block::
+
+   assert no_duplicates_in_trash {
+      always not hasDups[Trash.trashed]
+   }
+   check no_duplicates_in_trash
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/sequences/replacing-sets-with-sequences
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Higher-arity relations
+      :link-type: ref
+      :link: nary-relations
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Since sequences are ternary relations, they can be treated as any n-ary relation. Learn more about these higher-arity relations.
+

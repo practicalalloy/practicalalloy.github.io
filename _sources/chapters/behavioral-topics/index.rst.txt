@@ -1,0 +1,39 @@
+:hide-toc:
+
+.. _behavioral-topics:
+
+*************************************
+Behavioral modelling advanced topics
+*************************************
+
+This chapter presents some advanced topics relevant for behavioral modelling. These topics build on the file sharing app example model of the :ref:`behavioral-modeling` chapter.
+
+.. card-carousel:: 2
+
+   .. card:: Base model for the topics
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/verifying-expected-properties
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the base model that will be used for the advanced topics.
+
+
+.. toctree::
+   :hidden:
+   
+   topics/temporal-logic/index
+   topics/mutable-toplevel-signatures/index
+   topics/pointwise-effects/index
+
+   topics/macros/index
+   topics/meta/index
+
+
+   topics/event-depiction/index
+   topics/scenarios/index
+   topics/evaluator/index
+
+   topics/fairness/index
+   topics/inductive-invariants/index
+   topics/sequences/index
+ 

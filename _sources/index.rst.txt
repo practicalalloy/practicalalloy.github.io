@@ -1,0 +1,62 @@
+.. AlloyBook documentation master file, created by
+   sphinx-quickstart on Sat Feb 29 17:02:55 2020.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+:hide-toc:
+
+Practical Alloy
+==============================================
+
+A hands-on guide to formal software design
+------------------------------------------
+
+.. image:: cover.jpg
+   :width: 450 px 
+
+This book is an introduction to formal software design with `Alloy <https://alloytools.org>`_.
+
+A key activity in design is to develop models of the software system to be implemented. Models are abstractions that allow us to quickly explore design alternatives and help us reason about the expected requirements.
+
+Alloy is a formal modeling language that can be used to describe complex mutable software structures using simple mathematical concepts. The Alloy Analyzer supports both automatic model validation and verification of expected requirements, making Alloy one of the most cost-effective formal design frameworks nowadays. 
+
+This book starts by presenting the basics of both structural and behavioral modeling with Alloy, and then explores its application in the formal design of different kinds of software systems, ranging from simple user apps to distributed protocols.
+
+The presentation of the different concepts is always illustrated with practical examples, making this book a hands-on guide to learn formal software design with Alloy.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Preface
+   :hidden:
+
+   chapters/about-alloy/index
+   chapters/about-book/index
+   
+.. toctree::
+   :maxdepth: 2
+   :caption: The Basics
+   :hidden:
+
+   chapters/structural-modeling/index
+   Advanced topics <chapters/structural-topics/index>
+   chapters/behavioral-modeling/index
+   Advanced topics <chapters/behavioral-topics/index>
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Applications
+
+   chapters/protocol-design/index
+   chapters/app-design/index
+   chapters/interaction-design/index
+   chapters/system-design/index
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Resources
+
+   bibliography
+   genindex

@@ -1,0 +1,227 @@
+.. _meta:
+  
+Meta-capabilities 
+=================
+
+Although it is not a very well known feature, Alloy has some basic
+meta-capabilities that allow to manipulate signatures and fields at the
+meta-level. This is an advanced feature that can sometimes ease the
+encoding of certain constraints and even promote maintainability by avoiding
+updating constraints as the model evolves.
+
+The Alloy meta-model
+---------------------
+
+.. index::
+  meta-model
+
+Let us get back to the file sharing example from the  :ref:`behavioral-modeling` chapter, but extend its configuration slightly to better exemplify the Alloy's meta-capabilities. In particular, let us also add some abstract attributes to files, introduce different types of files as (static) extension sub-signatures of :alloy:`File`, and say that links point to other files. This will result in the following static declarations.
+
+.. code::
+
+  sig Token {}
+  
+  sig Attribute {}
+  
+  sig File {
+    attributes : set Attribute,
+    var shared : set Token
+  }
+
+  sig Text, Binary extends File {}
+  
+  sig Link extends File {
+    link : one File
+  }
+
+.. index::
+  Show Metamodel menu option
+  meta-model; visualization
+
+A (simplified version of the) Alloy meta-model comprises the signatures and fields declared in a model, along with some of their properties. The Analyzer actually provides an option to inspect this meta-model through menu option :menuselection:`Execute --> Show Metamodel` (or shortcut :kbd:`cmd-m`). Below is the result for this version of the file sharing model.
+
+.. image:: metamodel.png
+   :width: 600 px
+   :align: center
+
+.. index::
+  signature; extension
+  signature; top-level
+  signature; subset
+
+Top-level signatures and extension signatures are shown as yellow squares, while subset signatures are shown as blue ellipses. The signature hierarchy is shown with black edges for extension (`extends`) and subset (`in`) signatures. Red edges denote the fields, which in this model are all binary. Mutable elements are drawn with dashed lines.
+
+.. index::
+   signature; meta
+
+Alloy provides a few meta-signatures that capture these elements of the meta-model. These are all identified by a :code:`$` suffix. The two essential ones are :alloy:`sig$` -- which contains an atom identifying every signature declared in the model -- and :alloy:`field$` -- which contains an atom identifying every field declared in the model. By default, these meta-signatures are not created for every Alloy model to avoid cluttering, but only if any meta-signature is referred in the model. So let us activate the meta-capabilities of Alloy by simply writing the following command, which is trivially true in non-empty models:
+
+.. code::
+  
+  run some_sig {
+    some sig$
+  } for 2
+
+Meta-signature `sig$` contains a meta-atom identifying each signature of the
+model, so this property is trivially true in our model where there are various
+signatures declared. Nonetheless, this activates the meta-capabilities and
+introduces meta-signatures in the instance which we can inspect in the
+evaluator.
+
+.. index::
+   Evaluator button
+   meta-model; evaluation
+
+Let us open an instance returned by the Analyzer and open the evaluator by
+pressing :guilabel:`Evaluator`. Then let us ask for the value of meta-signature
+:alloy:`sig$`. You'll get the following set of meta-atoms.
+
+.. table:: 
+   :align: center
+
+   +---------------------+---------------------+-----------------+-----------------+-----------------+--------------------+--------------------+--------------------+
+   | :alloy:`Attribute$` | :alloy:`Binary$`    |  :alloy:`File$` |  :alloy:`Link$` |  :alloy:`Text$` | :alloy:`Token$`    |  :alloy:`trashed$` | :alloy:`uploaded$` |  
+   +---------------------+---------------------+-----------------+-----------------+-----------------+--------------------+--------------------+--------------------+
+
+As you can see, there is one meta-atom for each of the signatures declared in the model (also identified by a :code:`$` suffix), including extension and subset signatures. The value of meta-signature :alloy:`field$` returns instead the meta-atoms representing the fields for all signatures declared in the model.
+
+.. table:: 
+   :align: center
+
+   +--------------------------+----------------------+----------------------+
+   | :alloy:`File$attributes` | :alloy:`File$shared` | :alloy:`Link$link`   |
+   +--------------------------+----------------------+----------------------+
+
+You can refer directly to these meta-atoms in the evaluator, and actually, unlike regular atoms, you can also mention them in directly in the model. (Notice that a signature meta-atom always ends in :code:`$`, such as :alloy:`File$`, while the respective regular atoms end with :code:`$` followed by an identifier, such as :alloy:`File$0` and :alloy:`File$1`).  Additionally, Alloy also provides subsets of meta-atoms to distinguish between the static and mutable elements of the model. Namely, meta-subset :alloy:`static$` returns all static signatures and fields, and meta-subset :alloy:`var$` all mutable signatures and fields.
+
+.. index::
+   field; meta
+   signature; parent
+
+Each meta-signature has a few meta-fields defined that allow us to navigate over the structure of the model. These are :alloy:`parent`, to get the parent signature of a sub-signature, :alloy:`fields`, to get all the fields of a signature, and :alloy:`subfields`, to get all fields declared by a signature or one of its sub-signatures. Due to the Alloy type system, you won't be able to call these meta-fields directly on the evaluator since it won't be able to disambiguate between the instances for each signature. But you can call it for a particular meta-atom, such as :alloy:`File$ <: fields`. In this case, as expected, you'll get the following tuples.
+
+.. table:: 
+   :align: center
+
+   +------------------------------+----------------------------------+
+   | :alloy:`(File$,File$shared)` | :alloy:`(File$,File$attributes)` |
+   +------------------------------+----------------------------------+
+   
+Finally, and most importantly, a :alloy:`value` meta-field is provided for each
+meta-atom that retrieves its valuation in a particular instance. The figure
+below depicts this process for a particular instance resulting from the command
+presented above, namely the value of the signature :alloy:`File` by calling
+:alloy:`value` over the corresponding meta-atom (which is the same as just
+calling :alloy:`File` directly). 
+
+.. image:: evaluator1.png
+   :width: 750 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/d7906c088d9e67fd0a1bd6ca194fb40dff5ecd34/behavioral-topics/meta/instance_01/filesharing.als#L92-L102
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/meta/the-alloy-meta-model
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: The trace evaluator
+      :link-type: ref
+      :link: evaluator_trace
+
+      :octicon:`beaker` Further reading
+      ^^^
+      In this section we used the evaluator. Learn in more detail how to use it to inspect traces.          
+
+Specifying meta-constraints
+-----------------------------
+
+Given the available meta-model, let us now explore how it can be used to
+ease the writing of certain (meta-)constraints. For instance, let's say that we just
+want to see scenarios where all signatures of the configuration are not empty.
+This can be achieved with the following command.
+
+.. code::
+  
+  run no_empty_config_sigs {
+    all s : sig$ & static$ | some s.value
+  }
+
+Notice that, for now, we are restricting the signature quantification to those
+that are static. This command will have the intended behavior regardless of the
+model and the declared signatures, making it resilient to model evolution.
+
+As another example, we may want to see scenarios where the fields of a
+particular signature are not empty. As said above, we can refer to specific
+meta-atoms in the model, so we could just write the following command.
+
+.. code::
+  
+  run no_empty_file_fields {
+    all f : File$.subfields & static$ | some f.value
+  }
+
+This will only generate instances where there are necessarily some attributes
+and links assigned (since we called :alloy:`subfields` on meta-atom
+:alloy:`File$`, it also retrieves field :alloy:`link` from links).
+
+.. index::
+    transition system; initial state
+
+Perhaps more interesting is using the meta-signatures in the context of behavioral modelling. For instance, it is very often the case that there is a fact in the model restricting all declared mutable signatures and fields to be empty in the first state. That is also the case in the file sharing example. Using meta-signatures, this fact could be trivially written for any model as follows, forcing all mutable elements to be empty in the first state.
+
+.. code::
+
+  fact init {
+    // Initially all mutable elements are empty
+    all v : var$ | no v.value
+  }
+
+.. index::
+    stuttering
+
+This strategy is also useful to write stuttering predicates which are common in
+behavioral models, as is the case in the file sharing example. Using
+meta-signatures, the stuttering predicate could just be rewritten as follows,
+stating that the value of all mutable elements remain unchanged between the
+current and the next state.
+
+.. code::
+
+   pred stutter {
+     all v : var$ | v.value = v.value' // no effect on anything
+   }
+
+.. index::
+   event; frame condition
+
+A similar strategy could be used to encode frame conditions on event predicates, namely iterating over all mutable fields that are not relevant for the event and force them to remain unchanged. In the file sharing model, we could, for instance, re-encode the :alloy:`upload` event as follows.
+
+.. code::
+
+  pred upload [f : File] {
+    f not in uploaded                             // guard
+    uploaded' = uploaded + f                      // effect on uploaded
+    all v : var$ - uploaded$ | v.value = v.value' // no effect on anything other than uploaded
+  }
+
+This feature can also be used to quickly specify rich scenarios. For instance, let us say we want to see the minimal traces where every element of the model is used at some point. We can just write the following command, that will guarantee that every mutable element is eventually populated. For the file sharing example, this is a trace with 5 states, where a file is uploaded, shared, downloaded, and then deleted.
+
+.. code::
+
+  run everything_happens {
+    all v : var$ | eventually some v.value
+  }
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/meta/specifying-meta-constraints
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.

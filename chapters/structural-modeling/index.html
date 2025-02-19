@@ -1,0 +1,1295 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2025-02-16T20:25:24+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Structural modelling advanced topics" href="../structural-topics/index.html" /><link rel="prev" title="About this book" href="../about-book/index.html" />
+
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>Structural modeling - Practical Alloy</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/practicalalloy.css?v=2ee171b3" />
+    <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #2a5adf;
+  --color-brand-content: #2a5adf;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">Practical Alloy</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Practical Alloy</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Preface</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about-alloy/index.html">About Alloy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about-book/index.html">About this book</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Structural modeling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../structural-topics/index.html">Advanced topics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/subset-signatures/index.html">Subset signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/enumerations/index.html">Enumeration signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/commands/index.html">Commands in detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/visualization/index.html">Visualization customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/nary-relations/index.html">Higher-arity relations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/evaluator/index.html">The instance evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/bestiary/index.html">Arrow multiplicity constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/type-system/index.html">Type system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/modules/index.html">Module system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/ordering/index.html">The predefined <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/relational-logic/index.html">A relational logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/model-finding/index.html">Model finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/testing-instances/index.html">Encoding test instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/recursion/index.html">Handling recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/integers/index.html">Working with integers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structural-topics/topics/signature-facts/index.html">Signature facts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../behavioral-modeling/index.html">Behavioral modeling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../behavioral-topics/index.html">Advanced topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/temporal-logic/index.html">A temporal logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/mutable-toplevel-signatures/index.html">Mutable top-level signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/pointwise-effects/index.html">Pointwise effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/macros/index.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/meta/index.html">Meta-capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/event-depiction/index.html">An idiom for event depiction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/scenarios/index.html">Encoding trace scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/evaluator/index.html">The trace evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/fairness/index.html">Safety, liveness, and fairness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/inductive-invariants/index.html">Inductive invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/sequences/index.html">Sequences</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocol-design/index.html">Protocol design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/chapters/structural-modeling/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="structural-modeling">
+<span id="id1"></span><h1>Structural modeling<a class="headerlink" href="#structural-modeling" title="Link to this heading">¶</a></h1>
+<p id="index-0">This chapter explains how Alloy can be used for structural modeling. As running example we will explore the design of a file system.
+The main goal of the chapter is to introduce the
+key concepts of Alloy, so our model will be
+purposely simple, a very high-level abstraction of a real file
+system. We will focus only on the
+structural aspects of the design, namely on describing how files and directories are
+organized. Behavioral modeling will be the focus of the next chapter.
+Given the high level of abstraction, our specification will resemble a domain model, formally describing the key file system entities and their relationships.
+Another goal of this design exploration is to
+elicit the set of constraints that characterize a well-formed file
+system.
+Our final goal will be to verify that this set of
+constraints entails other relevant properties of a file system. In
+particular we are interested in verifying the property that no
+partitions occur in the file system, meaning
+that all files and directories are accessible from the root directory.</p>
+<section id="signature-declaration">
+<h2>Signature declaration<a class="headerlink" href="#signature-declaration" title="Link to this heading">¶</a></h2>
+<p id="index-1">In Alloy entities can be declared with <em>signatures</em>.  A signature is just a set that groups together some elements of the domain of discourse.
+In this case we will declare signatures to capture the two key entities in a file
+system: directories and files.
+Since both files and directories share some common
+properties, namely they can both appear inside a directory, it is
+convenient to declare them as subsets of a more abstract
+signature containing all file system objects. To declare a signature we use the keyword
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kd">sig</span></code> followed by the signature name and a list of field
+declarations between braces. Such <em>fields</em> will later be used to represent associations or relationships between signatures. For the moment we will not declare
+them, so a signature containing all file system objects without any field can be
+declared simply as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="kd">sig</span> <span class="nc">Object</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p id="index-2">To declare a <em>subset</em> signature, the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">in</span></code> should be used  after the signature name, followed by the name of the including (or <em>parent</em>) signature. For example, the two subset signatures of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> containing the directories and files can be declared as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="kd">sig</span> <span class="nc">Dir</span> <span class="k">in</span> <span class="nc">Object</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">File</span> <span class="k">in</span> <span class="nc">Object</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p>In Alloy we typically start validating a design very early in the modeling process, when the specification is still quite incomplete. The goal is to find design problems or specification errors as early as possible, and not let them amass to a point where debugging becomes very difficult. This can be achieved by executing analysis <em>commands</em>.</p>
+<p id="index-3">A distinguishing feature of Alloy is that commands can be
+included together with the declarations and constraints in a
+model. This is very convenient because later all stakeholders can easily see which analysis were used to validate and verify a design.
+There are two kinds of commands, both accepting an optional name and a formula enclosed in braces: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands instruct the Analyzer to
+check the satisfiability of the given formula,
+yielding a satisfying instance if that is the case; <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code>
+commands instruct the Analyzer to check the validity of the given formula, yielding a counter-example
+instance if that is not the case. An <em>instance</em> is just a valuation to all declared signatures and fields. In the case of signatures, this valuation defines which elements of the domain are contained in each signature. The elements of the domain are known in Alloy as <em>atoms</em>, because they have no intrinsic semantics, apart from the connections they establish with other atoms through relations.</p>
+<p>The usual way to start validating a specification is to define an
+empty <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command. An empty formula is equivalent to true, and
+for the moment such a command basically asks for any instance that conforms to the signature declarations. Later, as our model evolves, the instances returned by such an empty command will also be required to satisfy all the specified assumptions. If no instance is returned then the assumptions are inconsistent
+and most likely our specification of the system is buggy and needs to
+be corrected (for example by weakening some of the assumptions).</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">example</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p id="index-4">To execute the first command in a specification, or to re-execute the
+last command, just press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">cmd</kbd>-<kbd class="kbd docutils literal notranslate">e</kbd></kbd> or the <span class="guilabel">Execute</span>
+button in the toolbar of the Analyzer window. If you have multiple
+commands, to choose which one to execute go to the
+<span class="guilabel">Execute</span> menu and select the desired command. If the commands are
+named you will see the names there, otherwise you will see an
+automatically generated name composed by the type of command (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code>
+or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code>) followed by a <code class="code docutils literal notranslate"><span class="pre">$</span></code> and a sequential numeric
+identifier.</p>
+<p id="index-5">After executing a command, you’ll see some logging information in the pane to the right of the model editor. If a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command finds an instance, the Analyzer will report a message <em>Instance found</em> that can be clicked to open tha instance in the visualizer (likewise for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands and counter-examples). Alternatively, you can press the <span class="guilabel">Show</span> button in the toolbar of the Analyzer window or select menu option <span class="menuselection">Execute ‣ Show Latest Instance</span> (shortcut <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">cmd</kbd>-<kbd class="kbd docutils literal notranslate">l</kbd></kbd>) to view the last generated instance. After executing the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command in our model we
+get the following message.</p>
+<a class="reference internal image-reference" href="../../_images/log12.png"><img alt="../../_images/log12.png" class="align-center" src="../../_images/log12.png" style="width: 500px;" />
+</a>
+<p>After clicking <em>Instance</em>, the following instance is opened in the visualizer.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_01_02/filesystem.als#L18-L24"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance116.png" style="width: 500px;" />
+</a>
+<p id="index-6">Another distinguishing feature of Alloy is that the instances returned by the analysis commands are, by default, depicted graphically as graph-like structures in a pop-up window, just as the one above: atoms belonging to the different signatures are nodes (depicted as boxes by default) and associations between atoms are edges (depicted as arrows). In this instance we have two objects, one of them is a directory and the other a file. We can ask the Analyzer to generate a different instance, by pressing <span class="guilabel">New</span> in the visualizer toolbar, or selecting menu option <span class="menuselection">Instance ‣ Show New Solution</span> (shortcut <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">cmd</kbd>-<kbd class="kbd docutils literal notranslate">n</kbd></kbd>). As mentioned before, atoms have no intrinsic semantics. In particular, the names the Analyzer generates for them are meaningless: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object0</span></code> isn’t the name of a particular file existing in a real-world file system, but just a name to help us distinguish it from other elements in the domain. As such, two instances that only differ in the names of the atoms are in fact the same instance (they are isomorphic up to atom renaming), and showing both to the user would just encumber the understanding of the specification. To avoid this, and also to speed up analysis, the Analyzer implements a powerful <em>symmetry breaking</em> mechanism that excludes from the analysis most isomorphic (i.e., symmetric) instances. This feature is also very convenient for validation, as we can quickly see many truly different instances of our model. For example, after pressing <span class="guilabel">New</span> we could get the following instance. Re-enforcing the fact that name are meaningless, if there is a single atom in a signature it is not numbered in the visualization by default.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_01_02/filesystem.als#L26-L32"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance25.png" style="width: 500px;" />
+</a>
+<p id="index-7">If you  try to run these commands in the Analyzer it is possible that you get different instances. The Analyzer relies on lower-level
+<a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_satisfiability_problem">SAT</a>
+solvers to perform the analysis. Depending on the Analyzer version
+and the solver you have selected to perform the analysis, you might
+get instances in a different order than this. You can choose the
+underlying solver in the <span class="guilabel">Options</span> menu. However,
+irrespective of the selected solver, if you keep pressing
+<span class="guilabel">New</span> you will obtain all the possible (non-symmetric)
+instances of a specification, so you are guaranteed to eventually obtain
+these.</p>
+<p id="index-8">In the above instance we have a single object that is, simultaneously, a
+directory and a file. Obviously this is not something we wanted, but
+it is allowed by this model since both <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> are
+arbitrary subsets of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code>.
+It is very common to require that some subset signatures are
+disjoint. Alloy has a special syntax to declare those: instead of
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">in</span></code>, the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">extends</span></code> should be used in the signature
+declaration. An advantage of using <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">extends</span></code> is that in the instance visualizer
+atoms will be named according to the most specific extension signature they
+belong to (instead of using labels), which simplifies the understanding of instances.  To introduce <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> as
+two disjoint subsets of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> we should declare them as
+follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="kd">sig</span> <span class="nc">File</span> <span class="k">extends</span> <span class="nc">Object</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">Dir</span> <span class="k">extends</span> <span class="nc">Object</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p id="index-9"><code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> are <em>extension</em> signatures, while <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> is a <em>top-level</em> signature, because it does not extend or is included in another signature.
+If we re-execute the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command, and iterate through the possible
+instances using <span class="guilabel">New</span> we will no longer see objects that
+are simultaneously files and directories, but we will eventually get an instance
+such as the following, where we have the problem of having an object (named <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code>)
+that is neither a file nor a directory.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_03/filesystem.als#L18-L24"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance34.png" style="width: 500px;" />
+</a>
+<p id="index-10">A frequent requirement for extension signatures is that they
+actually form a partition of the parent signature, meaning that the parent signature must not contain atoms besides those
+contained in its extensions. In this case, the parent signature should be declared as <em>abstract</em>, by
+preceding its declaration with the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">abstract</span></code>.  In our example we want  <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> to partition
+signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code>, so we should have the following declarations.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Object</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">Dir</span> <span class="k">extends</span> <span class="nc">Object</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">File</span> <span class="k">extends</span> <span class="nc">Object</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p id="index-11">We would now like to denote one of the directories as the root of the file system. In Alloy it is not
+possible to directly declare constants, but we can declare an extension signature that is inhabited by exactly one atom, and thus behaves like a constant.
+Signature
+declarations can be preceded by a <em>multiplicity constraint</em> that
+restricts the cardinality of that signature. There are three
+multiplicities that can be used in a signature declaration:
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">some</span></code> forces the signature to always have some atoms;
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code> restricts the signature to have at most one atom; and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code> restricts the signature to have exactly one atom. To denote the root directory, we can declare  a
+signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> extending <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> with multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">one</span> <span class="kd">sig</span> <span class="nc">Root</span> <span class="k">extends</span> <span class="nc">Dir</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p><code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> is a singleton set that contains the atom
+that is the root directory of the file system. Since it is
+declared with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">extends</span></code>, that atom will also be named
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> in the instance visualizer. A possible instance returned
+by the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command is the following, where we have three
+directories, one of them being (necessarily, due to multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>) the root directory.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_04_05/filesystem.als#L28-L34"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance43.png" style="width: 500px;" />
+</a>
+<p>Objects inside directories have an associated name, so we will need a
+signature to represent the latter.  In our file system model we will
+also allow files to be (hard) linked, meaning that the same file can have
+different names in different directories (or even inside the same
+directory).  As such, we will also introduce a signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code>
+that will later be used as a (kind of) record to pack together an
+object inside a directory and the respective name.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="kd">sig</span> <span class="nc">Entry</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">Name</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p>With these new signature declarations, a possible instance of our specification is the following, with
+two different names, two entries, one file, and two directories, one
+of which is the root.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_04_05/filesystem.als#L36-L44"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance53.png" style="width: 500px;" />
+</a>
+<p id="index-12">To enable automatic analysis,
+Alloy imposes a bound on the size of all signatures. This bound is
+defined by a <em>scope</em> on commands. By default the scope is 3 for all
+top-level signatures, meaning that instances will only be built using
+at most 3 atoms for each top-level signature.
+In our command this means that instances will have at most
+3 names, 3 entries, and 3 objects. With this scope, instances with,
+for example, 3 files, will not be possible, because the root always
+exists and consumes 1 of the 3 atoms that can inhabit
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code>. To change the default global scope for a certain command the keyword
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">for</span></code> followed by the desired scope can be used. We can also
+set a different scope for each top-level or extension signature (but not for the
+subset signatures declared with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">in</span></code>), by
+using the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">but</span></code> followed by a comma separated list with
+different scopes for each signature. You can also set an exact scope
+for a signature with the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">exactly</span></code>, forcing that
+signature to always be inhabited by the exact number of specified
+atoms. For example, to execute the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command with a
+default scope of 4 for top-level signatures, but up to 2 entries, and exactly 3 names, the
+scope should be set as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">example</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">4</span> <span class="k">but</span> <span class="mi">2</span> <span class="n">Entry</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">3</span> <span class="n">Name</span>
+</pre></div>
+</div>
+<p>Note that in this case, the only top-level signature that will be
+subject to the default scope of 4 is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code>, since specific
+scopes are given for the other two top-level
+signatures. Multiplicities on signature declarations also affect the
+scope: for example, a signature with multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code> will
+always have a scope of exactly 1, and an error will be thrown if you try to
+set a different scope.</p>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/signature-declaration/"><span>https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/signature-declaration/</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Subset signatures</div>
+<p class="sd-card-text">A signature can be declared as a subset of a union of signatures. Learn how this allows us to simulate multiple inheritance.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/subset-signatures/index.html#subset-signatures"><span class="std std-ref">Subset signatures</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Enumeration signatures</div>
+<p class="sd-card-text">Learn how to declare enumeration signatures with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span> <span class="kd">sig</span></code> extensions or with the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kd">enum</span></code>.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/enumerations/index.html#enumerations"><span class="std std-ref">Enumeration signatures</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Commands in detail</div>
+<p class="sd-card-text">Learn more about Alloy’s analysis commands and associated scopes.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/commands/index.html#commands"><span class="std std-ref">Commands in detail</span></a></div>
+</div>
+</section>
+<section id="field-declaration">
+<h2>Field declaration<a class="headerlink" href="#field-declaration" title="Link to this heading">¶</a></h2>
+<p id="index-13">Having declared our signatures we now proceed with the declaration of
+<em>fields</em>. Fields can be used to model associations or relationships between different entities in the domain.
+Fields are declared inside the braces of a signature
+declaration, and are essentially mathematical <em>relations</em> (sets of
+tuples) that connect atoms of the enclosing signature to other atoms
+(of the same or other signatures).</p>
+<p>A field we will need in our example is one that connects each directory with the respective set
+of entries. This binary relation, which will be named <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code>,
+is a set of ordered pairs, where the first atom of each pair is a
+directory and the second atom is an entry.  Since it
+relates atoms of signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> to atoms of signature
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code>, it must be declared as a field in the former
+signature. To do so, we change the declaration of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="kd">sig</span> <span class="nc">Dir</span> <span class="k">extends</span> <span class="nc">Object</span> <span class="o">{</span>
+  <span class="n">entries</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Entry</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-14">As we can see, a field declaration consists of its name followed by a
+colon and the target signature, optionally preceded be a multiplicity
+declaration. In this case the target is signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code>
+and the multiplicity is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">set</span></code>, meaning that one atom of
+signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> can be related by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> to an
+arbitrary number of atoms of signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code>. The other
+options for the multiplicity are the same that can be used in signature
+declarations: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code>, or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">some</span></code>. If no
+multiplicity is given, the default is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>.  In this book we
+will avoid this implicit multiplicity in field declarations, and always
+explicitly state the multiplicity of a field, even if it is
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>.</p>
+<p>Recall the already declared empty command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">example</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<p>By executing it, we could now get the following instance.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_06/filesystem.als#L28-L37"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance63.png" style="width: 500px;" />
+</a>
+<p id="index-15">Binary relations are depicted by the Analyzer using labelled arrows: each
+arrow is a pair contained in the relation, whose first atom is the
+source of the arrow and whose second atom is the target. In this instance,
+relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> is a set that contains three pairs:
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">(</span><span class="n">Dir</span><span class="p">,</span><span class="n">Entry0</span><span class="o">)</span></code>, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">(</span><span class="n">Dir</span><span class="p">,</span><span class="n">Entry1</span><span class="o">)</span></code>, and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">(</span><span class="n">Root</span><span class="p">,</span><span class="n">Entry2</span><span class="o">)</span></code>, meaning that we have a directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code>
+with two entries and the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> with one entry. Given the
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">set</span></code> multiplicity we could also have
+directories without any entries.</p>
+<p id="index-16">The <em>arity</em> of a relation is the size of the tuples
+contained in it. For example, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> is a (binary) relation of arity 2.
+Actually, in Alloy <em>everything is a relation</em>. In particular, signatures are also relations, namely (unary) relations of arity 1. This means they are sets of tuples of size 1. For example, in the previous instance, signature
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> contains the following unary tuples: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">(</span><span class="n">Dir</span><span class="o">)</span></code> and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">(</span><span class="n">Root</span><span class="o">)</span></code>. Do not confuse the name of the atom
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> with the signature name <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code>: the former is just
+an automatically-generated name for one of the two inhabitants of the latter! When we start using
+relational logic operators to write constraints, it will be more
+clear why the fact that everything denotes a relation considerably simplifies the syntax and
+semantics of the language.</p>
+<p>Besides <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> we will declare two more fields in our
+specification: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">name</span></code>, that relates each entry
+in a directory with the respective name; and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">object</span></code>, that relates each entry in a directory with the respective
+file system object (either a file or a directory). Both these
+fields will be declared inside signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code> and both will
+have multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>, since exactly one target atom is
+associated with each entry. With these two fields, an entry acts like a record that packs together an object inside a directory and the respective name.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="kd">sig</span> <span class="nc">Entry</span> <span class="o">{</span>
+  <span class="n">object</span> <span class="p">:</span> <span class="k">one</span> <span class="n">Object</span><span class="p">,</span>
+  <span class="n">name</span>   <span class="p">:</span> <span class="k">one</span> <span class="n">Name</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Let’s change the default scope of our <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">example</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>After executing this command we could get the following instance.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_07_08/filesystem.als#L32-L43"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance73.png" style="width: 500px;" />
+</a>
+<p id="index-17">In this instance some problems with our specification are evident, for example
+entries shared between directories or files not belonging to any directory. As
+our specification grows, instances become increasingly difficult to understand.
+The Analyzer allows the visualization to be customized be defining a <em>theme</em>,
+which can make instances easier to understand. For our file system model, we
+will use different colours and shapes for entries and file system objects, and
+show entry names as attributes rather than edges. After the customization, the
+instance will be depicted as follows.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_07_08/filesystem.als#L45-L56"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance83.png" style="width: 500px;" />
+</a>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/field-declaration"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/field-declaration</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Visualization customization</div>
+<p class="sd-card-text">Learn in detail how to customize themes and how to get the above visualization.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/visualization/index.html#viz-customization"><span class="std std-ref">Visualization customization</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Higher-arity relations</div>
+<p class="sd-card-text">Instead of declaring entries, the association between directories, their contents, and the respective names could alternatively be modelled by a ternary relation.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/nary-relations/index.html#nary-relations"><span class="std std-ref">Higher-arity relations</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+The instance evaluator</div>
+<p class="sd-card-text">The Alloy Analyzer has an evaluator that can be very useful for debugging.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/evaluator/index.html#evaluator-instance"><span class="std std-ref">The instance evaluator</span></a></div>
+</div>
+</section>
+<section id="specifying-constraints">
+<h2>Specifying constraints<a class="headerlink" href="#specifying-constraints" title="Link to this heading">¶</a></h2>
+<p>By inspecting the above instance we can  easily detect several problems
+in our specification of a file system, namely it currently allows:</p>
+<ul class="simple">
+<li><p>Shared entries between directories (entry <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry3</span></code> belongs both to <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code>).</p></li>
+<li><p>Different entries in the same directory with the same name (all entries inside <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> have the same name <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code>).</p></li>
+<li><p>The same directory to appear in more than one entry (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> is the object of all entries).</p></li>
+<li><p>Dangling files that do not belong to any entry (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code>).</p></li>
+</ul>
+<p id="index-18">To prevent these issues, we must add constraints to our model. In Alloy, constraints that are assumptions of the model (that is, necessarily valid) should be added inside a <em>fact</em>. A fact is declared with keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">fact</span></code> followed by an optional name and a set of constraints inside braces.</p>
+<p id="index-19">To specify constraints Alloy has a dual syntax for the usual Boolean operators: they can be both written
+with the typical programming language style operators, but also using the
+respective English words. We have <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">!</span></code> or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">not</span></code> for negation,
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">&amp;&amp;</span></code> or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">and</span></code> for conjunction, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">||</span></code> or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">or</span></code> for
+disjunction, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">=&gt;</span></code> or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">implies</span></code> for implication, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">&lt;=&gt;</span></code>
+or <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">iff</span></code> for equivalence. Alloy syntax was designed to be very clean
+and readable. The use of the English version of the operators further
+increases the readability of the specifications, and will be the preferred
+style in this book. The universal and existential quantifiers of first-logic logic can also be used, and are written with keywords <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">all</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">some</span></code>. Quantified variables can range over arbitrary sets, and a single quantifier can introduce multiple variables at once, separated by commas. To separate the quantified variables from the (open) formula that they should satisfy the separator <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">|</span></code> should be used (or brackets for a block of constraints).</p>
+<p id="index-20">Actually, in Alloy properties can be specified with an extension of first-order logic called
+<em>relational logic</em>.
+Relational logic extends first-order logic with so
+called <em>relational operators</em>, that can be used to combine (or
+compose) relations (which in first-order logic are known as
+<em>predicates</em>) to obtain more complex relations. Among these operators we have the classic set operators such as
+intersection (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">&amp;</span></code>), union (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">+</span></code>), and difference
+(<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">-</span></code>). Notice that every relation (of any arity) is a set of tuples, so
+these can be applied to any relation, including fields and signatures. A typical atomic formula in relational logic is a cardinality check: keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">no</span></code> checks if a relation is empty; <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">some</span></code> checks if it is non-empty;  <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code> checks if it has at most one tuple; and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code> checks if it has exactly one tuple. We can check that a relation is a subset or equal to another relation with keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">in</span></code>. To check the negation of this we can directly use the operator <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">not</span> <span class="ow">in</span></code>. Finally, equality can be checked with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">=</span></code> and inequality with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">!=</span></code>. For example, the following fact <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">restrict_object</span></code> states that all objects are either directories or files, by specifying that signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> is a subset of the union of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">restrict_object</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="ow">in</span> <span class="n">Dir</span> <span class="o">+</span> <span class="n">File</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Using plain first-order logic, this fact would have to be written with a more verbose style using quantifiers and Boolean operators.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">restrict_object</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">x</span> <span class="p">:</span> <span class="n">Object</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Dir</span> <span class="ow">or</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">File</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Of course, this fact is redundant, since it is a consequence of signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> being abstract and extended by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code>. However, it illustrates an important point about Alloy’s motto that “everything is a relation”. In Alloy, the operator <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">in</span></code> is the standard subset or equal operator of set theory and not the membership test. A formula like <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span> <span class="ow">in</span> <span class="n">Dir</span></code> is allowed, because in Alloy every expression denotes a relation (a set of tuples). In particular, quantified variables are also relations, namely singleton sets with a unary tuple containing a single atom drawn from the range of the quantifier. When <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span></code> is such a singleton set, an inclusion check like <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span> <span class="ow">in</span> <span class="n">Dir</span></code> actually performs a membership check. This is an example of how the above motto enables the simplification of the syntax and semantics of the language, since there is no need for a different operator for membership check.</p>
+<p id="index-21">The essential operator in relational logic is <em>composition</em>, the
+binary operator written as <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">.</span></code> (also known as <em>dot-join</em>). This operator allows us to
+navigate through fields to obtain related atoms. Understanding
+how this operator works is key to be proficient in Alloy. Here, we
+will explain its informal semantics by means of several examples. In particular we will focus on the simplest,
+and most frequent, use of this operator, namely when applied to a
+set and a binary relation. For example, suppose <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code> is a singleton set containing an <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code> a
+singleton set containing a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code>. These could be, for example,
+quantified variables. To obtain the name of entry <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code> you can compose it with
+relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">name</span></code>: relational expression <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span><span class="o">.</span><span class="n">name</span></code> denotes
+the name of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code>. Since <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">name</span></code> is a field
+with multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>, the result of this composition is
+necessarily a singleton set containing a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code>. Similarly, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span><span class="o">.</span><span class="n">object</span></code> is the
+singleton set with the file system object that is contained in entry
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code>.
+The notation is, on purpose, similar to that of accessing an attribute
+of an object in an object-oriented programming language, as the effect
+is essentially the same when dealing with singleton sets. However, we
+can also apply it to relations with multiplicity different than
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code> and arbitrary sets. For example, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span><span class="o">.</span><span class="n">entries</span></code>
+retrieves the set of all entries in directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code>. This set can
+be empty or contain an arbitrary number of entries, since relation
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> has multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">set</span></code>. Another interesting usage
+is when composing a non-singleton set with a relation. For example,
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span><span class="o">.</span><span class="n">name</span></code> is the set of all names of all entries and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span><span class="o">.</span><span class="n">entries</span></code> is the set of all entries that belong to some
+directory. Also, you are not forced to compose a set followed by a
+relation: the other way around also works. Relations can be navigated
+forwards, from the source signature to the target signature, but also
+backwards from the target signature to the source one. For example,
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">e</span></code> denotes the set of directories that contain entry
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code>: this set can be empty, if <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code> is not contained in any
+directory, or even have more than one directory, since when declaring
+a field there are no multiplicity restrictions imposed on the source
+signature. We can also compose with an arbitrary set on the right-hand
+side: for example, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">Entry</span></code> is the set of all directories
+that contain some entry.
+Compositions can also be chained to obtain atoms that are somehow
+indirectly related. For example, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span></code> denotes the
+set of all file system objects that are contained in some entry of
+directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code>. And again, it is possible to navigate backwards
+through a chain of compositions. For example, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">d</span></code>
+denotes the set of all directories that have some entry that points to directory
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code>.</p>
+<p>Using <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">.</span></code> we can now declare a fact that prevents the first
+issue identified in the beginning of this section. We can almost directly transliterate the
+natural language requirement that “entries cannot be shared between directories” to relational logic. Given any two
+different directories <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">y</span></code>, the property that there
+should be no common entries between both can be specified as <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">no</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span> <span class="o">&amp;</span> <span class="n">y</span><span class="o">.</span><span class="n">entries</span><span class="o">)</span></code>. In this formula we first determine the intersection of the two
+sets of entries of both directories, and then we check that this set
+is empty using the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">no</span></code>. To finish the specification of our first assumption we just need to universally quantify over all different
+directories <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">y</span></code>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="k">all</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">implies</span> <span class="k">no</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span> <span class="o">&amp;</span> <span class="n">y</span><span class="o">.</span><span class="n">entries</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-22">The need to quantify over two or more different variables is very
+common, so Alloy provides the modifier <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">disj</span></code>, that can be added
+between a quantifier and the variables, precisely to restrict those
+variables to be different. This modifier simplifies the formulas,
+since we no longer need an implication to indirectly restrict the
+range of the quantification. Using this modifier, our property can be
+restated as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="k">all</span> <span class="k">disj</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="k">no</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span> <span class="o">&amp;</span> <span class="n">y</span><span class="o">.</span><span class="n">entries</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>As expected, there are many different ways to specify the same
+property. In the case of this property, a simpler formula can be obtained by navigating
+backwards the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> relation, and specifying instead that
+for every entry <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code> there should be at most one directory in the
+set <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">e</span></code>, the set of all directories that contain
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code> as an entry. This alternative formulation would look as
+follows. Recall that <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code> can be used to check if a relation (or set)
+contains at most one tuple.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="k">all</span> <span class="n">e</span> <span class="p">:</span> <span class="n">Entry</span> <span class="o">|</span> <span class="k">lone</span> <span class="n">entries</span><span class="o">.</span><span class="n">e</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>To fix the second identified issue, we must enforce that different entries in the same directory have different
+names. This can be achieved with the following fact.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">unique_names</span> <span class="o">{</span>
+  <span class="c1">// Different entries in the same directory must have different names</span>
+  <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span><span class="p">,</span> <span class="k">disj</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">entries</span> <span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">name</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Here you can see another nice feature of Alloy’s syntax: it is
+possible to quantify over any expression and not only over
+signatures. In this case, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">y</span></code> will be instantiated
+with all the (distinct) atoms belonging to <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span><span class="o">.</span><span class="n">entries</span></code>, the set
+of entries of each directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code> quantified in the outer formula. An alternative formulation of
+this property is the following.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">unique_names</span> <span class="o">{</span>
+  <span class="c1">// Different entries in the same directory must have different names</span>
+  <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span><span class="p">,</span> <span class="n">n</span> <span class="p">:</span> <span class="n">Name</span> <span class="o">|</span> <span class="k">lone</span> <span class="o">(</span><span class="n">d</span><span class="o">.</span><span class="n">entries</span> <span class="o">&amp;</span> <span class="n">name</span><span class="o">.</span><span class="n">n</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Expression <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span><span class="o">.</span><span class="n">entries</span> <span class="o">&amp;</span> <span class="n">name</span><span class="o">.</span><span class="n">n</span></code> denotes the set of entries in
+directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code> that also have name <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code>. This set must
+contain at most one entry for every directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code> and name
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code>.</p>
+<p>To prevent the third issue we can enforce that each directory is contained in at most one entry as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_dirs</span> <span class="o">{</span>
+  <span class="c1">// A directory cannot be contained in more than one entry</span>
+  <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="k">lone</span> <span class="n">object</span><span class="o">.</span><span class="n">d</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The last issue is a an example of a broader problem: there is nothing in our
+specification that forces all objects except the root to belong to an entry. To
+specify such a constraint, we can begin by determining the set of all objects
+that are contained in any entry using expression <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span><span class="o">.</span><span class="n">object</span></code>, and then
+enforce that this set is equal the set of all objects minus the root.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_dangling_objects</span> <span class="o">{</span>
+  <span class="c1">// Every object except the root is contained in some entry</span>
+  <span class="n">Entry</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="n">Object</span> <span class="o">-</span> <span class="n">Root</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>After adding these four facts, if we re-execute the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command and
+iterate with <span class="guilabel">New</span>, we’ll notice that the problems identified above
+seem to be gone. However, we will still get instances such as the following.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_09/filesystem.als#L57-L68"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance93.png" style="width: 500px;" />
+</a>
+<p>This instance makes clear two additional issues in our model (the second
+was actually already present in the previous problematic instance):</p>
+<ul class="simple">
+<li><p>Entries not belonging to any directory.</p></li>
+<li><p>Directories contained in themselves.</p></li>
+</ul>
+<p>To address the first issue we could replace the fact
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_shared_entries</span></code> introduced above with a stronger version to
+demand that every entry belongs to one and exactly one directory (rather
+than at most one).</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">one_directory_per_entry</span> <span class="o">{</span>
+  <span class="c1">// Entries must belong to exactly one a directory</span>
+  <span class="k">all</span> <span class="n">e</span> <span class="p">:</span> <span class="n">Entry</span> <span class="o">|</span> <span class="k">one</span> <span class="n">entries</span><span class="o">.</span><span class="n">e</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Concerning the second issue, to forbid directories from
+containing themselves as entries, we can use the previously described
+expression <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span></code> to determine the objects
+contained in a directory <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code>. Then we just need to forbid
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code> itself from being a member of this set.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_self_containment</span> <span class="o">{</span>
+  <span class="c1">// Directories cannot contain themselves</span>
+  <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Re-executing again command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> and iterating a couple of
+times with <span class="guilabel">New</span> reveals no more issues. Obviously, it is
+impossible to manually inspect all possible instances, so we will
+proceed with the verification of our desired assertion, namely that
+the file system contains no partitions.</p>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/specifying-constraints"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/specifying-constraints</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Arrow multiplicity checks</div>
+<p class="sd-card-text">Alloy has a special syntax to impose multiplicity constraints in both ends of binary relations. Learn about the full bestiary of binary relations we can get by varying these multiplicities.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/bestiary/index.html#bestiary"><span class="std std-ref">Arrow multiplicity constraints</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Type system</div>
+<p class="sd-card-text">Alloy has a nice type system that helps detecting many mistakes while specifying properties.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/type-system/index.html#type-system"><span class="std std-ref">Type system</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Modules</div>
+<p class="sd-card-text">Modules can help you break a big specification into separate, reusable specifications. Learn about the module system of Alloy.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/modules/index.html#modules"><span class="std std-ref">Module system</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+The predefined <code class="code docutils literal notranslate"><span class="pre">ordering</span></code> module</div>
+<p class="sd-card-text">Alloy has a pre-defined module that can be used to impose a total order in a signature. This could be used, for example, to model the creation timestamps of entries in a file-system.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/ordering/index.html#ordering"><span class="std std-ref">The predefined ordering module</span></a></div>
+</div>
+</section>
+<section id="a-question-of-style">
+<h2>A question of style<a class="headerlink" href="#a-question-of-style" title="Link to this heading">¶</a></h2>
+<p>Relational logic, the formalism behind the Alloy language, is very expressive and flexible. This means that the same constraint can be encoded in several different styles, depending on the user’s preference.</p>
+<p>Let us get back to the fact <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_shared_entries</span></code>, forcing
+that entries cannot be shared between directories. The last version presented above was the
+following.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="k">all</span> <span class="n">e</span> <span class="p">:</span> <span class="n">Entry</span> <span class="o">|</span> <span class="k">lone</span> <span class="n">entries</span><span class="o">.</span><span class="n">e</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-23">This <em>navigational style</em> is the most common in Alloy. We usually have a few
+quantifiers (many times just a single quantified variable) and use composition
+to navigate back and forwards from variables to get related sets of atoms, over
+which some constraints are imposed. In this case we first determine the set
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">e</span></code> containing the directories where entry <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">e</span></code> is contained,
+and then force this set to contain at most one directory with a cardinality check.</p>
+<p id="index-24">Of course, we could also express the same property using a plain <em>first-order
+style</em>, where we only check if a tuple of variables belongs to a relation (known as a
+<em>predicate</em> in first-order logic parlance) or if a pair of variables are equal. This
+requires having more quantified variables and results in a verbose style that is
+also known as <em>pointwise</em>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="k">all</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">Dir</span><span class="p">,</span> <span class="n">e</span> <span class="p">:</span> <span class="n">Entry</span> <span class="o">|</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">e</span> <span class="ow">in</span> <span class="n">entries</span> <span class="ow">and</span> <span class="n">y</span><span class="o">-&gt;</span><span class="n">e</span> <span class="ow">in</span> <span class="n">entries</span> <span class="ow">implies</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-25">The <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">-&gt;</span></code> operator is the Cartesian product, here being applied to two
+singleton sets (two variables) to form a singleton binary relation (with a single tuple).
+Checking that this singleton binary relation is a subset of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> is
+just checking the membership of the respective tuple.</p>
+<p>Going full first-order style usually results in very verbose constraints. So
+even when going for a pointwise style, it is still common to rely on the set
+operators of relational logic to obtain a more succinct formula. That was the
+case of the first version of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_shared_entries</span></code> fact we presented
+above.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="k">all</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">implies</span> <span class="k">no</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span> <span class="o">&amp;</span> <span class="n">y</span><span class="o">.</span><span class="n">entries</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-26">In Alloy, sometimes we can also go in the opposite direction and use a very
+succinct, purely relational style, where no quantifiers are used. This style is
+sometimes known as <em>pointfree</em> due to the lack of variables. The above
+restriction could be specified in this style as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_shared_entries</span> <span class="o">{</span>
+  <span class="c1">// Entries cannot be shared between directories</span>
+  <span class="n">entries</span><span class="o">.~</span><span class="n">entries</span> <span class="ow">in</span> <span class="kc">iden</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-27">The <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">iden</span></code> predefined binary <em>identity</em> relation contains all possible
+tuples of identical atoms. The unary operator <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">~</span></code> reverses a binary
+relation, so <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">~</span><span class="n">entries</span></code> is a relation from entries to the directories
+containing it. The expression <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.~</span><span class="n">entries</span></code> is thus a binary relation
+that associates a directory with all directories that contain at least a shared
+entry. By restricting this derived relation to be a subset of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">iden</span></code> we
+are indirectly forbidding shared entries between directories. It is a nice
+intellectual challenge to write specifications in this pointfree style, but
+sometimes we end up with formulas such as this one that are very difficult to
+understand, when compared to the equivalent formula specified in the typical
+navigational style of Alloy. Also, be aware that it is not possible to convert
+all formulas of relational logic to this style in Alloy.</p>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/a-question-of-style"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/a-question-of-style</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+A relational logic primer</div>
+<p class="sd-card-text">To start using a more pointfree style you first should know all operators in Alloy’s relational logic.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/relational-logic/index.html#relational-logic"><span class="std std-ref">tocdepth</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Model finding</div>
+<p class="sd-card-text">Learn how relational logic formulas can be checked with a model finding procedure implemented with off-the-shelf SAT solvers.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/model-finding/index.html#analysis"><span class="std std-ref">Model finding</span></a></div>
+</div>
+</section>
+<section id="verifying-assertions">
+<span id="index-28"></span><h2>Verifying assertions<a class="headerlink" href="#verifying-assertions" title="Link to this heading">¶</a></h2>
+<p id="index-29">In Alloy, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands are used to verify properties that are expected to be a consequence of the specified facts. Although such commands can be declared to verify any arbitrary formula (must like the body of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands), assertions that are expected to hold are better declared inside a named <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">assert</span></code> block to improve code maintainability.
+To specify the expected assertion in our example, namely that there are no partitions in a file system, we need to determine the set of all objects
+that are reachable from the root. We have already seen how to
+determine the set of objects that are directly contained in a
+directory. Namely, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span></code> is the set of objects
+directly contained in the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> directory. The set of objects
+reachable from <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> contains not only these, but also the
+objects that they contain, which can be determined as</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="n">Root</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span>
+</pre></div>
+</div>
+<p>Of course, we also need to include the objects contained in these, and
+so on, and so on. Essentially, we would like to determine the
+following set:</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="n">Root</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span> <span class="o">+</span>
+<span class="n">Root</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span> <span class="o">+</span>
+<span class="n">Root</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span> <span class="o">+</span>
+<span class="n">…</span>
+</pre></div>
+</div>
+<p id="index-30">The problem is how to fill in the <code class="code docutils literal notranslate"><span class="pre">…</span></code> in this expression:
+ultimately the number of times we need to compose
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">object</span></code> depends on the size of our file system, and we
+would like our specification to be independent of this
+value. Fortunately, relational logic includes the so-called <em>transitive
+closure</em> operator (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">^</span></code>) that when applied to a binary relation
+determines the binary relation that results
+from taking the union of all its possible compositions. Essentially,
+given a relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">r</span></code>, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="o">^</span><span class="n">r</span></code> is the same as <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">r</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">r</span> <span class="o">+</span>
+<span class="n">r</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">r</span> <span class="o">+</span> <span class="n">…</span></code>. Seeing our instances as labelled graphs, the expression
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span><span class="o">.^</span><span class="n">r</span></code> will determine the set of all atoms that can be reached
+from atom <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">x</span></code> by navigating in one or more steps via arrows
+labelled with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">r</span></code>. Transitive closure is the reason why
+relational logic is strictly more expressive than first-order logic:
+our desired assertion could not be expressed in first-order logic
+alone.</p>
+<p id="index-31">By using transitive closure applied to  relation
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">object</span></code> we can determine the set of all objects
+reachable from root, its <em>descendants</em>.
+Alloy allows the declaration of <em>functions</em>, reusable (parametrized) expressions. To declare a function the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">fun</span></code> should be used,
+followed by the function name, an optional list of
+parameters, a colon followed by the type of the returned relation, and the expression used to compute it enclosed between braces.
+This expression can be specified using any of the relational operators presented so far. For example, we could declare a function <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">descendants</span></code> that returns the set of all objects reachable from a given object as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">descendants</span> <span class="o">[</span><span class="n">o</span> <span class="p">:</span> <span class="n">Object</span><span class="o">]</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Object</span> <span class="o">{</span>
+  <span class="n">o</span><span class="o">.^(</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>In this definition we could also use a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">let</span></code> expression to name the derived relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span><span class="o">.</span><span class="n">object</span></code>. Let expressions are particularly useful if the named expression is used more than once in the following expression, thus avoiding repetition, but here we could use it just to make the definition more clear.</p>
+<div class="highlight-practicalalloy notranslate" id="index-32"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">descendants</span> <span class="o">[</span><span class="n">o</span> <span class="p">:</span> <span class="n">Object</span><span class="o">]</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Object</span> <span class="o">{</span>
+  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">object</span> <span class="o">|</span> <span class="n">o</span><span class="o">.^</span><span class="n">children</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p id="index-33">Besides functions Alloy also allows the declaration of <em>predicates</em>, reusable formulas that are only required to hold when invoked (for example in a fact). To declare a predicate  the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">pred</span></code> should be used, followed by the predicate name, an optional list of parameters, and a formula enclosed between braces. For example, we could declare a predicate <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">reachable</span></code> that checks if an object is reachable from the root as follows</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">reachable</span> <span class="o">[</span><span class="n">o</span> <span class="p">:</span> <span class="n">Object</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">o</span> <span class="ow">in</span> <span class="n">Root</span> <span class="o">+</span> <span class="n">descendants</span><span class="o">[</span><span class="n">Root</span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>A reachable object is either the root itself or one of its descendants. To compute the latter we use function <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">descendants</span></code> defined above.</p>
+<p>To ensure that there are no partitions, all objects of the file system should be reachable from the root. Using the above predicate, this desired
+assertion can be specified as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nf">no_partitions</span> <span class="o">{</span>
+  <span class="c1">// Every object is reachable from the root</span>
+  <span class="k">all</span> <span class="n">o</span> <span class="p">:</span> <span class="n">Object</span> <span class="o">|</span> <span class="n">reachable</span><span class="o">[</span><span class="n">o</span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>To verify that this assertion is a consequence of all the facts that
+have been imposed before, we can use a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">check</span> <span class="n">no_partitions</span>
+</pre></div>
+</div>
+<p>Unfortunately, executing this command reveals a counter-example.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_10/filesystem.als#L73-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance102.png" style="width: 400px;" />
+</a>
+<p>The problem is that we have two directories that contain each
+other. Fortunately, this counter-example is not an issue in real file
+systems, but exposes a problem in our specification. One of the facts
+specified above, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_self_containment</span></code>, imposed that no directory can contain itself, but of course this
+alone is not sufficient: a directory cannot be one of its own descendants. To fix that fact, we can again use function <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">descendants</span></code>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">no_indirect_containment</span> <span class="o">{</span>
+   <span class="c1">// Directories cannot descend from themselves</span>
+   <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">descendants</span><span class="o">[</span><span class="n">d</span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Re-executing the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command no longer yields
+counter-examples, reporting a message such as the following.</p>
+<a class="reference internal image-reference" href="../../_images/log22.png"><img alt="../../_images/log22.png" class="align-center" src="../../_images/log22.png" style="width: 500px;" />
+</a>
+<p>Note that the Analyzer only reports that no counter-example was found, so the
+assertion <em>may be valid</em>, since with the bounded analysis performed by the
+Analyzer we can never be entirely sure that an assertion is valid.
+Nonetheless, we can always set a higher scope in the command to increase our
+confidence that that is indeed the case.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">check</span> <span class="n">no_partitions</span> <span class="k">for</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>You should always be wary of the results of checking your
+assertions, in particular when they yield no
+counter-examples. Recall that a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command verifies that
+an assertion is implied by the conjunction of all declared
+facts. If your facts are inconsistent, in the sense that their
+conjunction is false, or admit only very trivial instances (for
+example empty ones), your assertion can be trivially true. For
+example, in this example we changed one of the facts before our
+final check that yielded no counter-examples. We should have
+checked that this change did not accidentally make our
+specification inconsistent. To do so we could execute a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code>
+command after the final check, and iterate a bit through the
+returned instances to make sure the specification is still
+consistent and admits non-trivial file systems.</p>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/verifying-assertions"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/verifying-assertions</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Encoding test instances</div>
+<p class="sd-card-text">Just pressing <span class="guilabel">New</span> is not the ideal method to validate a specification. Learn how to define <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands
+that behave like unit tests that directly search for specific
+instances.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/testing-instances/index.html#testing-instances"><span class="std std-ref">Encoding test instances</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Handling recursion</div>
+<p class="sd-card-text">Transitive closure is very powerful but some properties require a recursive definition that cannot be defined with closure. Learn how to specify such recursive definitions in Alloy.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/recursion/index.html#recursion"><span class="std std-ref">Handling recursion</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Working with integers</div>
+<p class="sd-card-text">Alloy has a predefined integer type which can be handy so model some quantitative constraints.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/integers/index.html#integers"><span class="std std-ref">Working with integers</span></a></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../structural-topics/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Structural modelling advanced topics</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../about-book/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">About this book</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021-2025, Alcino Cunha, Nuno Macedo, Julien Brunel, David Chemouil
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Feb 16, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Structural modeling</a><ul>
+<li><a class="reference internal" href="#signature-declaration">Signature declaration</a></li>
+<li><a class="reference internal" href="#field-declaration">Field declaration</a></li>
+<li><a class="reference internal" href="#specifying-constraints">Specifying constraints</a></li>
+<li><a class="reference internal" href="#a-question-of-style">A question of style</a></li>
+<li><a class="reference internal" href="#verifying-assertions">Verifying assertions</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "practicalalloy/practicalalloy.github.io");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

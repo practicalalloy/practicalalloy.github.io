@@ -1,0 +1,190 @@
+.. _macros: 
+
+Macros
+----------------------------------------
+
+.. index::
+  macro
+
+The Alloy Analyzer comes with a textual macro system that can be handy to define reusable expressions or constraints with less technical restrictions than functions or predicates, but less safeguards too.
+
+Macro definition
+===================
+
+.. index::
+  macro; vs predicate
+
+A predicate or function provides the ability to define a reusable expression or constraint, possibly with formal parameters. A predicate or function definition must comply with certain technical requirements, which are checked by the Alloy Analyzer:
+
+* The possible formal arguments can only stand for expressions (not predicates);
+* The actual arguments must comply with the arity of formal parameters as well as with related type constraints.
+
+.. index::
+  macro; definition
+  let keyword; in macro definition
+
+Macros are also reusable expressions or constraints. Syntactically, a macro is defined at the top level of a file, using the `let` keyword, like a `pred` or `fun`: 
+
+.. code::
+  
+  let m [x, y, ...] { ... }
+
+But the definition, on the other hand, is less constrained: 
+
+* The type and arity of formal arguments is not checked;
+* The arguments can not only stand for expressions or constraints, but even for partially-applied functions, predicates or macros.
+
+Then, calling a macro and passing it an actual parameter corresponds to substituting textually the bound variable with the said parameter. This process is classically called *macro expansion* in programming languages. This is very powerful but the consequence is that most typing or arity errors, made when calling a macro, may be cryptic, and the originating error may be difficult to spot.
+
+For this reason, the use of macros is rather discouraged. Nevertheless, their flexibility can be useful to write shorter and clearer specifications, so we illustrate them on two examples:
+
+* The first one shows how the absence of arity checking can be leveraged to simplify the writing of frame conditions;
+* The second one shows how one can define constraint *schemas* thanks to formal parameters standing for constraints.
+
+Like predicates and functions, macros are *lexically scoped*, which means that if a macro refers to a name that is not part of the list of parameters, then the name will be looked for in the file where the macro was defined (rather than the file where the macro is used).
+
+Furthermore, macros can be partially applied. This means that if a macro with say, *n* arguments, is called with only *k < n* arguments, then it yields a new macro where the said *k* arguments have been applied.
+
+
+A macro for frame conditions
+==============================
+
+.. index::
+  event; frame condition
+  relational logic; pointfree style
+  relational logic; pointwise style
+
+The effects of an event can be specified with many different styles, for example action *share* can be specified using two different styles. For instance, in a relational style it could look as follows.
+
+.. code::
+
+  // relational style
+  pred share [f : File, t : Token] {
+    f in uploaded - trashed             // guard
+    historically t not in File.shared   // guard
+    shared' = shared + f->t             // effect on shared
+    uploaded' = uploaded                // no effect on uploaded
+    trashed' = trashed                  // no effect on trashed
+  }
+
+Alternatively, in a pointwise style it could take the following shape.
+
+.. code::
+
+  // pointwise style
+  pred share [f : File, t : Token] {
+    f in uploaded - trashed                  // guard
+    historically t not in File.shared        // guard
+    f.shared' = f.shared + t                 // effect on f.shared
+    all g : File - f | g.shared' = g.shared  // no effect on other shared files
+    uploaded' = uploaded                     // no effect on uploaded
+    trashed' = trashed                       // no effect on trashed
+  }
+
+In both approaches, specifying *frame conditions* (constraints stating that some mutable signature or field doesn't change under the action) is tedious and error-prone. Now suppose we had an `unchanged` predicate ensuring some argument doesn't change in the next instant. With such a predicate, our specification of frame conditions would be shorter and safer. The version in the relational style would be adapted as follows.
+
+.. code::
+
+  // relational style
+  pred share [f : File, t : Token] {
+    f in uploaded - trashed             // guard
+    historically t not in File.shared   // guard
+    shared' = shared + f->t             // effect on shared
+    unchanged[uploaded]                 // no effect on uploaded
+    unchanged[trashed]                  // no effect on trashed
+  }
+
+The version in the pointwise style would instead be adapted as follows, where the macro is applied to particular projections of relation `shared`.
+
+.. code::
+
+  // pointwise style
+  pred share [f : File, t : Token] {
+    f in uploaded - trashed                  // guard
+    historically t not in File.shared        // guard
+    f.shared' = f.shared + t                 // effect on f.shared
+    all g : File - f | unchanged[g.shared]   // no effect on other shared files
+    unchanged[uploaded]                      // no effect on uploaded
+    unchanged[trashed]                       // no effect on trashed
+  }
+
+In the example above, `unchanged` is applied to sets but, for full generality, it should also be possible to apply it to a relation, such as the binary relation `shared` in action *upload*:
+
+.. code::
+
+  // relational style
+  pred upload [f : File] {
+    f not in uploaded          // guard
+    uploaded' = uploaded + f   // effect on uploaded
+    unchanged[trashed]         // no effect on trashed
+    unchanged[shared]          // no effect on shared
+  }
+
+Defining such a generic predicate is however impossible in Alloy. Indeed, in an Alloy predicate (or function) arguments must have a single, fixed arity, while this hypothetical `unchanged` predicate should accept arguments with any positive arity. 
+
+However, it is possible to define `unchanged` as a *macro*, since macros do not check the type nor arity of arguments, which is precisely the feature we need. This could be declared as follows.
+
+.. code::
+
+  let unchanged[x] { x = (x)' }
+
+Note that the parentheses in `(x)'` are *absolutely required*: when calling `unchanged`, the actual argument coming in place of `x` may be an arbitrary complex expression, like in `unchanged[g.shared]` in action predicate `share` in the pointwise style. Suppose the expression has the shape `r.s.t`, with `r` and `t` both *mutable* fields, while `s` is static. Then our definition of `unchanged` will ensure that the prime operator is properly applied to every mutable sub-term. Indeed, according to the semantics of the prime operator, `(r.s.t)'` is equal to `r'.s'.t'`, which is equal to `r'.s.t'` as `s` is static. This is different from expression `r.s.t'` that would results without parenthesis, with is equal to `r.s.(t')`.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/macros/a-macro-for-frame-conditions
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Pointwise effects
+      :link-type: ref
+      :link: pointwise-effects
+
+      :octicon:`beaker` Further reading
+      ^^^
+      In the next section we used two different styles to specify the effects of an event. Learn more detail about them.
+
+
+Defining constraint schemas
+============================================
+
+In :ref:`behavioral-modeling`, checking the `non_restored_files_will_disappear` assertion (a *liveness* property) relied on a *fairness* assumption specified as follows.
+
+.. code::
+
+  fact fairness_on_empty {
+    always eventually empty
+  }
+
+While it was not the case here, often, several events must share a similar fairness assumption in order to ensure a liveness property. The only difference between all these assumptions is the fired event (here `empty`). We could just repeat them several times but it's admittedly cumbersome and even error-prone. 
+
+A better solution would be to create a  parameterized constraint. This is precisely the second usage of the macro system mentioned in the beginning of this chapter. We can thus define a `fair` macro as follows:
+
+.. code::
+
+  let fair [ev] { always (eventually (ev)) }
+
+  fact fairness_on_empty { fair[empty] }
+
+Notice, again, that we write `ev` between parentheses in case the actual parameter contains logical connectives of lower precedence than `always` (such as `or`, if we wanted to impose the constraint on a disjunction of events). Without parentheses, `fair[a or b]` would expand to `always (eventually a or b)`, which is not equivalent to `always (eventually (a or b))`, which is what we wanted to enforce.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/macros/defining-constraint-schemas
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Safety, liveness, and fairness
+      :link-type: ref
+      :link: fairness
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Here we defined a macro for a specific kind of fairness. Learn about other kinds of fairness constraints, for which macros could also be defined.
+

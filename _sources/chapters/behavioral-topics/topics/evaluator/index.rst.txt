@@ -1,0 +1,114 @@
+.. _evaluator_trace:
+
+The trace evaluator
+===================
+
+.. index::
+   trace; evaluator
+
+
+The Alloy Analyzer evaluator can be used to evaluate the value of expressions and formulas. It can also be used if a model declares mutable structures, but there are some nuances you should be aware.
+
+.. card-carousel:: 2
+
+      
+   .. card:: The instance evaluator
+      :link-type: ref
+      :link: evaluator_instance
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Learn how to use the evaluator to see the value of immutable expressions and formulas before learning the nuances of evaluating mutable ones.
+
+
+
+
+Evaluating expressions
+----------------------
+
+.. index::
+   Evaluator button
+   Close Evaluator button
+
+As in the static version of the visualizer, the evaluator is still opened by
+pressing the :guilabel:`Evaluator` button in the toolbar of the instance
+visualizer window, and closed with the :guilabel:`Close Evaluator` button in the
+toolbar. 
+
+.. index::
+   → button
+   ← button
+
+The main aspect to take into consideration in the trace version of the evaluator, is that every constraint or expression is evaluated in the state currently focused on the visualizer (the one on the left-hand side). This applies also to temporal constraints: if you evaluate an :alloy:`always` constraint, it will only check whether a property holds from the focused state onwards. This is different from the constraints written in the model itself, which are always evaluated from the first state. When you first open the visualizer, the focused state will be the first one, but as you navigate the trace using the :guilabel:`→` or :guilabel:`←` buttons in the toolbar, the focused state may be one further down the trace.
+
+Let us get back to the file sharing example from chapter :ref:`behavioral-modeling`, and, to get some interesting traces, let us define a command that generates traces where a file is shared and then deleted.
+
+.. code-block::
+
+  run shared_deleted {
+    some f : File | eventually (f in shared.Token and after f in trashed)
+  } for 2
+   
+Let us execute the command and then open the evaluator by pressing
+:guilabel:`Evaluator`. Notice that the visualizer still shows two states
+side-by-side, and the trace overview is still shown on top of it. Moreover,  the
+trace navigation buttons :guilabel:`→` or :guilabel:`←` are still available with
+the evaluator open. Again, recall that the evaluator will act on the state
+focused on the left-hand side of the visualizer. So if you ask for
+:alloy:`uploaded`, the evaluator will reply with the empty set. You also
+evaluate temporal expressions. So you can ask for the value of
+:alloy:`uploaded'`. This will evaluate relation :alloy:`uploaded` in the state
+next to the first, which has a single file inside. Temporal expressions are
+valid even if they go beyond the 2 shown states. For instance, we can see that
+:alloy:`uploaded` becomes empty at the fifth state.
+
+.. image:: evaluator1.png
+   :width: 750 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/f0ede6261da1e97daa5b0a00653f074968bd57e8/behavioral-topics/evaluator/instance_1_2_3/filesharing.als#L82-L91
+   :alt: Get the code to generate this instance.
+
+Now, let us use button :guilabel:`→` to further explore the trace, and focus on
+the fourth state. If you now evaluate :alloy:`trashed`, you'll get a set with a
+single file. This is expected since any temporal expression is now evaluated
+from this state onward, and there is indeed a file in the trash in the fourth
+state. 
+
+.. image:: evaluator2.png
+   :width: 750 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/f0ede6261da1e97daa5b0a00653f074968bd57e8/behavioral-topics/evaluator/instance_1_2_3/filesharing.als#L82-L91
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/evaluator/evaluating-expressions
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Evaluating constraints
+-----------------------
+
+Besides expressions, the evaluator also supports any temporal constraint, including those with past and future operators. The same rule applies to constraints: they are evaluated from the focused state. For instance, getting back to the example, you can ask if, from that point onwards, there is no shared file, which is true. But you can also ask if at any point in the past there was a shared file, which is also true.
+
+You can also call any function and predicate defined in the model. This has an interesting usage in behavioral modelling, since we've already seen in  chapter :ref:`behavioral-modeling` that transitions are often defined by enforcing action predicates at each state. A consequence of this is that there is nothing in the visualizer that identifies which event occurred. The evaluator can be used to quickly check which event occurred in a state transition. Since you can refer to concrete atoms in the evaluator, you can also test whether an event has occurred with a particular atom as a parameter. Below we show some of these constraints evaluated over the fourth state of the trace being visualized.
+
+.. image:: evaluator3.png
+   :width: 750 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/f0ede6261da1e97daa5b0a00653f074968bd57e8/behavioral-topics/evaluator/instance_1_2_3/filesharing.als#L82-L91
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: An idiom for event depiction
+      :link-type: ref
+      :link: event-depiction
+
+      :octicon:`beaker` Further reading
+      ^^^
+      We've mentioned how you can identify occurring events in the evaluator, but you can also have them appear in the visualizer.
+      

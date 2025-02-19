@@ -1,0 +1,167 @@
+.. _evaluator_instance:
+
+.. index::
+   instance; evaluator
+
+The instance evaluator
+======================
+
+
+The Alloy instance visualizer has an evaluator that can be used to compute the
+value of any relational expression or formula over the instance being inspected
+in the visualizer. For more complex instances and counter-examples, this feature
+is helpful to support their interpretation.
+
+Evaluating expressions
+----------------------
+
+.. index::
+   Evaluator button
+   Close Evaluator button
+
+To access this evaluator just press the :guilabel:`Evaluator` button in the toolbar of the instance visualizer window.  To close the evaluator and return to the normal instance visualizer just press the :guilabel:`Close Evaluator` button in the toolbar. 
+
+To illustrate this feature, we will use an instance that could have been returned as the result of the empty
+:alloy:`run` command :alloy:`example` from :ref:`structural-modeling` chapter. While this is clearly
+a simple instance that could perhaps be easily understood through the
+visualization, as models and instances become more complex, so does the
+evaluator become more relevant.
+
+.. image:: evaluator1.png
+   :width: 600 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86
+   :alt: Get the code to generate this instance.
+
+To ask for the value of an expression just type it in the evaluator and press
+:kbd:`Enter`. Every relational expression denotes a relation of a certain arity.
+By default, the visualizer depicts the values of the signatures and fields of an
+instance as labelled graphs. The visualizer can also be set to depict the value
+of a relation (of any arity) as a table where each line is one of the tuples
+contained in it. The evaluator uses this latter representation to show the
+values of relational expressions. 
+
+A basic use of the evaluator is to just ask for the values of the signatures and
+fields of the model, such as :alloy:`Dir` or :alloy:`entries`. However, we can
+actually evaluate the value of any relational expression. For instance, we can
+ask for the value of :alloy:`entries.objects` to get the relation between
+directories and the objects they contain, or
+:alloy:`Root.^(entries.object)` to get all objects indirectly contained inside
+the root using the transitive closure. We can also refer any auxiliary function
+defined in the model, so we can also just call function :alloy:`descendants` to
+get the descendants of the root. The result is shown below. Note that you can
+navigate through the evaluator log with :kbd:`↑` and :kbd:`↓`.
+
+.. image:: evaluator2.png
+   :width: 600 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/evaluating-expressions
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Evaluating formulas
+-------------------
+
+The evaluator can also be used to ask for the values of arbitrary formulas,
+which makes it very useful and convenient to debug constraints. For example,
+when inspecting a counter-example, we can use the evaluator to find out which
+sub-formulas of a constraint have been broken in that particular case. Below is
+an example where we evaluate certain formulas over this instance, such as
+testing whether there are any directories besides the root, or whether the root
+is indirectly contained in itself. As expected, you can also call any auxiliary functions and predicates defined in the model to ease this process. So we test whether the root is in its own descendants using function :alloy:`descendants`, or even using the :alloy:`reachable` predicate directly.
+
+.. image:: evaluator3.png
+   :width: 600 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86
+   :alt: Get the code to generate this instance.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/evaluating-formulas
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+
+Referring to atoms
+------------------
+
+.. index:: 
+  atom
+
+Another feature of the evaluator that is sometimes helpful is that, when
+inspecting an instance, unlike when writing a specification, we can refer to
+concrete atoms in expressions. This is possible because the universe of atoms
+for a specific instance is known during evaluation. To refer to a concrete atom
+in the evaluator, you should use the label of its most specific extension signature as
+the prefix and its numerical identifier as a suffix, separated by a :code:`$`
+mark (except for special atoms such as those from :alloy:`Int`). Note that subset
+signatures do not affect the name of an atom (since each atom may belong to
+multiple subsets). Back to the example, you can for instance query the object of
+entry :alloy:`Entry$2` with :alloy:`Entry$2.object`, or find out all objects that
+have name :alloy:`Name$1` with :alloy:`(name.Name$1).object`. Or you can call :alloy:`descendants` on :alloy:`Dir$0` to find out the indirect contents of that directory.
+
+.. image:: evaluator4.png
+   :width: 600 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86
+   :alt: Get the code to generate this instance.
+
+.. index:: 
+  instance; visualization
+
+You might have noticed that in this instance, the atoms of :alloy:`Dir` and
+:alloy:`File` do not appear numbered in the visualization. This is because, by
+default, the visualizer does not number the atoms of  signatures that directly contain just one atom to improve
+readability (in this case signature :alloy:`Dir` actually has 2 atoms, but one
+of them is in a more specific extension, :alloy:`Root`). To refer to those
+atoms, you can use index 0, namely :alloy:`Dir$0` and :alloy:`File$0` (note that
+a call to :alloy:`Dir` refers to the signature and will actually return
+:alloy:`Dir$0` and :alloy:`Root$0`).
+
+This mismatch between the names of the atoms in the evaluator, and the
+pretty-printed version in the graphical visualizer can be a source of confusion.
+For instance, if you try to call :alloy:`Entry2` you'll get an error as that atom
+does not exist (and it could actually refer to another signature since signature
+names are alpha-numerical). In fact, we can even change the name of the atoms in
+the graphical visualization through theme customizations, but these do not apply
+to the evaluator, and the new name of atoms in the graph will not be recognized
+by the evaluator. If this gets confusing, you can always temporarily tick the
+option :guilabel:`Use original atom names` in the theme customizer, and all
+atoms in the visualization will be shown with their original name as in the
+evaluator. Below is the result after changing this option in the theme.
+
+.. image:: evaluator5.png
+   :width: 600 px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/evaluator/instance_01/filesystem.als#L75-L86
+   :alt: Get the code to generate this instance.
+   
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/evaluator/referring-to-atoms
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: Visualization customization
+      :link-type: ref
+      :link: viz-customization
+
+      :octicon:`beaker` Further reading
+      ^^^
+      We've mentioned that the visualizer can be customized. Learn in more
+      detail how this can simplify the understanding of instances.

@@ -1,0 +1,283 @@
+.. _scenarios: 
+
+Encoding trace scenarios
+==========================
+
+.. index::
+   trace; scenario
+
+As an Alloy specification increases in size and complexity, its validation through the exploration of arbitrary instances in the visualizer becomes more and more difficult.  A technique that can be used is to combine this interactive exploration with the specification of  :alloy:`run` commands that directly search for interesting *scenarios*.  When models have mutable structures, scenarios now have a temporal facet that must also be restricted, which can get difficult to manage. Also, often we don't want the command to completely fix the trace since we want to be able to explore the design. In those cases, the scenario may be under-specified and the Analyzer will complete it by solving the specified constraints. This topic presents an idiom to encode such trace scenarios.
+
+.. card-carousel:: 2
+
+
+   .. card:: Encoding test instances
+      :link-type: ref
+      :link: testing-instances
+
+      :octicon:`beaker` Further reading
+      ^^^
+      This topic builds on a technique that can be used to encode structural scenarios. We recommend you read about that technique before reading this topic.
+
+
+State-oriented scenario encoding
+---------------------------------
+
+A trace is comprised of a (immutable) configuration and a (mutable) state. The first step of encoding a scenario is to restrict the configuration, and this can be achieved with the same strategy used for encoding test instances, based on :alloy:`some`/:alloy:`disj` patterns. For example, let us try to encode the scenario that was being explored in chapter :ref:`behavioral-modeling`: upload a file, share it twice, download it once, delete it, and finally empty the trash. This trace requires exactly one file and two tokens in the configuration (there are no immutable fields in the file sharing example). Such configuration could be specified as follows.
+
+.. code-block::
+
+    run scenario_two_shared {
+       some f : File, disj t1, t2 : Token {
+          File = f
+          Token = t1 + t2
+          // ...
+       }
+    } for 1 File, 2 Token
+
+
+Focusing now on the mutable part of the model, we must extend the above formulas with constraints that encode the different states of the desired execution trace. The main issue here is that with the standard temporal
+operators we have seen so far, this would result in either nested
+:alloy:`and`/:alloy:`after` formulas, or expressions with several appended
+primes :alloy:`'`, neither being a scalable approach. For example, to restrict
+the first 4 states of the desired scenario we could write the following.
+
+.. code-block::
+
+    no uploaded and after (uploaded = f and after (uploaded = f and after uploaded = f))
+    no shared and after (no shared and after (shared = f->t1 and after shared = f->t1 + f->t2))
+    no trashed and after (no trashed and after (no trashed and after no trashed))
+    
+Or, alternatively, the following.
+    
+.. code-block::
+
+    no uploaded and uploaded' = f and uploaded'' = f and uploaded''' = f
+    no shared and no shared' and shared'' = f->t1 and shared''' = f->t1 + f->t2
+    no trashed and no trashed' and no trashed'' and no trashed'''
+    
+Some of these formulas could of course be simplified (for instance, we could
+just state :alloy:`always no trash`), but they quickly become unmanageable. 
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/scenarios/state-oriented-scenario-encoding
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+      
+The temporal sequence operator
+--------------------------------
+
+.. index::
+   ; (sequence)
+   sequence operator
+
+To address this kind of rather common formulas, Alloy has a sequential temporal
+operator :alloy:`;` that eases their formulation: a formula :alloy:`p;q`
+literally means :alloy:`p and after q`. Moreover, this operator has the least
+precedence of all logic and temporal operators, further simplifying the
+combination of formulas restricting each individual state. Given this operator,
+we can now encode our scenario with the following command.
+
+.. code-block::
+
+    run scenario_two_shared {
+      some f : File, disj t1, t2 : Token {
+        File = f
+        Token = t1 + t2
+
+        no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; no uploaded
+        no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    no shared
+        no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  no trashed
+      }
+    } for 1 File, 2 Token
+
+If we now run this scenario, we will get exactly the trace we were expecting.
+Below is the first transition (an upload action), and you can see in the trace
+overview that it has the expected 7 states.
+
+.. image:: instance1.png
+   :width: 650px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/1f057ad379afa4496a2120e95ddc04e1c05f3dd0/behavioral-topics/scenarios/instance_1_2_3/filesharing.als#L94-L103
+   :alt: Get the code to generate this instance.
+
+Recall that due to the mechanics already explained, the quantified variables are
+Skolemized and appear in the visualizer identified by a :code:`$` prefix and
+the name of the command, as shown above, but they can be omitted in the theme.
+This may help identify which atoms in the scenario correspond to the variables
+in the command, but they also clutter the visualization. Below is the second
+transition of the same scenario (a sharing action) after disabling :guilabel:`Show as labels` in the
+theme for those sets.
+
+.. image:: instance2.png
+   :width: 550px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/1f057ad379afa4496a2120e95ddc04e1c05f3dd0/behavioral-topics/scenarios/instance_1_2_3/filesharing.als#L94-L103
+   :alt: Get the code to generate this instance.
+
+Since we've fully restricted the first 7 states of the trace, we might think
+that the scenario is fully specified and that any instance exploration operation
+fails to produce another trace. In fact, if you hit :guilabel:`New Trace` in the
+visualizer you'll find that there are many possible traces that respect the
+specified scenario, namely any valid trace that extends its behavior beyond the first 7
+fixed states. Below is one such alternative, which rather than
+stuttering after emptying the trash, uploads the deleted file again and deletes it again, going back to state 5.
+
+.. image:: instance3.png
+   :width: 550px
+   :align: center
+   :target: https://github.com/practicalalloy/models/blob/1f057ad379afa4496a2120e95ddc04e1c05f3dd0/behavioral-topics/scenarios/instance_1_2_3/filesharing.als#L105-L114
+   :alt: Get the code to generate this instance.
+   
+Exploring the possible continuations of a scenario may or not be something
+interesting to explore. For instance, you may wish to explore whether it is
+possible to share the file again (it isn't because all tokens available in the
+scenario configuration have been used). In fact, as expected, these formulas can
+be as under-specified as we wish. For instance, we could leave certain relations
+unrestricted and just leave them to be solved by the Analyzer. Rather than
+encoding a single scenario, such commands would encode a "family" of related
+scenarios.
+
+If we actually wanted the scenario to perform exactly the 6 actions and then
+stutter forever, we have to enforce what happens after the last state in the
+command's constraint. The :alloy:`;` operator can combine arbitrary Alloy
+temporal formulas, although nesting temporal formulas quickly become difficult
+to manage.  In this case we just want to restrict the behavior after the last
+step, so we can just specify that the desired last state  :alloy:`always` happens from that
+point onwards.
+
+.. code-block::
+
+    run scenario_two_shared_stutter {
+       some f : File, disj t1, t2 : Token {
+          File = f
+          Token = t1 + t2
+          
+          no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; always no uploaded
+          no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    always no shared
+          no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  always no trashed
+       }
+    } for 1 File, 2 Token
+
+If we run this command and then ask for a :guilabel:`New Trace`, the Analyzer
+will report that there is no such instance.
+
+
+Notice that, since these scenarios are encoded as plain formulas, we can
+refactor out common formulas into auxiliary predicates. For instance, although
+configurations are extremely simple in the file sharing example, the two
+scenarios above share the same configuration, so we can reuse that portion of
+the command.
+
+.. code-block::
+
+    pred two_tokens [f : File, t1, t2 : Token] {
+      File = f
+      Token = t1 + t2
+    }
+
+    run scenario_two_shared {
+      some f : File, disj t1, t2 : Token {
+        two_tokens[f, t1, t2]
+
+        no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; no uploaded
+        no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    no shared
+        no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  no trashed
+      }
+    } for 1 File, 2 Token
+
+    run scenario_two_shared_stutter {
+      some f : File, disj t1, t2 : Token {
+        two_tokens[f, t1, t2]
+        
+        no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; always no uploaded
+        no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    always no shared
+        no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  always no trashed
+      }
+    } for 1 File, 2 Token
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/scenarios/the-temporal-sequence-operator
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+Event-oriented scenario encoding
+---------------------------------
+
+The encodings above followed a "relation-wise" definition of the scenario, in
+the sense that we restricted the evolution of each mutable relation
+independently. Sometimes it's easier to reason about scenarios in a "state-wise"
+manner, particularly for relations closely related. We could easily adapt this
+idiom for that purpose as follows (again, the :alloy:`;` operator has the lowest
+precedence).
+
+.. code-block::
+
+    run scenario_two_shared_stutter {
+      some f : File, disj t1, t2 : Token {
+        two_tokens[f, t1, t2]
+        
+        no uploaded + trashed and no shared; 
+        uploaded = f and no shared and no trashed; 
+        uploaded = f and shared = f->t1 and no trashed; 
+        uploaded = f and shared = f->t1 + f->t2 and no trashed;
+        uploaded = f and shared = f->t1 and no trashed;
+        uploaded = f and no shared and trashed = f;
+        always (no uploaded + trashed and no shared)
+      }
+    } for 1 File, 2 Token
+
+This command represents exactly the same scenario as the previous
+"relation-wise" version. Notice that we can't just say :alloy:`no uploaded +
+trashed + shared` because the :alloy:`+` operator must combine relations with
+the same arity.
+
+We can take this approach even further. So far we've encoded the expected
+scenario by directly restricting the value of the states. This allows us to
+exactly restrict the value of the relations in each state, but the result is
+verbose. An alternative is to instead just use the action predicates and force
+their occurrence in each desirable state. This results in simpler encodings, but
+at the cost of disregarding the concrete value of the relations. In particular,
+if an event is non-deterministic, the same action event may allow different
+state transitions to occur.
+
+Let us get back to the scenario above. The same command could be written instead as follows.
+
+.. code-block::
+
+    run scenario_two_shared_event {
+       some f : File, disj t1, t2 : Token {
+          two_tokens[f, t1, t2]
+          
+          upload[f]; share[f, t1]; share[f, t2]; download[t1]; delete[f]; empty; always stutter
+       }
+    } for 1 File, 2 Token
+
+For the file sharing application, where all events are deterministic, this command represents exactly the same scenario as the previous versions.
+
+This idiom is the one used throughout the book to encode the presented example traces, which you can access by clicking the figures.
+
+.. card-carousel:: 2
+
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/scenarios/event-oriented-scenario-encoding
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+
+   .. card:: An idiom for event depiction
+      :link-type: ref
+      :link: event-depiction
+
+      :octicon:`beaker` Further reading
+      ^^^
+      Learn how to us an appropriate theme to ease even further the validation of scenarios.

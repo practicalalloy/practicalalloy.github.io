@@ -1,0 +1,63 @@
+.. raw:: latex
+
+   \cleardoublepage
+   \begingroup
+   \renewcommand\chapter[1]{\endgroup}
+   \phantomsection
+
+Bibliography
+************
+
+.. [MIT12] Daniel Jackson: *Software Abstractions: Logic, Language, and Analysis*. Revised edition. MIT Press, 2012.
+
+.. [SCP21] Nuno Macedo, Alcino Cunha, José Pereira, Renato Carvalho, Ricardo Silva, Ana C. R. Paiva, Miguel Sozinho Ramalho, Daniel Castro Silva: *Experiences on Teaching Alloy with an Automated Assessment Platform*. Science of Computer Programming 211: 102690. Springer, 2021.
+
+.. [FSE16] Nuno Macedo, Julien Brunel, David Chemouil, Alcino Cunha, Denis Kuperberg: *Lightweight Specification and Analysis of Dynamic Systems with Rich Configurations*. In proceedings of the 24th ACM SIGSOFT International Symposium on Foundations of Software Engineering (FSE): 373-383. ACM, 2016.
+
+.. [ASE18] Julien Brunel, David Chemouil, Alcino Cunha, Nuno Macedo: *The Electrum Analyzer: Model Checking Relational First-order Temporal Specifications*. In proceedings of the 33rd ACM/IEEE International Conference on Automated Software Engineering (ASE): 884-887. ACM, 2018.
+
+.. [FIDE19] Julien Brunel, David Chemouil, Alcino Cunha, Nuno Macedo: *Simulation under Arbitrary Temporal Logic Constraints*. In proceedings of the 5th International Workshop on Formal Integrated Development Environment (F-IDE), EPTCS 310: 63-69. OPA, 2019.
+
+.. [CACM19] Daniel Jackson: *Alloy: A Language and Tool for Exploring Software Designs*. Communications of the ACM 62(9): 66-76. ACM, 2019.
+
+.. [JAC21] Daniel Jackson: *The Essence of Software: Why Concepts Matter for Great Design*. Princeton University Press, 2021.
+
+.. [TOPLAS94] Leslie Lamport: *The Temporal Logic of Actions*. ACM Transactions on Programming Languages and Systems 16(3): 872-923. ACM, 1994.
+
+.. [FSE04] Jonathan Edwards, Daniel Jackson, Emina Torlak: *A Type System for Object Models*. In proceedings of the 12th ACM SIGSOFT International Symposium on Foundations of Software Engineering (FSE): 189-199. ACM, 2004.
+
+.. [LED07] Derek Rayside, Felix Sheng-Ho Chang, Greg Dennis, Robert Seater, Daniel Jackson: *Automatic Visualization of Relational Logic Models*. In proceedings of the Workshop on the Layout of (Software) Engineering Diagrams (LED), ECEASST 7. EASST, 2007.
+
+.. [CACM79] Ernest J. H. Chang, Rosemary Roberts: *An Improved Algorithm for Decentralized Extrema-Finding in Circular Configurations of Processes*. Communications of the ACM 22(5): 281-283. ACM, 1979.
+
+.. [CAV03] Cindy Eisner, Dana Fisman, John Havlicek, Yoad Lustig, Anthony McIsaac, David Van Campenhout: *Reasoning with Temporal Logic on Truncated Paths*. In proceedings of the 15th International Conference on Computer Aided Verification (CAV), LNCS 2725: 27-39. Springer, 2003.
+
+.. [FOCS77] Amir Pnueli: *The Temporal Logic of Programs*. In proceedings of the 18th Annual Symposium on Foundations of Computer Science (FOCS): 46-57. IEEE, 1977.
+
+.. [POPL80] Dov Gabbay, Amir Pnueli, Saharon Shelah, Jonathan Stavi: *On the Temporal Analysis of Fairness*. In proceedings of the 7th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages (POPL): 163-173. ACM, 1980.
+
+.. [EATCS03] Nicolas Markey: *Temporal Logic with Past is Exponentially More Succinct*. Bulletin of the European Association for Theoretical Computer Science 79: 122-128. EATCS, 2003.
+
+.. [LP81] Edmund M. Clarke, E. Allen Emerson: *Design and Synthesis of Synchronization Skeletons Using Branching-Time Temporal Logic*. In proceedings of the Workshop of Logics of Programs, LNCS 131: 52-71. Springer, 1981.
+
+.. [LICS90] Rajeev Alur, David Dill, Costas Courcoubetis: *Model-Checking for Real-Time Systems*. In proceedings of the 5th Annual Symposium on Logic in Computer Science (LICS). IEEE, 1990.
+
+.. [JACM85] Aravinda Prasad Sistla, Edmund M. Clarke: *The Complexity of Propositional Linear Temporal Logics*. Journal of the ACM 32(3): 733-749. ACM, 1985. 
+
+.. [TSE77] Leslie Lamport: *Proving the Correctness of Multiprocess Programs*. Transaction of Software Engineering SE 3(2): 125-143. IEEE, 1977.
+
+.. [IPL85] Bowen Halpern, Fred B. Schneider: *Defining Liveness*. Information Processsing Letters 21(4): 181-185. Elsevier, 1985.
+
+.. [FAC94] Aravinda Prasad Sistla: *Safety, Liveness, and Fairness in Temporal Logic*. Formal Aspects of Computing 6(5): 495-512. ACM. 1994
+
+.. [IPL14] Grgur Petric Maretic, Mohammad Torabi Dashti, David Basin: *LTL is Closed under Topological Closure*. Information Processsing Letters 114(8): 408-413. Elsevier, 2014.
+
+.. [TCS91] Martın Abadi, Leslie Lamport: *The Existence of Refinement Mappings*. Theoretical Computer Science 82(2): 253–284. Elsevier, 1991
+
+.. [FMSD19] Aleksandar Milicevic, Joseph P. Near, Eunsuk Kang, Daniel Jackson: *Alloy**: *A General-purpose Higher-order Relational Constraint Solver*. Formal Methods in System Design 55(1): 1-32. Springer, 2019.
+
+.. [FSE21] Changjian Zhang, Ryan Wagner, Pedro Orvalho, David Garlan, Vasco M. Manquinho, Ruben Martins, Eunsuk Kang: *AlloyMax: Bringing Maximum Satisfaction to Relational Specifications*. In proceedings of the 29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE): 155-167. ACM, 2021.
+
+.. [FSE17] Germán Regis, César Cornejo, Simón Gutiérrez Brida, Mariano Politano, Fernando D. Raverta, Pablo Ponzio, Nazareno Aguirre, Juan Pablo Galeotti, Marcelo F. Frias: *DynAlloy Analyzer: A Tool for the Specification and Analysis of Alloy Models with Dynamic Behaviour*. In proceedings of the 11th Joint Meeting on Foundations of Software Engineering (ESEC/FSE): 969-973. ACM, 2017.
+
+.. [FSE22] Pedro Silva, José N. Oliveira, Nuno Macedo, Alcino Cunha: *Quantitative Relational Modelling with QAlloy*. In proceedings of the 30th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE): 885-896. ACM, 2022.

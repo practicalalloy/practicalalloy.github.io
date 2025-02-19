@@ -1,0 +1,691 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2025-02-16T20:25:24+00:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Visualization customization" href="../visualization/index.html" /><link rel="prev" title="Enumeration signatures" href="../enumerations/index.html" />
+
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>Commands in detail - Practical Alloy</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
+    <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #2a5adf;
+  --color-brand-content: #2a5adf;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">Practical Alloy</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Practical Alloy</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Preface</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-alloy/index.html">About Alloy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-book/index.html">About this book</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../structural-modeling/index.html">Structural modeling</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Advanced topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../subset-signatures/index.html">Subset signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../enumerations/index.html">Enumeration signatures</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Commands in detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../visualization/index.html">Visualization customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nary-relations/index.html">Higher-arity relations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluator/index.html">The instance evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bestiary/index.html">Arrow multiplicity constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type-system/index.html">Type system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/index.html">Module system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ordering/index.html">The predefined <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../relational-logic/index.html">A relational logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model-finding/index.html">Model finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing-instances/index.html">Encoding test instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recursion/index.html">Handling recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integers/index.html">Working with integers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../signature-facts/index.html">Signature facts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../behavioral-modeling/index.html">Behavioral modeling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../behavioral-topics/index.html">Advanced topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/temporal-logic/index.html">A temporal logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/mutable-toplevel-signatures/index.html">Mutable top-level signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/pointwise-effects/index.html">Pointwise effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/macros/index.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/meta/index.html">Meta-capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/event-depiction/index.html">An idiom for event depiction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/scenarios/index.html">Encoding trace scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/evaluator/index.html">The trace evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/fairness/index.html">Safety, liveness, and fairness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/inductive-invariants/index.html">Inductive invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/sequences/index.html">Sequences</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocol-design/index.html">Protocol design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Index</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../_sources/chapters/structural-topics/topics/commands/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="commands-in-detail">
+<span id="index-0"></span><span id="commands"></span><h1>Commands in detail<a class="headerlink" href="#commands-in-detail" title="Link to this heading">¶</a></h1>
+<p id="index-1">Commands are an essential feature of an Alloy model, since they are what
+triggers the automatic analyses of our model by the Analyzer. There are two
+types of commands in Alloy: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands search for instances that satisfy
+certain constraints, while <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands search for
+counter-examples that violate assertions. Commands also
+include the scope of the analyses, which determines the maximum size of the
+signatures and of the universe of discourse. In the <a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a> chapter we have already seen the fundamentals of command
+declaration. This chapter explores commands in more detail.</p>
+<section id="alternative-command-syntaxes">
+<h2>Alternative command syntaxes<a class="headerlink" href="#alternative-command-syntaxes" title="Link to this heading">¶</a></h2>
+<p id="index-2">Both <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands can take two different syntaxes. In the first commands have an optional label and a constraint to be enforced/checked
+between braces. Between the braces any arbitrary constraint can be written. In the <a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a> chapter we have defined <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands of this shape, but this could
+also be done for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands. For instance, below is a
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command equivalent to the one defined in the <a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a>  chapter to check that the file system has no partitions, given as a contraint in the command rather than defined in an assertion.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">check</span> <span class="n">no_partitions</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">o</span> <span class="p">:</span> <span class="n">Object</span> <span class="o">|</span> <span class="n">reachable</span><span class="o">[</span><span class="n">o</span><span class="o">]</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>In the second alternative syntax, a command cannot be labelled and just calls a re-usable formula defined
+elsewhere. For <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands we’ve already seen in the <a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a> chapter
+how that can be done through the definition of assertions; the
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command will then search for counter-examples that violate that
+assertion. For <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands, they can be instructed to generate
+instances for which a certain predicate holds. An advantage of these
+versions is that they ease the definition of multiple commands for the same
+property with different scopes. For instance, let’s say that we want to explore
+instances that have a file hierarchy of at least depth 2 but with different
+scopes for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code>. We could do something like the following.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">depth2</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">Root</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span>
+<span class="o">}</span>
+
+<span class="k">run</span> <span class="n">depth2</span> <span class="k">for</span> <span class="mi">4</span> <span class="k">but</span> <span class="mi">0</span> <span class="n">File</span>
+<span class="k">run</span> <span class="n">depth2</span> <span class="k">for</span> <span class="mi">4</span> <span class="k">but</span> <span class="mi">1</span> <span class="n">File</span>
+<span class="k">run</span> <span class="n">depth2</span> <span class="k">for</span> <span class="mi">4</span> <span class="k">but</span> <span class="mi">2</span> <span class="n">File</span>
+</pre></div>
+</div>
+<p>An interesting feature of this kind of commands is that, if you <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> a
+predicate with parameters, they will be automatically quantified and show an
+instance for which there is some atom that makes the predicate true. For
+instance, let us define a predicate that tests whether a directory is empty, and
+then ask for instances where there is some empty directory.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">empty_dir</span> <span class="o">[</span><span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">no</span> <span class="n">d</span><span class="o">.</span><span class="n">entries</span>
+<span class="o">}</span>
+
+<span class="k">run</span> <span class="n">empty_dir</span> <span class="k">for</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p id="index-3">This will result in instances such as the one below. Notice that there is now a
+subset <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$empty_dir_d</span></code> in the instances, identifying the quantified
+variable that made predicate <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">empty_dir</span></code> true. This is because the
+Analyzer performs a process called <em>Skolemization</em> whenever outermost
+existential quantifications occur in <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands (or universal
+quantifications for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands), creating additional free relations to represent the quantified variables. This improves the
+efficiency of the analysis procedures, and as a side-effect such relations are
+now also part of the generated instance and can be depicted.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/commands/instance_01/filesystem.als#L90-L102"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance117.png" style="width: 500px;" />
+</a>
+<p>Although less common, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands can also call a function rather than a predicate. In that case Alloy will search for input variables for which the function is well defined (i.e., it returns a value within its return type).</p>
+<p>Note that once you specify a constraint in the command, you are no longer calling an assertion or predicate and just labelling the command. Since commands can have the same label as a predicate name, this can sometime lead to confusions. For instance, the command below is not really checking assertion <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_partitions</span></code>, but instead the empty constraint within brackets (which is equivalent to true) and obviously never finds any counter-example, possibly leading the distracted user to a false sense of confidence.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">check</span> <span class="n">no_partitions</span> <span class="o">{}</span>
+</pre></div>
+</div>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/alternative-command-syntaxes"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/alternative-command-syntaxes</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Model finding</div>
+<p class="sd-card-text">Learn more about the Skolemization process employed by the Analyzer when executing commands.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../model-finding/index.html#analysis"><span class="std std-ref">Model finding</span></a></div>
+</div>
+</section>
+<section id="controlling-scopes">
+<h2>Controlling scopes<a class="headerlink" href="#controlling-scopes" title="Link to this heading">¶</a></h2>
+<p id="index-4">When the Analyzer is launched, a non-negative scope must be assigned to every
+signature of the model that determines the maximum number of atoms for that
+signature. These scopes are declared in the analysis commands.</p>
+<p>The overall scope of a command is specified with the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">for</span></code> which
+is applied to all top-level signatures. If omitted, a default overall scope of 3
+is used. Since overall scopes apply only to top-level signatures, they may have
+some unintended results when the signature hierarchy becomes more complex, in
+particular when singleton signatures are introduced and consume part of the
+scope of a top-level signature. For instance, in our running example, a command
+with a overall scope of 3 like the one below will never generate instances with
+3 files. This is because the scope for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> is 3, but one of those
+atoms is the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code>, so only 2 atoms are free to become files or non-root
+directories.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">scope_3</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p id="index-5">After the overall scope, we can assign additional scopes to specific top-level
+and extension sub-signatures that override the overall scope (you cannot assign
+scopes to subset signatures). These additional scopes are declared after the
+overall scope with a keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">but</span></code> and separated by commas. For instance,
+the following command overrides the overall scope for signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code>.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">names_2</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">3</span> <span class="k">but</span> <span class="mi">2</span> <span class="n">Name</span>
+</pre></div>
+</div>
+<p>If you declare a scope for a specific signature that conflicts with its
+multiplicity constraint, you’ll get an error. Namely, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code> signatures
+must have scope 1, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code> signatures scope less than or equal to 1, and
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">some</span></code> signatures greater than 0. Also, you can never declare a scope for
+an enumeration signature.</p>
+<p>In general, assigning a specific scope to a signature does not affect the scope
+of its parent nor its siblings. There are however exceptions, namely when specific scopes are assigned to the extensions of a signature. If the extensions have exact scopes (if they are singleton signatures or, as will be explained later, have an exact scope defined in a command) than the scope of the parent signature is automatically increased so be at least the sum of the scopes of the extensions. If the parent signature is abstract and does not have a specified scope then the overall scope will also be automatically overrided to be the sum of the specified scopes of the extensions (even if these scopes are not exact). For example, in the following command, the scope of
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> is actually increased from the overall specified scope of 3 up to 6.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">files_3_dirs_3</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">3</span> <span class="k">but</span> <span class="mi">3</span> <span class="n">Dir</span><span class="p">,</span> <span class="mi">3</span> <span class="n">File</span>
+</pre></div>
+</div>
+<p>Note that this second case only happens if all extensions signatures are assigned a specific scope.
+Moreover, there is another corner case implemented in calculating the scope of
+abstract signatures: if all extension signatures are assigned a specific scope except
+one, then that one gets the scope remaining from the abstract parent signature,
+which is not increased. This may have unexpected consequences. For instance, the
+following command yields no instance, because there is a single extension signature of
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> without a specific scope assigned, namely <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code>, so it gets what
+remains of the scope on <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> minus the scope on <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code>, which is
+0.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">dirs_3</span> <span class="o">{</span> <span class="k">some</span> <span class="n">File</span> <span class="o">}</span> <span class="k">for</span> <span class="mi">3</span> <span class="k">but</span> <span class="mi">3</span> <span class="n">Dir</span>
+</pre></div>
+</div>
+<p>The actual scopes being used by the Analyzer can be consulted in the information
+reported by the Analyzer. For instance, for the two commands above, the following
+information would be reported.</p>
+<a class="reference internal image-reference" href="../../../../_images/log13.png"><img alt="../../../../_images/log13.png" class="align-center" src="../../../../_images/log13.png" style="width: 550px;" />
+</a>
+<p id="index-6">More information about how these scopes were calculated is provided if the
+logging verbosity is increased through menu option <span class="menuselection">Options ‣
+Verbosity</span>.</p>
+<p>If you assign a specific scope for every top-level signature of the model, you
+can actually omit the overall scope; otherwise, an error is thrown. For instance,
+the following command is valid in our running example.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">no_overall</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">3</span> <span class="n">Object</span><span class="p">,</span> <span class="mi">2</span> <span class="n">Name</span><span class="p">,</span> <span class="mi">2</span> <span class="n">Entry</span>
+</pre></div>
+</div>
+<p id="index-7">All scopes considered until now impose an upper-bound on the number of atoms.
+Specific signature scopes can also be marked with keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">exactly</span></code>,
+which forces them to contain exactly that amount of atoms. For instance, the
+following command guarantees that there exist exactly 2 files in every instance.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">files_exact2</span> <span class="o">{}</span> <span class="k">for</span> <span class="mi">3</span> <span class="k">but</span> <span class="k">exactly</span> <span class="mi">2</span> <span class="n">File</span>
+</pre></div>
+</div>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/controlling-scopes"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/controlling-scopes</span></a></div>
+</div>
+</section>
+<section id="documenting-expected-outcomes">
+<h2>Documenting expected outcomes<a class="headerlink" href="#documenting-expected-outcomes" title="Link to this heading">¶</a></h2>
+<p id="index-8">A complex model often contains several <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands.
+Sometimes we want to encode negative <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands to show that a certain
+class of instances is disallowed, or invalid <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands to register
+some known issues. We could use comments to annotate which is the case, but
+Alloy allows the user to register what is the expected outcome of a command
+using a keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">expect</span></code> after the scope declaration. The expectation is
+that the command is either satisfiable (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="mi">1</span></code>) or unsatisfiable (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="mi">0</span></code>). A command is
+satisfiable when it is able to generate an instance. So a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command that
+yields instances is satisfiable, and a valid <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command that finds no
+counter-examples is unsatisfiable. When executing such commands, the Analyzer
+will inform the user whether the result was the expected.</p>
+<p>Let us recall the file system example developed in the
+<a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a> chapter. Let us say that, for demonstration purposes we want
+to be able execute the invalid version of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_partitions</span></code> assertion
+that we encountered when the incorrect fact <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_self_containment</span></code> was
+enforced rather than the stronger, fixed <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_indirect_containment</span></code>. This
+would require those constraints to no longer be enforced as a fact (which would
+apply to all commands), but as a predicate that is only enforced in the
+appropriate command. Likewise, we won’t be able to use a single <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">assert</span></code>
+since we now have two distinct properties to check. A possibility is to encode
+them as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">no_self_containment</span> <span class="o">{</span>
+   <span class="c1">// Directories cannot contain themselves</span>
+   <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">object</span>
+<span class="o">}</span>
+
+<span class="k">pred</span> <span class="nf">no_indirect_containment</span> <span class="o">{</span>
+  <span class="c1">// Directories cannot contain themselves directly or indirectly</span>
+  <span class="k">all</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">|</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">descendants</span><span class="o">[</span><span class="n">d</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="k">pred</span> <span class="nf">no_partitions</span> <span class="o">{</span>
+  <span class="c1">// Every object is reachable from the root</span>
+  <span class="k">all</span> <span class="n">o</span> <span class="p">:</span> <span class="n">Object</span> <span class="o">|</span> <span class="n">reachable</span><span class="o">[</span><span class="n">o</span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Then we can call the appropriate restriction as a premise to checking
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_partitions</span></code>. This would be done as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">check</span> <span class="n">bad_containment</span> <span class="o">{</span>
+  <span class="n">no_self_containment</span> <span class="ow">implies</span> <span class="n">no_partitions</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">6</span> <span class="k">expect</span> <span class="mi">1</span>
+
+<span class="k">check</span> <span class="n">good_containment</span> <span class="o">{</span>
+  <span class="n">no_indirect_containment</span> <span class="ow">implies</span> <span class="n">no_partitions</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">6</span> <span class="k">expect</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The first command is expected to generate a counter-example, but not the second
+one, as stated by the expected outcome. After execution, the Analyzer would
+report the results as follows.</p>
+<a class="reference internal image-reference" href="../../../../_images/log23.png"><img alt="../../../../_images/log23.png" class="align-center" src="../../../../_images/log23.png" style="width: 550px;" />
+</a>
+<p>Recall, however, that once <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_self_containment</span></code> becomes a predicate, it is no longer enforced in any command. For instance, to generate valid file systems without any additional constraint, one would have to adapt the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">example</span> <span class="o">{</span> <span class="n">no_self_containment</span> <span class="o">}</span>
+</pre></div>
+</div>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/documenting-expected-outcomes"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/commands/documenting-expected-outcomes</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Encoding test instances</div>
+<p class="sd-card-text"><code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands can be used to encode unit tests for our specification.
+Learn how to write commands of that kind.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../testing-instances/index.html#testing-instances"><span class="std std-ref">Encoding test instances</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Working with integers</div>
+<p class="sd-card-text">Scopes for the built-in type <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kt">Int</span></code> work differently. Learn how to
+properly handle them.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../integers/index.html#integers"><span class="std std-ref">Working with integers</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Model finding</div>
+<p class="sd-card-text">The Analyzer uses a technique called model finding to execute the commands. Learn how this works.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../model-finding/index.html#analysis"><span class="std std-ref">Model finding</span></a></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../visualization/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Visualization customization</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../enumerations/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Enumeration signatures</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021-2025, Alcino Cunha, Nuno Macedo, Julien Brunel, David Chemouil
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Feb 16, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Commands in detail</a><ul>
+<li><a class="reference internal" href="#alternative-command-syntaxes">Alternative command syntaxes</a></li>
+<li><a class="reference internal" href="#controlling-scopes">Controlling scopes</a></li>
+<li><a class="reference internal" href="#documenting-expected-outcomes">Documenting expected outcomes</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "practicalalloy/practicalalloy.github.io");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>
