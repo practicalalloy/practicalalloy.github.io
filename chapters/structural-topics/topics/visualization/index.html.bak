@@ -1,0 +1,610 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="article:modified_time" content="2025-02-16T20:25:58+00:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Higher-arity relations" href="../nary-relations/index.html" /><link rel="prev" title="Commands in detail" href="../commands/index.html" />
+
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>Visualization customization - Practical Alloy</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
+    <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #2a5adf;
+  --color-brand-content: #2a5adf;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">Practical Alloy</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">Practical Alloy</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Preface</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-alloy/index.html">About Alloy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-book/index.html">About this book</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../structural-modeling/index.html">Structural modeling</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">Advanced topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../subset-signatures/index.html">Subset signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../enumerations/index.html">Enumeration signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">Commands in detail</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Visualization customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nary-relations/index.html">Higher-arity relations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluator/index.html">The instance evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bestiary/index.html">Arrow multiplicity constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type-system/index.html">Type system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/index.html">Module system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ordering/index.html">The predefined <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../relational-logic/index.html">A relational logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model-finding/index.html">Model finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing-instances/index.html">Encoding test instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recursion/index.html">Handling recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integers/index.html">Working with integers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../signature-facts/index.html">Signature facts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../behavioral-modeling/index.html">Behavioral modeling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../behavioral-topics/index.html">Advanced topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Advanced topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/temporal-logic/index.html">A temporal logic primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/mutable-toplevel-signatures/index.html">Mutable top-level signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/pointwise-effects/index.html">Pointwise effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/macros/index.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/meta/index.html">Meta-capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/event-depiction/index.html">An idiom for event depiction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/scenarios/index.html">Encoding trace scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/evaluator/index.html">The trace evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/fairness/index.html">Safety, liveness, and fairness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/inductive-invariants/index.html">Inductive invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../behavioral-topics/topics/sequences/index.html">Sequences</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocol-design/index.html">Protocol design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">Index</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../_sources/chapters/structural-topics/topics/visualization/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="visualization-customization">
+<span id="index-0"></span><span id="viz-customization"></span><h1>Visualization customization<a class="headerlink" href="#visualization-customization" title="Link to this heading">¶</a></h1>
+<p>The visualizer provided by the Analyzer is one of the most popular features of
+Alloy, since it allows the inspection and navigation of scenarios or
+counter-examples. However, as models become more complex, the interpretation of
+instances becomes more challenging. To ease this process, the visualizer allows
+the graphical visualization of instances to be customized through themes.</p>
+<section id="theme-customization">
+<h2>Theme customization<a class="headerlink" href="#theme-customization" title="Link to this heading">¶</a></h2>
+<p>Let us get back to our file system example from the
+<a class="reference internal" href="../../../structural-modeling/index.html#structural-modeling"><span class="std std-ref">Structural modeling</span></a> chapter and focus on an instance generated by command
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code>. With the default visualization of the instances, it looks as
+follows.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_01/filesystem.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance129.png" style="width: 400px;" />
+</a>
+<p id="index-1">To customize it, we can open the theme customization menu, by pressing the
+button <span class="guilabel">Theme</span> in the toolbar of the instance visualizer pop-up
+window. The first customization we will apply is to show the names of directory
+entries as attributes in the respective atoms, instead of using arrows pointing
+to the name. This will unclutter substantially the depiction and is a very
+common customization for fields of multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>, in particular for
+fields that somehow act as identifiers, as is the case of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">name</span></code>. To do
+so, first select the field <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">name</span></code>, and then tick the <span class="guilabel">Show as
+attribute</span> option in the top pane. This option will show the name of an entry as
+an attribute but still keep the respective arrows. To remove them, tick twice
+<span class="guilabel">Show as arcs</span> to choose the <span class="guilabel">Off</span> option. Your theme
+options for relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">name</span></code> should look as follows.</p>
+<a class="reference internal image-reference" href="../../../../_images/theme1.png"><img alt="../../../../_images/theme1.png" class="align-center" src="../../../../_images/theme1.png" style="width: 700px;" />
+</a>
+<p id="index-2">By pressing <span class="guilabel">Apply</span> in the toolbar and then <span class="guilabel">Close</span> the instance will now be depicted as follows.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_02/filesystem.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance216.png" style="width: 450px;" />
+</a>
+<p id="index-3">We now have some unconnected <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code> atoms. Since names were only
+used in directory entries, where they are now shown as attribute, we
+can remove them from the graph. To do so, select <span class="guilabel">Theme</span>
+again (actually when changing many options it is better to keep the
+theme customization menu open and just keep pressing <span class="guilabel">Apply</span>
+without closing it to see the effect), select the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code> signature,
+and then tick the <span class="guilabel">Show</span> option twice to choose the
+<span class="guilabel">Off</span> option. After pressing <span class="guilabel">Apply</span> the
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code> atom will disappear.</p>
+<a class="reference internal image-reference" href="../../../../_images/theme2.png"><img alt="../../../../_images/theme2.png" class="align-center" src="../../../../_images/theme2.png" style="width: 700px;" />
+</a>
+<p id="index-4">Another common customization is to give different colors (or different shapes and borders) to atoms belonging to different signatures. First, we will select a different color palette, with more subdued colors. To do so, select the <span class="guilabel">general graph settings</span>, and then select the <span class="guilabel">Martha</span> palette both for node and edge colors. After pressing <span class="guilabel">Apply</span> we will get some nice faded colors.</p>
+<a class="reference internal image-reference" href="../../../../_images/theme3.png"><img alt="../../../../_images/theme3.png" class="align-center" src="../../../../_images/theme3.png" style="width: 700px;" />
+</a>
+<p>Notice that since version 6.2 of Alloy, the visualizer features a colorblind-friendly palette called <span class="guilabel">Tol</span>, inspired by (but not completely equivalent to) one of Paul Tol’s <a class="reference external" href="https://personal.sron.nl/~pault/">color schemes</a>.</p>
+<p>Since entries are auxiliary structures in defining the (supposedly) tree-like structure of the file system, we will paint them gray. To do so select signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code>, then the color <span class="guilabel">Gray</span> in the drop-down menu in the top left-hand corner, and finally <span class="guilabel">Apply</span>.</p>
+<a class="reference internal image-reference" href="../../../../_images/theme4.png"><img alt="../../../../_images/theme4.png" class="align-center" src="../../../../_images/theme4.png" style="width: 700px;" />
+</a>
+<p>For file system objects we will choose a more eye-catching red color. We don’t have to set this color separately for signatures <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code>, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code>. By default most theme options of extension signatures are set as <span class="guilabel">Inherited</span> from their parent signature. As such, it suffices to set the color red for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> signature, and both their children will inherit this setting. You also have the option to set the color to <span class="guilabel">Magic</span>, which will assign a different color to each extension signature, instead of the default yellow. That is actually the default setting for the color of edges, as you can see by the colors of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">entries</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">object</span></code>. Finally we will choose different shapes for different file system objects. Let’s keep files as rectangles, but choose the shape <span class="guilabel">Trapezoid</span> for directories and a <span class="guilabel">House</span> for the root. The shape can be chosen in the drop-down menu in the top right-hand corner. The combo-box to the left of that one allows changing the style of the border. After pressing <span class="guilabel">Apply</span> we have the following visualization.</p>
+<a class="reference internal image-reference" href="../../../../_images/theme5.png"><img alt="../../../../_images/theme5.png" class="align-center" src="../../../../_images/theme5.png" style="width: 700px;" />
+</a>
+<p>One last customization that is often useful is to change the label of an element in the graph, be it a signature, a subset or relation (for instance, to make it shorter, or to remove the namespace prepended to elements from imported modules). This can be changed in the text box in the top left-hand corner after selecting an element.</p>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/visualization/theme-customization"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/visualization/theme-customization</span></a></div>
+</div>
+</section>
+<section id="managing-themes">
+<h2>Managing themes<a class="headerlink" href="#managing-themes" title="Link to this heading">¶</a></h2>
+<p id="index-5">For the moment these are all the customizations we will use, and so we
+can close the theme customization menu. Notice that you can always reset
+your theme settings by going to the menu option <span class="menuselection">Theme
+‣ Reset theme</span>. You can also save your theme for later use in the
+option <span class="menuselection">Theme ‣ Save theme</span>. Occasionally it is also
+useful to have multiple themes for the same model, highlighting different
+facets of the instances.</p>
+<p id="index-6">Instead of customizing manually your theme, you can also try out the
+<span class="guilabel">Magic Layout</span> button in the toolbar of the instance visualizer. This
+will “magically” choose options for visualizing the different elements of your
+specification based on the signature and field declarations. Sometimes the
+results are good enough and it will save you some work. The result of magic
+layout for our instance is the following.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_03/filesystem.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance310.png" style="width: 500px;" />
+</a>
+<p id="index-7">More information about how the magic layout actually works can be found in
+<a class="reference internal" href="../../../../bibliography.html#led07" id="id1"><span>[LED07]</span></a>. In this case we prefer our handmade customization and so we will load
+back our previously saved theme by selecting <span class="menuselection">Theme ‣ Load
+theme</span> in the menu.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_04/filesystem.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance47.png" style="width: 450px;" />
+</a>
+</section>
+<section id="improving-visualizations-with-derived-relations">
+<h2>Improving visualizations with derived relations<a class="headerlink" href="#improving-visualizations-with-derived-relations" title="Link to this heading">¶</a></h2>
+<p>Alloy supports the definition of derived relations through the declaration of functions, whose return type can be any relational expression with arbitrary arity. <em>Parameterless</em> functions are processed by the visualizer and presented alongside the signatures and fields of the instance, even if not used in the specification at all. This section shows how to explore this feature for further tweaking instance visualization.</p>
+<p>Let’s say that we want to highlight in our visualization the directories that are empty. A possibility would be to introduce a new subset signature and restrict its value to always be the set of empty directories. However, due to the nature of the Alloy analysis procedures, such a signature would have to be solved by the Analyzer, possible impacting its performance. If we introduce a function that calculates this set, the Analyzer will calculate its value after the instance is generated and present it in the visualizer. Since they are introduced by the visualizer after the solving process, they can be used without undermining the performance of the analysis. Such a function that retrieves all empty directories would be defined as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">empty_dirs</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Dir</span> <span class="o">{</span>
+  <span class="n">Dir</span> <span class="o">-</span> <span class="n">entries</span><span class="o">.</span><span class="n">Entry</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>For instance, using the same instance as above, the visualization would now be as follows.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_05/filesystem.als#L70-L81"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance55.png" style="width: 450px;" />
+</a>
+<p id="index-8">Notice how the empty directory at the bottom has an additional label <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$empty_dirs</span></code>. All visualization elements introduced in the visualizer that are not part of the model  are prefixed with a <code class="code docutils literal notranslate"><span class="pre">$</span></code>. Since function <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">empty_dirs</span></code> returns a set, it is interpreted as a subset of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> which by default are shown as labels in the theme. As expected, their depiction can be customised as any other signature. For instance, to highlight empty directories in the depiction, open the theme customisation menu, and set the border of  <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$empty_dirs</span></code> subset of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code> to be <span class="guilabel">Dotted</span> and the displayed name to just <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">empty</span></code>. The resulting depiction is below. You could also hide the label of this subset altogether by just setting to <span class="guilabel">Show as labels</span> to <span class="guilabel">Off</span> for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$empty_dirs</span></code>.</p>
+<a class="reference internal image-reference" href="../../../../_images/theme6.png"><img alt="../../../../_images/theme6.png" class="align-center" src="../../../../_images/theme6.png" style="width: 700px;" />
+</a>
+<p>Parameterless derived functions are introduced in the visualization regardless of their arity, resulting in additional edges for relations of arity higher than 1. For instance, let’s say we wanted to directly depict the relation between directories and their content, hiding the entry intermediary atoms. We could define the binary relation below in the specification.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">contents</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">-&gt;</span> <span class="n">Object</span> <span class="o">{</span>
+  <span class="n">entries</span><span class="o">.</span><span class="n">object</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Running the command again results in the depiction below, with
+<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$contents</span></code> edges directly between directories and objects.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_06/filesystem.als#L74-L85"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance64.png" style="width: 450px;" />
+</a>
+<p>Once we start introducing derived relations, it is often useful to hide others
+elements in order to unclutter the visualizer. In this case, we simply set
+<span class="guilabel">Show</span> to <span class="guilabel">Off</span> for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Entry</span></code> signature, resulting
+in the compact depiction below where the content of directories is evident.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_07/filesystem.als#L74-L85"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance74.png" style="width: 400px;" />
+</a>
+<p id="index-9">A consequence of short-circuiting entries in the visualizer is that we can no longer see the name of the objects inside a directory. Relations with arity higher than 2 are depicted in the visualizer as edges with labels. Thus, a ternary relation between signatures <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Dir</span></code>, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Name</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code> could be used to directly show the content of a directory but also show its name in a label. Defining such relations is often not trivial, and usually requires defining relations by comprehension. In this case this ternary relation could be defined as follows.</p>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">named_contents</span> <span class="p">:</span> <span class="n">Dir</span> <span class="o">-&gt;</span> <span class="n">Name</span> <span class="o">-&gt;</span> <span class="n">Object</span> <span class="o">{</span>
+  <span class="o">{</span> <span class="n">d</span> <span class="p">:</span> <span class="n">Dir</span><span class="p">,</span> <span class="n">n</span> <span class="p">:</span> <span class="n">Name</span><span class="p">,</span> <span class="n">o</span> <span class="p">:</span> <span class="n">Object</span> <span class="o">|</span>
+    <span class="k">some</span> <span class="n">e</span> <span class="p">:</span> <span class="n">Entry</span> <span class="o">|</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">entries</span> <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">object</span> <span class="o">=</span> <span class="n">o</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Here, we are collecting all triples <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">o</span></code> such that there is an
+entry in <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">d</span></code> that has name <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code> and object <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">o</span></code>. The resulting
+depiction is shown below, where the names of the objects inside directories can be seen as a label of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$named_contents</span></code> edges.</p>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/visualization/instance_08/filesystem.als#L67-L78"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance84.png" style="width: 400px;" />
+</a>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/visualization/improving-visualizations-with-derived-relations"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/visualization/improving-visualizations-with-derived-relations</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Higher-arity relations</div>
+<p class="sd-card-text">The  <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">named_contents</span></code> function returns a derived relation of arity 3. Learn more about such higher-arity relations.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../nary-relations/index.html#nary-relations"><span class="std std-ref">Higher-arity relations</span></a></div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Model finding</div>
+<p class="sd-card-text">Sometimes we can have <code class="code docutils literal notranslate"><span class="pre">$</span></code> prefixed atoms in a visualization that  do not correspond to a declared derived function. Learn how such Skolemized variables were introduced by the model finding analysis technique.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../commands/index.html#commands"><span class="std std-ref">Commands in detail</span></a></div>
+</div>
+</section>
+<section id="alternative-visualizations">
+<span id="index-10"></span><h2>Alternative visualizations<a class="headerlink" href="#alternative-visualizations" title="Link to this heading">¶</a></h2>
+<p>As a last note, it is worth mentioning that the Analyzer also supports
+alternative visualizations other than the graph one we’ve explored in this
+chapter. In the visualizer toolbar, buttons <span class="guilabel">Viz</span>, <span class="guilabel">Txt</span>,
+<span class="guilabel">Table</span>, and <span class="guilabel">Tree</span> control the representation of the
+instance. Option <span class="guilabel">Viz</span> is the default graph representation, while the
+other 3 are textual representations of the relations in plain text, tabular
+format, and in hierarchical structure, respectively. For illustration purposes, below is the
+representation of the same instance in tabular format, where each table denotes
+a signature and the associated fields. Despite the usefulness of the graph
+visualization, when instances become too complex these simpler representations
+can prove helpful.</p>
+<a class="reference internal image-reference" href="../../../../_images/table1.png"><img alt="../../../../_images/table1.png" class="align-center" src="../../../../_images/table1.png" style="width: 500px;" />
+</a>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+</div>
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Full model for the section</div>
+<p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/visualization/alternative-visualizations"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/visualization/alternative-visualizations</span></a></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../nary-relations/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Higher-arity relations</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../commands/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Commands in detail</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021-2025, Alcino Cunha, Nuno Macedo, Julien Brunel, David Chemouil
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Feb 16, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Visualization customization</a><ul>
+<li><a class="reference internal" href="#theme-customization">Theme customization</a></li>
+<li><a class="reference internal" href="#managing-themes">Managing themes</a></li>
+<li><a class="reference internal" href="#improving-visualizations-with-derived-relations">Improving visualizations with derived relations</a></li>
+<li><a class="reference internal" href="#alternative-visualizations">Alternative visualizations</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "practicalalloy/practicalalloy.github.io");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>
