@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2024-06-20T17:37:54+01:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Mutable top-level signatures" href="../mutable-toplevel-signatures/index.html" /><link rel="prev" title="Behavioral modelling advanced topics" href="../../index.html" />
+    <meta property="article:modified_time" content="2024-06-20T18:37:54+02:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Mutable top-level signatures" href="../mutable-toplevel-signatures/index.html" /><link rel="prev" title="Behavioral modelling advanced topics" href="../../index.html" />
 
-    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
         <title>A temporal logic primer - Practical Alloy</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=8f9e6779" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
     <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -304,12 +304,10 @@
 <p id="index-2">What do we mean by “the behaviors of the system”? In Alloy, we view a system as the set of all its execution traces, and every such trace is a feasible <em>infinite sequence of states</em> of the system. Here, “feasible” means that each trace much follow the constraints of the model. The constraints of the model include the Alloy facts and the constraints that are included in the signature declarations, such as the multiplicity constraints.
 In each state, a relational value is associated with each declared signature and field. If a signature or field is declared as mutable, that its value can change along the trace. Be aware that if a top-level signature is declared as mutable then relations <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">univ</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">iden</span></code> will also be mutable, since <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">univ</span></code> is the union of all top-level sigs, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">iden</span></code> is the identity relation over <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">univ</span></code>.</p>
 <p>Let us consider for instance the following trace of our file sharing web app.</p>
-<a class="reference internal image-reference" href="../../../../_images/trace.png"><img alt="../../../../_images/trace.png" class="align-center" src="../../../../_images/trace.png" style="width: 550px;" />
-</a>
+<a class="reference internal image-reference" href="../../../../_images/trace.png"><img alt="../../../../_images/trace.png" class="align-center" src="../../../../_images/trace.png" style="width: 550px;" /></a>
 <p>In this scenario, which we will use as an illustrating example in this topic, there are two files and two tokens. A file is depicted in red if it is shared. Tokens are not represented in the picture.</p>
 <p>Let us define this scenario in Alloy terms. The set of atoms (the universe) consists of the two files and the two tokens, which are named after their signature name by Alloy: <code class="code docutils literal notranslate"><span class="pre">File0</span></code>, <code class="code docutils literal notranslate"><span class="pre">File1</span></code>, <code class="code docutils literal notranslate"><span class="pre">Token0</span></code>, <code class="code docutils literal notranslate"><span class="pre">Token1</span></code>. Alloy Analyzer produces the following depiction for this scenario. We use here the same visualization theme as in chapter <a class="reference internal" href="../../../behavioral-modeling/index.html#behavioral-modeling"><span class="std std-ref">Behavioral modeling</span></a>: the files are depicted as circles and the tokens as grey rectangles, the files that are not currently uploaded are in white, the uploaded ones are in yellow, the trashed ones are in red. When inspecting a trace, the visualizer starts by focusing on the first two states of a trace (state 0 and state 1).</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/d9d168e8382a114614e1fa527ad9b3b113555840/behavioral-topics/temporal-logic/instance_1_2/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance113.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/d9d168e8382a114614e1fa527ad9b3b113555840/behavioral-topics/temporal-logic/instance_1_2/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance113.png" style="width: 600px;" /></a>
 <p>All along the trace, the signatures <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Token</span></code> have a constant value (because they are static signatures), which is the following.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="n">File</span>  <span class="o">=</span> <span class="o">{(</span><span class="n">File0</span><span class="o">)</span><span class="p">,</span><span class="o">(</span><span class="n">File1</span><span class="o">)}</span>
 <span class="n">Token</span> <span class="o">=</span> <span class="o">{(</span><span class="n">Token0</span><span class="o">)</span><span class="p">,</span><span class="o">(</span><span class="n">Token1</span><span class="o">)}</span>
@@ -321,31 +319,30 @@ In each state, a relational value is associated with each declared signature and
 <li><p>in the second state, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">uploaded</span> <span class="o">=</span> <span class="o">{(</span><span class="n">File1</span><span class="o">)}</span></code>, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">trashed</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">shared</span></code> are still empty.</p></li>
 </ul>
 <p>By pressing pressing <span class="guilabel">→</span> a couple of times we can focus on the 3rd and 4th states (state 2 and state 3) of the trace, corresponding to the transition where one file is shared.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/d9d168e8382a114614e1fa527ad9b3b113555840/behavioral-topics/temporal-logic/instance_1_2/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance23.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/d9d168e8382a114614e1fa527ad9b3b113555840/behavioral-topics/temporal-logic/instance_1_2/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance23.png" style="width: 600px;" /></a>
 <p>We can see that in state 2 (left-hand side) <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">shared</span></code> is empty and that <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">uploaded</span> <span class="o">=</span> <span class="o">{(</span><span class="n">File0</span><span class="o">)</span><span class="p">,</span><span class="o">(</span><span class="n">File1</span><span class="o">)}</span></code>, and that in state 3 (right-hand side) <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">shared</span> <span class="o">=</span> <span class="o">{(</span><span class="n">File1</span><span class="p">,</span><span class="n">Token1</span><span class="o">)}</span></code>.</p>
 <p>In the following, we will use this scenario to illustrate the semantics of temporal connectives.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Mutable top-level signatures</div>
 <p class="sd-card-text">We mentioned that top-level signatures can be mutable. Learn about the implications of having them in a model.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../mutable-toplevel-signatures/index.html#mutable-toplevel-signatures"><span class="std std-ref">Mutable top-level signatures</span></a></div>
+<a class="sd-stretched-link reference internal" href="../mutable-toplevel-signatures/index.html#mutable-toplevel-signatures"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 A relational logic primer</div>
 <p class="sd-card-text">Alloy’s temporal specifications are built top of relational logic. Learn more about this static fragment.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../../../structural-topics/topics/relational-logic/index.html#relational-logic"><span class="std std-ref">tocdepth</span></a></div>
+<a class="sd-stretched-link reference internal" href="../../../structural-topics/topics/relational-logic/index.html#relational-logic"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="temporal-connectives">
@@ -513,14 +510,14 @@ As it is presented in chapter <a class="reference internal" href="../../../behav
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Safety, liveness, and fairness</div>
 <p class="sd-card-text">Learn about the different kinds of formulas you specify in temporal logic.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../fairness/index.html#fairness"><span class="std std-ref">tocdepth</span></a></div>
+<a class="sd-stretched-link reference internal" href="../fairness/index.html#fairness"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 </section>
@@ -597,11 +594,11 @@ Safety, liveness, and fairness</div>
     </aside>
   </div>
 </div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
-    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/clipboard.min.js?v=66b4909c"></script>
+    <script src="../../../../_static/copybutton.js?v=71494f10"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -628,7 +625,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -636,7 +633,7 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../../_static/design-tabs.js?v=70e5c12e"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

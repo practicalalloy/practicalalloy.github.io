@@ -51,7 +51,7 @@ The authors are researchers in formal methods, focusing on making these methods 
 
 `Julien Brunel <https://www.onera.fr/fr/staff/julien-brunel>`_  is a Senior Researcher at ONERA, the French aerospace research center, and also a member of University of Toulouse. He is also adjunct faculty at ISAE-SUPAERO, INP-ENSEEIHT and IMT-Mines Alès.
    
-`David Chemouil <https://www.onera.fr/fr/staff/david-chemouil>`_ is a Senior Researcher with Habilitation at ONERA, the French aerospace research center, and also a member of University of Toulouse. He's also adjunct faculty at ENSEEIHT and ISAE Supaéro.
+`David Chemouil <https://www.onera.fr/fr/staff/david-chemouil>`_ is a Senior Researcher with Habilitation at ONERA, the French aerospace research center, and also a member of University of Toulouse. He's also adjunct faculty at INP-ENSEEIHT and ISAE-SUPAERO.
 
 Acknowledgments
 ========================

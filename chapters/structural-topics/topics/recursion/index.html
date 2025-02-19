@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2025-02-16T20:25:24+00:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Working with integers" href="../integers/index.html" /><link rel="prev" title="Encoding test instances" href="../testing-instances/index.html" />
+    <meta property="article:modified_time" content="2025-02-16T21:25:24+01:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Working with integers" href="../integers/index.html" /><link rel="prev" title="Encoding test instances" href="../testing-instances/index.html" />
 
-    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
         <title>Handling recursion - Practical Alloy</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=8f9e6779" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
     <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -336,14 +336,14 @@ larger than maximum number of <code class="code highlight alloy practicalalloy d
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/the-predefined-natural-module"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/the-predefined-natural-module</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/the-predefined-natural-module"></a></div>
 </div>
 </section>
 <section id="recursive-alloy-functions">
@@ -386,8 +386,7 @@ to performance issues. So, if we follow the menu option <span class="menuselecti
 ‣ Recursion depth</span> and set it to <span class="menuselection">2</span> rather than
 <span class="menuselection">disabled</span>, and then run the command again, we will finally
 obtain the following instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_01_02/filesystem.als#L94-L106"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance125.png" style="width: 500px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_01_02/filesystem.als#L94-L106"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance125.png" style="width: 500px;" /></a>
 <p>Now, let us try instead to find a file system with depth 3 with the following command.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">run</span> <span class="n">depth3</span> <span class="o">{</span>
   <span class="k">some</span> <span class="n">f</span> <span class="p">:</span> <span class="n">File</span> <span class="o">|</span> <span class="n">depth</span><span class="o">[</span><span class="n">f</span><span class="o">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">[</span><span class="n">inc</span><span class="o">[</span><span class="n">One</span><span class="o">]]</span>
@@ -399,8 +398,7 @@ recursion depth of 2, it is not possible for <code class="code highlight alloy p
 value 3 (it actually just returns <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kc">none</span></code> in those cases). If we set menu
 option <span class="menuselection">Options ‣ Recursion depth</span> to 3, we will now get the
 following instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_01_02/filesystem.als#L109-L121"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance213.png" style="width: 500px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_01_02/filesystem.als#L109-L121"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance213.png" style="width: 500px;" /></a>
 <p>It’s evident that this approach can easily lead to unpredictable results. The
 outcome of a command is dependent on an Analyzer option, which in general is a
 bad practice in Alloy where models are expected to be self-contained. When the
@@ -414,14 +412,14 @@ that recursive functions are useful in Alloy, so let’s just keep
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/recursive-alloy-functions"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/recursive-alloy-functions</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/recursive-alloy-functions"></a></div>
 </div>
 </section>
 <section id="recursion-through-memoization">
@@ -465,8 +463,7 @@ to make it clear that <code class="code highlight alloy practicalalloy docutils 
 <p>After a few theme customizations (showing <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">depth</span></code> as an attribute rather
 than an edge, hiding <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Natural</span></code> atoms, and removing the namespace from
 their labels), we obtain instances such as the following.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_03_04/filesystem.als#L94-L106"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance37.png" style="width: 500px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_03_04/filesystem.als#L94-L106"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance37.png" style="width: 500px;" /></a>
 <p>We can now ask for file systems with a depth as big as that supported by the
 scope on naturals. For instance, the following command still generates
 instances, namely the example shown below.</p>
@@ -475,8 +472,7 @@ instances, namely the example shown below.</p>
 <span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">3</span> <span class="n">Name</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_03_04/filesystem.als#L108-L120"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance45.png" style="width: 500px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/recursion/instance_03_04/filesystem.als#L108-L120"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance45.png" style="width: 500px;" /></a>
 <p>Beyond depth 4, with the current scope it is not possible to generate instances,
 since there are obviously not enough objects. But even if we increase the scope
 on objects and entries, it will not be possible to generate instances since the
@@ -485,14 +481,14 @@ So be careful to always update the scope of <code class="code highlight alloy pr
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/recursion-through-memoization"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/recursion-through-memoization</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/recursion/recursion-through-memoization"></a></div>
 </div>
 </section>
 </section>
@@ -569,11 +565,11 @@ Full model for the section</div>
     </aside>
   </div>
 </div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
-    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/clipboard.min.js?v=66b4909c"></script>
+    <script src="../../../../_static/copybutton.js?v=71494f10"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -600,7 +596,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -608,6 +604,6 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../../_static/design-tabs.js?v=70e5c12e"></script>
     </body>
 </html>

@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2025-02-16T20:25:24+00:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="A relational logic primer" href="../relational-logic/index.html" /><link rel="prev" title="Module system" href="../modules/index.html" />
+    <meta property="article:modified_time" content="2025-02-16T21:25:24+01:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="A relational logic primer" href="../relational-logic/index.html" /><link rel="prev" title="Module system" href="../modules/index.html" />
 
-    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
         <title>The predefined ordering module - Practical Alloy</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=8f9e6779" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
     <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -324,13 +324,11 @@ In particular, this module defines a <code class="code highlight alloy practical
 </div>
 <p>Note the use of a chain of compositions to get all timestamps of all entries contained in the object of an entry. If the object is a file this set will be obviously empty and the constraint holds trivially. If it is a directory, then the timestamp of the respective entry must be less than those of all its children.</p>
 <p>If we run the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command with a scope of 3, and customize the theme to show timestamps as attributes, we could get the following example filesystem.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_01/filesystem.als#L85-L96"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance124.png" style="width: 400px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_01/filesystem.als#L85-L96"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance124.png" style="width: 400px;" /></a>
 <p>You can see in the visualization relations <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">first</span></code>, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">last</span></code>, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code> introduced by module <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code>. If we are not interested in seeing these relations in the visualization, we can omit them.
 In principle, this would make it very difficult to understand how the timestamps are ordered, and check if instances are valid.
 However, the module <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code> is handled in special way be the Alloy Analyzer, which will attempt to name the inhabitants of the ordered signature sequentially according to the order defined by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code>. So you can see in our instance that <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Time0</span></code> is the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">first</span></code>, which is followed by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Time1</span></code>, and then by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Time3</span></code>, which is the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">last</span></code>. If we really want to confirm the value of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code> relation we could go to the evaluator and ask for its value. However, we will get an ambiguity error since <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code> is also defined in the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">integer</span></code> module that is imported by default. To disambiguate we could type the qualified name <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span><span class="o">/</span><span class="n">next</span></code> instead.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_02/filesystem.als#L85-L96"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator13.png" style="width: 550px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_02/filesystem.als#L85-L96"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator13.png" style="width: 550px;" /></a>
 <p>To see what other functions and derived relations are declared in <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code> you can open it in the menu <span class="menuselection">File ‣ Open Sample Models…</span>.</p>
 <p>The above fact, imposing that the creation timestamp of an entry should precede that of its children, actually makes fact <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">no_indirect_containment</span></code> redundant, since it is no longer  possible for directories to contain themselves directly or indirectly. We can confirm this by changing that fact to an assertion and using the Analyzer to verify it.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nf">no_indirect_containment</span> <span class="o">{</span>
@@ -343,34 +341,34 @@ However, the module <code class="code highlight alloy practicalalloy docutils li
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering/declaring-totally-ordered-signatures"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering/declaring-totally-ordered-signatures</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering/declaring-totally-ordered-signatures"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Module system</div>
 <p class="sd-card-text">Learn how to define your own modules in Alloy, and the strategy used in <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span></code>.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../modules/index.html#modules"><span class="std std-ref">Module system</span></a></div>
+<a class="sd-stretched-link reference internal" href="../modules/index.html#modules"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 The instance evaluator</div>
 <p class="sd-card-text">Learn how to use the evaluator, so that you can check the value of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code> relation.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../evaluator/index.html#evaluator-instance"><span class="std std-ref">The instance evaluator</span></a></div>
+<a class="sd-stretched-link reference internal" href="../evaluator/index.html#evaluator-instance"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="analysis-scopes">
@@ -393,44 +391,42 @@ The instance evaluator</div>
 </pre></div>
 </div>
 <p>If we execute the command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> we get no instance! This is due to the fact that the default scope for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Nat</span></code> is 3, and since this signature is being totally ordered with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code> this scope is required to be exact. Unfortunately, with exactly 3 atoms in <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Nat</span></code> it is impossible to satisfy the given constraints. If we change the scope of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> to 4 then we will obtain one instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_03/nat_ordering.als#L21"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance212.png" style="width: 400px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_03/nat_ordering.als#L21"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance212.png" style="width: 400px;" /></a>
 <p>This is also an example where the naming of the atoms does not help in understanding what is the total order, since the ordered signature <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Nat</span></code> is abstract and extended by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Even</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Odd</span></code>. If you omit the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code>
 relations from the visualization, you can always use the evaluator to consult the atom order.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_04/nat_ordering.als#L21"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator22.png" style="width: 550px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-topics/ordering/instance_04/nat_ordering.als#L21"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/evaluator22.png" style="width: 550px;" /></a>
 <p>As a last note on scopes, for efficiency reasons the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code> module also requires the parameter signature to be non-empty (it forces <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">first</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">last</span></code> to always contain exactly one atom), meaning that setting its scope to 0 will also result in an inconsistent specification.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering/analysis-scopes"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering/analysis-scopes</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering/analysis-scopes"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full models for this topic</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-topics/ordering"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Commands in detail</div>
 <p class="sd-card-text">Learn the full details about analysis commands and their scopes.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../commands/index.html#commands"><span class="std std-ref">Commands in detail</span></a></div>
+<a class="sd-stretched-link reference internal" href="../commands/index.html#commands"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 </section>
@@ -506,11 +502,11 @@ Commands in detail</div>
     </aside>
   </div>
 </div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
-    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/clipboard.min.js?v=66b4909c"></script>
+    <script src="../../../../_static/copybutton.js?v=71494f10"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -537,7 +533,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -545,6 +541,6 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../../_static/design-tabs.js?v=70e5c12e"></script>
     </body>
 </html>

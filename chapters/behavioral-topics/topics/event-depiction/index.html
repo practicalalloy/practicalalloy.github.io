@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2024-06-20T17:37:54+01:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Encoding trace scenarios" href="../scenarios/index.html" /><link rel="prev" title="Meta-capabilities" href="../meta/index.html" />
+    <meta property="article:modified_time" content="2024-06-20T18:37:54+02:00" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="Encoding trace scenarios" href="../scenarios/index.html" /><link rel="prev" title="Meta-capabilities" href="../meta/index.html" />
 
-    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
         <title>An idiom for event depiction - Practical Alloy</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=8f9e6779" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/practicalalloy.css?v=2ee171b3" />
     <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -308,14 +308,10 @@ particular predicates should be interpreted as events. In this section we will d
 an useful side effect, it also eases the specifications of certain classes of
 constraints.</p>
 <p>Let’s consider an instance returned when executing command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code>, whose transitions are shown below.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance19.png" style="width: 500px;" />
-</a>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance21.png" style="width: 500px;" />
-</a>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance31.png" style="width: 500px;" />
-</a>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance41.png" style="width: 500px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance19.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance21.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance31.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance41.png" style="width: 500px;" /></a>
 <p>After a short examination, and based upon our knowledge of the specification, we
 can determine that this trace uploads a file, shares it, deletes it, empties the trash and then stutters forever. However, in the general
 case, for more complex specifications, the fact that events aren’t displayed
@@ -323,14 +319,14 @@ makes their interpretation tedious and error-prone.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Visualization customization</div>
 <p class="sd-card-text">This topic builds on the standard visualization theme customization features of the Analyzer. Learn in detail how they work.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../../../structural-topics/topics/visualization/index.html#viz-customization"><span class="std std-ref">Visualization customization</span></a></div>
+<a class="sd-stretched-link reference internal" href="../../../structural-topics/topics/visualization/index.html#viz-customization"><span class="std std-ref"></span></a></div>
 </div>
 <section id="depicting-parameterless-events">
 <h2>Depicting parameterless events<a class="headerlink" href="#depicting-parameterless-events" title="Link to this heading">¶</a></h2>
@@ -363,22 +359,20 @@ of the enumeration, in order to enhance readability.</p>
 </div>
 <p>This definition may seem strange at first but this is indeed what we want. Sets by comprehension retrieve a set of atoms for which a certain formula is true; if this formula is temporal, a different set may be returned in each state. So the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">empty_happens</span></code> derived relation yields, in every state, a subset of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Event</span></code> that will be populated (exactly by singleton <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Empty</span></code>) if the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">empty</span></code> predicate is true, and empty otherwise.</p>
 <p>Let us observe the effect of adding this derived relation to the visualization. First, open the theme customization menu and set both <span class="guilabel">Hide unconnected nodes</span> and <span class="guilabel">Show as labels</span> to <span class="guilabel">Off</span> for the subsets <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$empty_happens</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$stutter_happens</span></code>. This will override the hiding of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Event</span></code> nodes that belong to those subsets.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance51.png" style="width: 750px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance51.png" style="width: 750px;" /></a>
 <p>Then head to the last states of the trace (where the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">empty</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">stutter</span></code> events occur). You will now be able to observe the event happening, as shown below. You’ll notice that in the last state both the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Stutter</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Empty</span></code> atoms are shown. This is because the current version of the <em>empty</em> action has no guard, and thus can be applied even if there is no file in the trash. In those cases, its effect is indistinguishable from stuttering: nothing happens.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance61.png" style="width: 550px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance61.png" style="width: 550px;" /></a>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-parameterless-events"><span>https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-parameterless-events</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-parameterless-events"></a></div>
 </div>
 </section>
 <section id="depicting-events-with-parameters">
@@ -402,8 +396,7 @@ Full model for the section</div>
 </pre></div>
 </div>
 <p>Now the first state of the trace is as follows. Since <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Event</span></code> nodes related by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">upload_happens</span></code> are no longer unconnected, they will show up in the visualization without needing to change the theme as was the case for the events without parameters.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance71.png" style="width: 650px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance71.png" style="width: 650px;" /></a>
 <p>Finally, we can proceed with the last event, <em>share</em>. Since this event takes two parameters, the derived relation representing it will now be ternary, the first coordinate having the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Share</span></code> name and the other two the file and the token on which the <em>share</em> event occurs.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">share_happens</span> <span class="p">:</span> <span class="n">Event</span> <span class="o">-&gt;</span> <span class="n">File</span> <span class="o">-&gt;</span> <span class="n">Token</span> <span class="o">{</span>
   <span class="o">{</span> <span class="n">e</span> <span class="p">:</span> <span class="n">Share</span><span class="p">,</span> <span class="n">f</span> <span class="p">:</span> <span class="n">File</span><span class="p">,</span> <span class="n">t</span> <span class="p">:</span> <span class="n">Token</span> <span class="o">|</span> <span class="n">share</span><span class="o">[</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="o">]</span> <span class="o">}</span>
@@ -411,8 +404,7 @@ Full model for the section</div>
 </pre></div>
 </div>
 <p>The result is as follows.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance81.png" style="width: 650px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance81.png" style="width: 650px;" /></a>
 <p>As you start visualizing a trace, you may realize that the depiction of events without further theme customization is deficient when an event takes two parameters or more. A possible alternative visualization is to show event parameters as labels of the event name rather than edges. However, we need to somehow identify which events occur in each state without relying on those edges and the <span class="guilabel">Hide unconnected nodes</span> option. To do so, we can introduce a further derived relation that just returns the set of names of events occurring in a state.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">events</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Event</span> <span class="o">{</span>
   <span class="n">empty_happens</span> <span class="o">+</span> <span class="n">stutter_happens</span> <span class="o">+</span>
@@ -426,21 +418,20 @@ Full model for the section</div>
 <li><p>Uncheck <span class="guilabel">Hide unconnected nodes</span> for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$events</span></code> set and set <span class="guilabel">Show as labels</span> to <span class="guilabel">Off</span>.</p></li>
 <li><p>In the <span class="guilabel">relations</span> part, set all derived relations for events to <span class="guilabel">Show as attribute</span> and change the displayed name for the derived relations to <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">args</span></code> (shown below for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">$upload_happens</span></code>).</p></li>
 </ul>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_9/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance91.png" style="width: 750px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_9/filesharing.als#L78-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../../../_images/instance91.png" style="width: 750px;" /></a>
 <p>Notice how the arguments of events can be seen clearly (namely <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File1</span></code> for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">upload</span></code> event in state 0, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">File1</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Token1</span></code> for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">share</span></code> event in state 1).</p>
 <p>On a last note, in our file sharing example all events are interleaved, meaning that exactly one event occurs in each state (except for <em>empty</em> actions indistinguishable from stuttering). This is not necessarily the case, and models that allow true concurrency may allow many events to occur simultaneously, which hinders even further the identification of the occurring events without a proper visualization. Luckily, the idiom we just presented will work exactly the same if multiple events occur in a state: the derived relations will just return additional tuples, which will be depicted as well.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-events-with-parameters"><span>https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-events-with-parameters</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-events-with-parameters"></a></div>
 </div>
 </section>
 <section id="uses-of-the-event-idiom-beyond-visualization">
@@ -485,24 +476,24 @@ If we did so, to check that event <code class="code highlight alloy practicalall
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/event-idiom-beyond-visualization"><span>https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/event-idiom-beyond-visualization</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/event-idiom-beyond-visualization"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Encoding trace scenarios</div>
 <p class="sd-card-text">The event idiom is also helpful when we are trying to encode concrete execution scenarios.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../scenarios/index.html#scenarios"><span class="std std-ref">Encoding trace scenarios</span></a></div>
+<a class="sd-stretched-link reference internal" href="../scenarios/index.html#scenarios"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 </section>
@@ -579,11 +570,11 @@ Encoding trace scenarios</div>
     </aside>
   </div>
 </div><script src="../../../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
-    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/clipboard.min.js?v=66b4909c"></script>
+    <script src="../../../../_static/copybutton.js?v=71494f10"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -610,7 +601,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -618,6 +609,6 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../../_static/design-tabs.js?v=70e5c12e"></script>
     </body>
 </html>

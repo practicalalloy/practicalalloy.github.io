@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2025-02-04T10:43:06+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Bibliography" href="../../bibliography.html" /><link rel="prev" title="Sequences" href="../behavioral-topics/topics/sequences/index.html" />
+    <meta property="article:modified_time" content="2025-02-04T11:43:06+01:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Bibliography" href="../../bibliography.html" /><link rel="prev" title="Sequences" href="../behavioral-topics/topics/sequences/index.html" />
 
-    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
         <title>Protocol design - Practical Alloy</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=8f9e6779" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../_static/practicalalloy.css?v=2ee171b3" />
     <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -355,8 +355,7 @@ validating our specification by inspecting possible instances generated using a
 </div>
 <p>By iterating over the returned instances with <span class="guilabel">New</span> we could
 get the following instance, which is of course not a valid ring.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_1/leaderelection.als#L9-L14"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance114.png" style="width: 400px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_1/leaderelection.als#L9-L14"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance114.png" style="width: 400px;" /></a>
 <p id="index-2">In addition to requiring each node to have exactly one successor, a simple way to ensure that a network forms a ring is to require that
 every node is reachable from any other node. Given a node <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code>,
 to determine the set of nodes reachable from <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code> via relation
@@ -377,8 +376,7 @@ nodes (denoted by <code class="code highlight alloy practicalalloy docutils lite
 </pre></div>
 </div>
 <p>If we now iterate over all instances returned by command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> we will get the 3 possible rings with up to 3 nodes and a configuration without any node, which is also allowed by our specification. The limit of 3 is due to the implicit command scope of 3 atoms per top-level signature. As an example we show the ring with 3 nodes.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_2/leaderelection.als#L12-L19"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance24.png" style="width: 400px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_2/leaderelection.als#L12-L19"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance24.png" style="width: 400px;" /></a>
 <p>To enforce that we have at least one node that can be elected we can add the following fact.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">some_node</span> <span class="o">{</span>
   <span class="c1">// at least one node</span>
@@ -419,39 +417,38 @@ ring, and another where they decrease. The latter is depicted below (notice the
 This illustrates the power of Alloy’s symmetry breaking, which in this case
 prevents the return of any other instance (that necessarily would be isomorphic
 to one of these two).</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_3/leaderelection.als#L30-L38"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance33.png" style="width: 400px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_3/leaderelection.als#L30-L38"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance33.png" style="width: 400px;" /></a>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-network-configuration"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-network-configuration</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-network-configuration"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 The predefined <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ordering</span></code> module</div>
 <p class="sd-card-text">Learn more about the predefined module that we have used to impose a total order on the identifiers.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/ordering/index.html#ordering"><span class="std std-ref">The predefined ordering module</span></a></div>
+<a class="sd-stretched-link reference internal" href="../structural-topics/topics/ordering/index.html#ordering"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Working with integers</div>
 <p class="sd-card-text">Learn what are the caveats of using integers and how to properly address them in Alloy.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/integers/index.html#integers"><span class="std std-ref">Working with integers</span></a></div>
+<a class="sd-stretched-link reference internal" href="../structural-topics/topics/integers/index.html#integers"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="specifying-the-protocol-dynamics">
@@ -472,12 +469,10 @@ As we have seen in the <a class="reference internal" href="../behavioral-modelin
 </div>
 <p>Note that, on purpose, we did not impose a multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code> in this declaration, because that constraint, that at most one node is elected leader, is one of the key assertions we will want to verify to be a consequence of the protocol dynamics, and thus should not be imposed as an assumption upfront.</p>
 <p id="index-8">If we now run the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example3</span></code> command we might get the following instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_4/leaderelection.als#L34-L45"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance42.png" style="width: 700px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_4/leaderelection.als#L34-L45"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance42.png" style="width: 700px;" /></a>
 <p>As we have seen in the <a class="reference internal" href="../behavioral-modeling/index.html#behavioral-modeling"><span class="std std-ref">Behavioral modeling</span></a> chapter, the interface of the visualizer is different when we have mutable elements: it now shows two states of a trace side-by-side, there are several new instance exploration buttons in the toolbar, and a depiction of a path just below those. In this case we have a trace where the same state 0 repeats itself indefinitely, something that is possible since so far we added no restrictions that constrain the behavior of the protocol. We recall that in the depiction of the states, by default, immutable sets and fields (the configuration of the protocol) are shown with solid lines, while mutable ones are shown with dashed lines.</p>
 <p>To simplify the visualization, we can configure the theme so that node identifiers, the inbox, and the outbox are shown as node attributes, and change the color of elected nodes to green. Since the elected nodes can now be easily distinguished by color we can also hide the respective textual label. As for the totally ordered identifiers, we will just show the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code> relation. The result of this customization will be the following.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_5/leaderelection.als#L34-L45"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance52.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_5/leaderelection.als#L34-L45"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance52.png" style="width: 600px;" /></a>
 <p>Something that is clearly wrong in this execution is that in the initial
 state nodes already have identifiers in their inboxes and outboxes, and some of them are already elected. To restrict the initial value of these mutable fields we can add the following fact.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">init</span> <span class="o">{</span>
@@ -492,11 +487,9 @@ state nodes already have identifiers in their inboxes and outboxes, and some of 
 it applies to the initial state of the system. Rerunning the
 <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example3</span></code> command now yields instances such as the following, where the
 systems remains indefinitely in a valid initial state.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L41-L52"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance62.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L41-L52"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance62.png" style="width: 600px;" /></a>
 <p id="index-9">We can explore additional instances by using the instance exploration buttons in the toolbar. For example, the <span class="guilabel">New Fork</span> button asks the Analyzer for a different trace with the same behavior up to the left-hand side state, but a different outcome of the current transition (a different right-hand side state). By pressing this button we may get the following.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L54-L70"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance72.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L54-L70"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance72.png" style="width: 600px;" /></a>
 <p>This trace displays a behavior that should not be allowed in a correct execution of the protocol: in the second state all of a sudden several identifiers appeared in the inbox and outbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node1</span></code>. Moreover, this node was also randomly designated as leader. So far this is allowed because we added no constraints to our specification that restrict how the system can transition from one state to another. If there are no constraints then any transition is possible.</p>
 <p id="index-10">As already explained in chapter <a class="reference internal" href="../behavioral-modeling/index.html#behavioral-modeling"><span class="std std-ref">Behavioral modeling</span></a>, the simplest way to constrain the valid transitions is to consider all the possible events that can occur in the system, and for each event specify when it can occur (its <em>guard</em>) and what is its <em>effect</em> on the mutable relations. In our protocol we can distinguish three possible events:</p>
 <ul class="simple">
@@ -581,8 +574,7 @@ fact can be added to the specification.</p>
 </div>
 <p>Running command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example3</span></code> yields the following trace, where
 <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code> initiates the protocol and then nothing else happens.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_8/leaderelection.als#L63-L79"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance82.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_8/leaderelection.als#L63-L79"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance82.png" style="width: 600px;" /></a>
 <p id="index-13">On first glance, this may seem like an invalid trace, given that we
 required that at every state one node initiates the protocol. However,
 if we look closely at our specification of event <em>initiate</em> we
@@ -664,8 +656,7 @@ depicted, where <code class="code highlight alloy practicalalloy docutils litera
 else happens. If we move to the next state by pressing <span class="guilabel">→</span>,
 and fork again with <span class="guilabel">New Fork</span>, we might get the following
 trace where <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node0</span></code> initiates the protocol after <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code>.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_9/leaderelection.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance92.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_9/leaderelection.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance92.png" style="width: 600px;" /></a>
 <p>By exploring a bit more the possible traces we can get some confidence
 that event <em>initiate</em> is well specified.</p>
 <p>Let us now specify the <em>send</em> event. In this event we could have as parameters the node
@@ -767,45 +758,43 @@ the Analyzer guarantees that the shortest traces that satisfy (or refute) a
 property are returned first. The first transition of this trace is the
 following, where the node with the highest identifier (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Id2</span></code>) initiates
 the protocol.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance101.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance101.png" style="width: 600px;" /></a>
 <p>In the last transition, that can be focused by pressing <span class="guilabel">→</span> 6 times or
 by directly clicking the state numbered 6 in the trace depiction, this node
 reads back its own identifier that was passed around in the ring and elects
 himself as leader.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance115.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance115.png" style="width: 600px;" /></a>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-protocol-dynamics"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-protocol-dynamics</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-protocol-dynamics"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Encoding scenarios</div>
 <p class="sd-card-text">Learn how to specify richer <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands to search for specific scenarios, where a particular sequence of events occurred.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/scenarios/index.html#scenarios"><span class="std std-ref">Encoding trace scenarios</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/scenarios/index.html#scenarios"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Event depiction</div>
 <p class="sd-card-text">Learn a simple Alloy idiom that can be used to depict which events occurred in each transition of a trace.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/event-depiction/index.html#event-depiction"><span class="std std-ref">An idiom for event depiction</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/event-depiction/index.html#event-depiction"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="verifying-the-expected-properties">
@@ -914,8 +903,7 @@ model checking, you can increase your confidence on the analysis by using
 unbounded model checking. As hinted above, running this command immediately returns a
 counter-example where the system stutters forever, and obviously no
 leader is elected. This counter-example can be replicated in trivial configurations, for example the following with a single node.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_12/leaderelection.als#L123-L134"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance121.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_12/leaderelection.als#L123-L134"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance121.png" style="width: 600px;" /></a>
 <p id="index-24">This behavior is currently allowed because we added a stutter event that
 captures events external to our system. At the moment this event can
 occur indefinitely, which is a bit unrealistic or <em>unfair</em> to the
@@ -984,34 +972,34 @@ scopes, as expected.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/verifying-the-expected-properties"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/verifying-the-expected-properties</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/verifying-the-expected-properties"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Fairness and Liveness</div>
 <p class="sd-card-text">Learn how to specify different fairness conditions and the impact they have on the analysis.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/fairness/index.html#fairness"><span class="std std-ref">tocdepth</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/fairness/index.html#fairness"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 A temporal logic primer</div>
 <p class="sd-card-text">Read about the full syntax and semantics of the temporal logic supported in Alloy.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/temporal-logic/index.html#temporal-logic"><span class="std std-ref">tocdepth</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/temporal-logic/index.html#temporal-logic"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="making-the-specification-more-abstract">
@@ -1058,8 +1046,7 @@ A temporal logic primer</div>
 </pre></div>
 </div>
 <p>Running this command yields the following instance (with the theme already customized), and it is now more clear if the ring follows the increasing order of the identifiers (as happens here), or the other way around. Notice that without using <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code>, the node identifiers are no longer representative of the total order (in the trace below, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code> is the first element of the total order, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node1</span></code> the last).</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_13/leaderelection.als#L103-L113"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance131.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_13/leaderelection.als#L103-L113"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance131.png" style="width: 600px;" /></a>
 <p>Another signature we can remove is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code>, since actually we can infer which node has been elected by looking at what happened in the past: if at some point in the past a node had its identifier in the inbox and processed it, then it necessarily became a leader. Instead of declaring a subset signature we can define <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code> as a derived set of nodes using a function without parameters.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">Elected</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
   <span class="o">{</span> <span class="n">n</span> <span class="p">:</span> <span class="n">Node</span> <span class="o">|</span> <span class="ow">once</span> <span class="o">(</span><span class="ow">before</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">inbox</span> <span class="ow">and</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">inbox</span><span class="o">)</span> <span class="o">}</span>
@@ -1119,8 +1106,7 @@ example, event <em>process</em> can now be specified as follows.</p>
 </div>
 <p>After removing event <em>send</em> from predicate <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">node_acts</span></code>, we can run the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">eventually_elected</span></code> command and see that it is now possible
 to elect a leader in a ring with three nodes with almost half the transitions.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_14/leaderelection.als#L77-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance141.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_14/leaderelection.als#L77-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance141.png" style="width: 600px;" /></a>
 <p>With the same scope on the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">steps</span></code> we can now check much longer behaviors
 with roughly the same efficiency. If we check our three assertions they are all
 still valid, as expected.</p>
@@ -1161,10 +1147,8 @@ itself.</p>
 </pre></div>
 </div>
 <p>If we ask for a trace where a leader is elected in a ring with one node, we now get the expected outcome after two events.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance151.png" style="width: 600px;" />
-</a>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance161.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance151.png" style="width: 600px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance161.png" style="width: 600px;" /></a>
 <p>So far we have specified the effects of events in a <em>point-wise</em> style, stating the effect on different projections of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">inbox</span></code> separately. Using a <em>point-free</em> style, where we specify the effect on all inboxes at once, can many times considerably simplify the specification. Consider for example the point-free version of the <em>initiate</em> event.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">initiate</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
   <span class="c1">// node n initiates the protocol</span>
@@ -1190,24 +1174,24 @@ itself.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/making-the-specification-more-abstract"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/making-the-specification-more-abstract</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/making-the-specification-more-abstract"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Pointwise effects</div>
 <p class="sd-card-text">Learn about the different ways to specify effects and frame conditions of events. Here we used the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">point</span><span class="o">-</span><span class="n">free</span></code> style to simplify the specifications.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/pointwise-effects/index.html#pointwise-effects"><span class="std std-ref">Pointwise effects</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/pointwise-effects/index.html#pointwise-effects"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="explicit-messages-as-signatures">
@@ -1325,8 +1309,7 @@ single node and the system stutters forever (recall that bounded model checking
 guarantees minimal trace prefix length). By hitting <span class="guilabel">New Fork</span> we
 should be able to observe a different event, namely an <em>initiate</em> event.
 However, depending on the selected solver, we may get the following message.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation1.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation1.png" style="width: 600px;" /></a>
 <p id="index-26">Let’s try to use the evaluator to debug the trace. Recall that the evaluator for
 traces supports any formula and expression, and that this evaluation is always
 performed on the focused state (the one at the left-hand side). We can start by
@@ -1340,16 +1323,14 @@ nodes for which that guard holds. The evaluator will show us that it holds for
 the existing node. So this must be a case where the guard is not necessarily
 the same as the enabled condition of the event. The problem is in the existential quantifier  searching for the new candidate message: this cannot be satisfied because there is no available <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">CandidateMsg</span></code> message in the configuration
 of this trace that can be added to the successor’s inbox.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation2.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation2.png" style="width: 600px;" /></a>
 <p>This issue is actually evident if we inspect the available messages in the
 visualizer, as there are only <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ElectedMsg</span></code> messages in the configuration. So we
 can hit <span class="guilabel">New Config</span> until a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">CandidateMsg</span></code> is available (after
 closing the evaluator). This should happen after a few iterations. Then, we can
 ask again for <span class="guilabel">New Fork</span>, and this time a node will effectively
 initiate.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L107-L116"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance181.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L107-L116"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance181.png" style="width: 600px;" /></a>
 <p>This means that to simulate a specific scenario we must first think about which messages will be necessary and hit <span class="guilabel">New Config</span> until those messages are in scope at the initial state. Of course, this does not scale to more complex scenarios.</p>
 <p>Another problem occurs when we want to inspect a different network
 configuration (recall that with up to 3 nodes, there are only 4 distinct
@@ -1361,12 +1342,9 @@ With one of the available solvers we actually
 needed to hit <span class="guilabel">New Config</span> 10 times before seeing a different ring
 network, and dozens of times to inspect the 4 alternatives, as the Analyzer will
 just iterate over different sets of possible messages.</p>
-<a class="reference internal image-reference" href="../../_images/validation3.png"><img alt="../../_images/validation3.png" class="align-center" src="../../_images/validation3.png" style="width: 800px;" />
-</a>
-<a class="reference internal image-reference" href="../../_images/validation4.png"><img alt="../../_images/validation4.png" class="align-center" src="../../_images/validation4.png" style="width: 800px;" />
-</a>
-<a class="reference internal image-reference" href="../../_images/validation5.png"><img alt="../../_images/validation5.png" class="align-center" src="../../_images/validation5.png" style="width: 800px;" />
-</a>
+<a class="reference internal image-reference" href="../../_images/validation3.png"><img alt="../../_images/validation3.png" class="align-center" src="../../_images/validation3.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../_images/validation4.png"><img alt="../../_images/validation4.png" class="align-center" src="../../_images/validation4.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../_images/validation5.png"><img alt="../../_images/validation5.png" class="align-center" src="../../_images/validation5.png" style="width: 800px;" /></a>
 <p id="index-27">One possible solution to circumvent these issues if we have explicit messages is
 to enforce a so-called <em>generator axiom</em>. These are constraints that force every possible
 combination of field values of a signature to exist <em>in every instance</em>. In our
@@ -1439,8 +1417,7 @@ message with its own identifier.</p>
 <span class="o">}</span> <span class="k">for</span> <span class="k">exactly</span> <span class="mi">3</span> <span class="n">Node</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">6</span> <span class="n">Message</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_19/leaderelection.als#L166-L180"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance191.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_19/leaderelection.als#L166-L180"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance191.png" style="width: 600px;" /></a>
 <p>So, before re-running the 3 check commands defined previously for our leader
 election protocol, we should extend the scope of available messages. However, we must first adapt the specification of the properties to the new <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code> relation.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nf">at_most_one_leader</span> <span class="o">{</span>
@@ -1461,8 +1438,7 @@ election protocol, we should extend the scope of available messages. However, we
 </div>
 <p>Note that <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node</span><span class="o">.</span><span class="n">Elected</span></code> is now the set of leaders known to any of the nodes, so the two safety properties are the same as before, but with the previous <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code> set replaced by <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node</span><span class="o">.</span><span class="n">Elected</span></code>. The liveness property specifies that all nodes will eventually know who is the leader, by requiring that eventually the domain of relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code> contains all nodes.
 The two safety properties are satisfied as before. Here is the result of the analysis for the first.</p>
-<a class="reference internal image-reference" href="../../_images/log11.png"><img alt="../../_images/log11.png" class="align-center" src="../../_images/log11.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../../_images/log11.png"><img alt="../../_images/log11.png" class="align-center" src="../../_images/log11.png" style="width: 600px;" /></a>
 <p>To verify the liveness property <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">at_least_one_leader</span></code>, we should first update the fairness
 condition to consider the new event and the new guards.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">initiate_enabled</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
@@ -1497,34 +1473,34 @@ Actually, when using explicit messages it might be a good idea to just change th
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/explicit-messages-as-signatures"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/explicit-messages-as-signatures</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/explicit-messages-as-signatures"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 The trace evaluator</div>
 <p class="sd-card-text">Learn more about using the evaluator to validate and debug traces.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/evaluator/index.html#evaluator-trace"><span class="std std-ref">The trace evaluator</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/evaluator/index.html#evaluator-trace"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Commands in detail</div>
 <p class="sd-card-text">Understanding how scopes work is essential to write useful analysis commands.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/commands/index.html#commands"><span class="std std-ref">Commands in detail</span></a></div>
+<a class="sd-stretched-link reference internal" href="../structural-topics/topics/commands/index.html#commands"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="messages-as-tuples">
@@ -1618,8 +1594,7 @@ The <code class="code highlight alloy practicalalloy docutils literal highlight-
 </div>
 <p>In this new model all commands return the expected result. Below is a transition for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">eventually_elected</span></code>
 command.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_20/leaderelection.als#L135-L145"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance20.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_20/leaderelection.als#L135-L145"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance20.png" style="width: 600px;" /></a>
 <p>Notice that, without messages as signatures, messages are now represented as
 edges in the visualizer. In this case, the inbox is a ternary relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node</span> <span class="o">-&gt;</span>
 <span class="n">Type</span> <span class="o">-&gt;</span> <span class="n">Node</span></code>, so the type appears as an annotation of the edge. This may be
@@ -1632,8 +1607,7 @@ version, is now one order of magnitude faster than the version with an explicit
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">check</span> <span class="n">at_most_one_leader</span> <span class="k">for</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/log21.png"><img alt="../../_images/log21.png" class="align-center" src="../../_images/log21.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../../_images/log21.png"><img alt="../../_images/log21.png" class="align-center" src="../../_images/log21.png" style="width: 600px;" /></a>
 <p>The payload of the messages in this protocol
 is very simple, with just two message types that happen to contain the
 same single, mandatory field. Let us imagine we needed an additional, optional field <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">r</span></code>
@@ -1670,34 +1644,34 @@ elected messages without the <code class="code highlight alloy practicalalloy do
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/messages-as-tuples"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/messages-as-tuples</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/messages-as-tuples"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Model finding</div>
 <p class="sd-card-text">Learn how the analysis engine of Alloy works, to understand why analysis becomes unfeasible with fields of large arity.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/model-finding/index.html#analysis"><span class="std std-ref">Model finding</span></a></div>
+<a class="sd-stretched-link reference internal" href="../structural-topics/topics/model-finding/index.html#analysis"><span class="std std-ref"></span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Higher-arity relations</div>
 <p class="sd-card-text">In this section we used higher-arity fields to model inboxes. Learn how to use them.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/nary-relations/index.html#nary-relations"><span class="std std-ref">Higher-arity relations</span></a></div>
+<a class="sd-stretched-link reference internal" href="../structural-topics/topics/nary-relations/index.html#nary-relations"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 <section id="refining-the-network-model">
@@ -1748,30 +1722,29 @@ However, we might want to verify the correctness of our protocol in a more refin
 </pre></div>
 </div>
 <p>This will now return a counter-example, for which a relevant transition is shown below.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_21/leaderelection.als#L126-L136"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance211.png" style="width: 600px;" />
-</a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_21/leaderelection.als#L126-L136"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance211.png" style="width: 600px;" /></a>
 <p>The issue is that the inbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code>, the potential leader, is already at full capacity. <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node0</span></code> is attempting to send the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code> identifier to <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code>, but since the queue is already full, the message is discarded. So to ensure liveness in this version of the protocol - and in an eventual implementation with such a communication middleware - one must make sure that the inboxes are large enough to contain all possible messages. Although this counter-example uses very small queues sizes, the problem still might exist in realistic implementations at larger scales.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/refining-the-network-model"><span>https://github.com/practicalalloy/models/tree/main/protocol-design/refining-the-network-model</span></a></div>
+<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/main/protocol-design/refining-the-network-model"></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Sequences</div>
 <p class="sd-card-text">Sequences in Alloy have some particularities, learn how to use them correctly.</p>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/sequences/index.html#sequences"><span class="std std-ref">Sequences</span></a></div>
+<a class="sd-stretched-link reference internal" href="../behavioral-topics/topics/sequences/index.html#sequences"><span class="std std-ref"></span></a></div>
 </div>
 </section>
 </section>
@@ -1852,11 +1825,11 @@ Sequences</div>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/clipboard.min.js?v=66b4909c"></script>
+    <script src="../../_static/copybutton.js?v=71494f10"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -1883,7 +1856,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -1891,7 +1864,7 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=70e5c12e"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
