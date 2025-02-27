@@ -56,7 +56,7 @@ Although this is a correct specification, the second constraint is now redundant
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/mutable-toplevel-signatures/declaring-top-level-signatures
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/mutable-toplevel-signatures/declaring-top-level-signatures
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -109,7 +109,7 @@ The fact that specifies the valid transitions will then look as follows.
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/mutable-toplevel-signatures/adding-new-atoms-to-the-universe
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/mutable-toplevel-signatures/adding-new-atoms-to-the-universe
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -172,7 +172,7 @@ Here the quantification :alloy:`all t : Token` can still be outside :alloy:`alwa
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/mutable-toplevel-signatures/quantifying-over-mutable-signatures
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/mutable-toplevel-signatures/quantifying-over-mutable-signatures
 
       :octicon:`file-badge` Alloy model 
       ^^^

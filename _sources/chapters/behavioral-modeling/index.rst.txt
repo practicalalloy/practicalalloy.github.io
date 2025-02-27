@@ -159,7 +159,7 @@ Note the usage of :alloy:`or` to allow any possible action predicate to hold in 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/specifying-transition-systems
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-modeling/specifying-transition-systems
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -294,7 +294,7 @@ The token must be associated with some file by the :alloy:`shared` relation, and
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/specifying-actions
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-modeling/specifying-actions
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -369,7 +369,7 @@ To allow stuttering in our system we need to change the fact that specifies the 
 
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/stuttering
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-modeling/stuttering
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -433,7 +433,7 @@ After executing this command we can get the following trace.
    
 .. image:: instance1.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/3c496d674eb736234fe6c3dfa416adcf172d71c1/behavioral-modeling/instance_1_2/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_01_02/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 When a specification has mutable relations, the instance is visualized in a slightly different way from what we have seen in the :ref:`structural-modeling` chapter.
@@ -468,7 +468,7 @@ To navigate in the trace, namely to move forwards and backwards to focus on a di
            
 .. image:: instance2.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/3c496d674eb736234fe6c3dfa416adcf172d71c1/behavioral-modeling/instance_1_2/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_01_02/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 .. index::
@@ -507,94 +507,94 @@ For example, if at this point we press :guilabel:`New Config` we could get the f
 
 .. image:: instance3.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_03/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_03/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 If now we press :guilabel:`New Trace` we may get the following trace.
 
 .. image:: instance4.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/df0bf6a5bda636ad24f1e951aea39dabf46dba22/behavioral-modeling/instance_04/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_04/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 In this trace, the first transition is the upload of the only file in the universe, and then the system stutters forever, as can be seen in the trace depiction. Pressing :guilabel:`New Trace` again could produce the following trace, where the first transition is again a stuttering step.
 
 .. image:: instance5.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/df0bf6a5bda636ad24f1e951aea39dabf46dba22/behavioral-modeling/instance_5_6/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_05_06/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 To see the second transition, which is the upload of the file, we can press :guilabel:`→`.
 
 .. image:: instance6.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/df0bf6a5bda636ad24f1e951aea39dabf46dba22/behavioral-modeling/instance_5_6/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_05_06/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 Before proceeding with the validation of our specification, let's change our visualization theme, for example by setting different colors for files not currently uploaded (white), uploaded files (yellow), and trashed files (red), and different shapes for files (circles) and tokens (rectangles), with the latter also colored gray. Finally, hide the subset labels and change the color palette. After customizing the theme the above transition will be displayed as follows.
 
 .. image:: instance7.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_7/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_07/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 While :guilabel:`New Trace` allows some quick validation of the specification, :guilabel:`New Fork` is the main tool used in this task, since it allows us to quickly narrow our exploration to the behaviors of interest, instead of just pressing :guilabel:`New Trace` until they eventually show up. For example, let us suppose we wanted to see if the following sequence of actions is possible: upload a file, share it with two different tokens, download it with one token, delete it, and finally empty the trash. To search for this scenario, we first re-execute our command, and press :guilabel:`New Config` to get the desired configuration with one file and two tokens.
 
 .. image:: instance8.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_8/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_08/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 Pressing :guilabel:`New Fork` will necessarily change the stuttering step to a file upload, because that is the only other action that can occur at this point.
 
 .. image:: instance9.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_9/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_09/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 Pressing :guilabel:`→` to move to the second transition, which is a stuttering step, and pressing :guilabel:`New Fork` may produce the following trace, where the uploaded file is trashed and then the trash emptied, moving the system back to the initial state. Notice in the trace depiction how in this infinite trace the last state loops back to a state other than itself.
 
 .. image:: instance10.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_10/filesharing.als#L77-L85
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_10/filesharing.als#L84-L92
    :alt: Get the code to generate this instance.
 
 Since this is not the behavior we want to explore, we can press :guilabel:`New Fork` again to change this transition to a sharing action (the only other possible action).
 
 .. image:: instance11.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_11/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_11/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 Pressing :guilabel:`→` and :guilabel:`New Fork` may show us the second share action.
 
 .. image:: instance12.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_12/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_12/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 By repeatedly pressing these buttons we can produce the remaining steps of our desired scenario.
 
 .. image:: instance13.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_13/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_13/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 .. image:: instance14.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_14/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_14/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 .. image:: instance15.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_15/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_15/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 We can also use :guilabel:`New Fork` to check that no unexpected behaviors can happen. For example, at this point the only other possible action should be the following restore action.
 
 .. image:: instance16.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_16/filesharing.als#L77-L85
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_16/filesharing.als#L84-L92
    :alt: Get the code to generate this instance.
 
 We can confirm this by pressing :guilabel:`New Fork` and see if the "The are no more satisfying instances" error window appears, which is the case here.
@@ -607,7 +607,7 @@ We can confirm this by pressing :guilabel:`New Fork` and see if the "The are no 
 
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/validating-the-design
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-modeling/validating-the-design
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -686,12 +686,12 @@ Here we used the :alloy:`after` operator to check that the *restore* action occu
 
 .. image:: instance17.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_17_18/filesharing.als#L94-L104
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_17_18/filesharing.als#L132-L142
    :alt: Get the code to generate this instance.
 
 .. image:: instance18.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/ae2ce59065f9eb09d94ef1599035677128486b39/behavioral-modeling/instance_17_18/filesharing.als#L94-L104
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-modeling/instance_17_18/filesharing.als#L132-L142
    :alt: Get the code to generate this instance.
    
 If we really wanted this property to hold we could change our design in two ways: either keep the associations between files and tokens when deleting them or forbid the deletion of shared files.
@@ -823,7 +823,7 @@ up to 4 items and traces of any length the scope would need to be set as follows
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/verifying-expected-properties
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-modeling/verifying-expected-properties
 
       :octicon:`file-badge` Alloy model 
       ^^^

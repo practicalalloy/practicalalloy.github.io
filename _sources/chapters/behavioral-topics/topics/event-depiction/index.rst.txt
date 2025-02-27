@@ -22,25 +22,25 @@ Let's consider an instance returned when executing command :alloy:`example`, who
 .. image:: instance1.png
    :width: 500px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_01_02_03_04/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 .. image:: instance2.png
    :width: 500px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_01_02_03_04/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 .. image:: instance3.png
    :width: 500px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_01_02_03_04/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 .. image:: instance4.png
    :width: 500px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_1_2_3_4/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_01_02_03_04/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 After a short examination, and based upon our knowledge of the specification, we
@@ -108,7 +108,7 @@ Let us observe the effect of adding this derived relation to the visualization. 
 .. image:: instance5.png
    :width: 750px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_05_06/filesharing.als#L99-L105
    :alt: Get the code to generate this instance.
 
 Then head to the last states of the trace (where the :alloy:`empty` and :alloy:`stutter` events occur). You will now be able to observe the event happening, as shown below. You'll notice that in the last state both the `Stutter` and `Empty` atoms are shown. This is because the current version of the *empty* action has no guard, and thus can be applied even if there is no file in the trash. In those cases, its effect is indistinguishable from stuttering: nothing happens.
@@ -116,13 +116,13 @@ Then head to the last states of the trace (where the :alloy:`empty` and :alloy:`
 .. image:: instance6.png
    :width: 550px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_5_6/filesharing.als#L78-L84
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_05_06/filesharing.als#L99-L105
    :alt: Get the code to generate this instance.
 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-parameterless-events
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/event-depiction/depicting-parameterless-events
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -156,7 +156,7 @@ Now the first state of the trace is as follows. Since :alloy:`Event` nodes relat
 .. image:: instance7.png
    :width: 650px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_07_08/filesharing.als#L119-L125
    :alt: Get the code to generate this instance.
 
 Finally, we can proceed with the last event, *share*. Since this event takes two parameters, the derived relation representing it will now be ternary, the first coordinate having the :alloy:`Share` name and the other two the file and the token on which the *share* event occurs.
@@ -172,7 +172,7 @@ The result is as follows.
 .. image:: instance8.png
    :width: 650px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_7_8/filesharing.als#L78-L84
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_07_08/filesharing.als#L119-L125
    :alt: Get the code to generate this instance.
 
 As you start visualizing a trace, you may realize that the depiction of events without further theme customization is deficient when an event takes two parameters or more. A possible alternative visualization is to show event parameters as labels of the event name rather than edges. However, we need to somehow identify which events occur in each state without relying on those edges and the :guilabel:`Hide unconnected nodes` option. To do so, we can introduce a further derived relation that just returns the set of names of events occurring in a state.
@@ -193,7 +193,7 @@ Note that, for instance, expression :alloy:`upload_happens.File` projects away a
 .. image:: instance9.png
    :width: 750px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/fa89307c94e12acd20eb53d3b7fdcafdd15eb62f/behavioral-topics/event-depiction/instance_9/filesharing.als#L78-L84
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/event-depiction/instance_09/filesharing.als#L125-L131
    :alt: Get the code to generate this instance.
    
 Notice how the arguments of events can be seen clearly (namely :alloy:`File1` for the :alloy:`upload` event in state 0, and :alloy:`File1` and :alloy:`Token1` for the :alloy:`share` event in state 1).
@@ -203,7 +203,7 @@ On a last note, in our file sharing example all events are interleaved, meaning 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/depicting-events-with-parameters
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/event-depiction/depicting-events-with-parameters
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -263,7 +263,7 @@ Thus, the only price to pay is a small but systematic inflation, albeit admitted
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/event-depiction/event-idiom-beyond-visualization
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/event-depiction/event-idiom-beyond-visualization
 
       :octicon:`file-badge` Alloy model 
       ^^^

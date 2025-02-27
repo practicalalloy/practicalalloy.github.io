@@ -11,7 +11,7 @@ This chapter presents some advanced topics relevant for behavioral modelling. Th
 .. card-carousel:: 2
 
    .. card:: Base model for the topics
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-modeling/verifying-expected-properties
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-modeling/verifying-expected-properties
 
       :octicon:`file-badge` Alloy model 
       ^^^

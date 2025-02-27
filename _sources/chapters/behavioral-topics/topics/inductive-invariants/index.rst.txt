@@ -116,7 +116,7 @@ Verifying this inductive invariant took less than a second on a normal computer,
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/inductive-invariants/non-inductive-invariants
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/inductive-invariants/non-inductive-invariants
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -171,7 +171,7 @@ For the sake of readability, we replay the command but with a scope of 1, which 
 .. image:: instance1.png
    :width: 550px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/a657a3dd79e9e138504708462c9792d158a8dff2/behavioral-topics/inductive-invariants/instance1/filesharing.als#L165-L174
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/inductive-invariants/instance_01/filesharing.als#L173-L182
    :alt: Get the code to generate this instance.
 
 In this counterexample, there is a shared file in the trash in the first states, which is then no longer uploaded after the trash is emptied. The first state satisfies `pres_inv_shared_are_uploaded` and the second one does not. It might seem contradictory, as we already know that `inv_shared_are_uploaded` is an invariant. But, after close inspection, it actually appears that these two states are *unreachable*, that is they do not exist in any possible valid trace: once a file is deleted, it can no longer be shared. This could be confirmed by writing an adequate `run` command. However, this is in general a bad idea as the command would run for a long time, (because of the absence of a satisfying instance), thus defeating the purpose of using this inductive approach. 
@@ -181,7 +181,7 @@ What this example illustrates is that this method of verification does not only 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/inductive-invariants/non-inductive-invariants
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/inductive-invariants/non-inductive-invariants
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -206,7 +206,7 @@ This obviously succeeds. However, in general, finding inductive invariants is no
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/inductive-invariants/invariant-strengthening
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/inductive-invariants/invariant-strengthening
 
       :octicon:`file-badge` Alloy model 
       ^^^

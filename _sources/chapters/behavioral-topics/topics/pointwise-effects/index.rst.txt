@@ -63,7 +63,7 @@ Both styles are equivalent, so which one should you favor? Some people prefer th
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/pointwise-effects
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/pointwise-effects
 
       :octicon:`file-badge` Alloy model 
       ^^^

@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2025-02-16T21:25:24+01:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Structural modelling advanced topics" href="../structural-topics/index.html" /><link rel="prev" title="About this book" href="../about-book/index.html" />
+    <meta property="article:modified_time" content="2025-02-16T20:25:24+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Structural modelling advanced topics" href="../structural-topics/index.html" /><link rel="prev" title="About this book" href="../about-book/index.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Structural modeling - Practical Alloy</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=684c625f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=8f9e6779" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../_static/practicalalloy.css?v=2ee171b3" />
     <link crossorigin="anonymous" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -21,7 +21,7 @@
 
 <style>
   body {
-    --color-code-background: #f8f8f8;
+    --color-code-background: #ffffff;
   --color-code-foreground: black;
   --color-brand-primary: #2a5adf;
   --color-brand-content: #2a5adf;
@@ -237,7 +237,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/temporal-logic/index.html">A temporal logic primer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/mutable-toplevel-signatures/index.html">Mutable top-level signatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/pointwise-effects/index.html">Pointwise effects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/macros/index.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/macros/index.html">Macro system</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/meta/index.html">Meta-capabilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/event-depiction/index.html">An idiom for event depiction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../behavioral-topics/topics/scenarios/index.html">Encoding trace scenarios</a></li>
@@ -363,11 +363,14 @@ or <code class="code highlight alloy practicalalloy docutils literal highlight-p
 identifier.</p>
 <p id="index-5">After executing a command, you’ll see some logging information in the pane to the right of the model editor. If a <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> command finds an instance, the Analyzer will report a message <em>Instance found</em> that can be clicked to open tha instance in the visualizer (likewise for <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands and counter-examples). Alternatively, you can press the <span class="guilabel">Show</span> button in the toolbar of the Analyzer window or select menu option <span class="menuselection">Execute ‣ Show Latest Instance</span> (shortcut <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">cmd</kbd>-<kbd class="kbd docutils literal notranslate">l</kbd></kbd>) to view the last generated instance. After executing the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command in our model we
 get the following message.</p>
-<a class="reference internal image-reference" href="../../_images/log12.png"><img alt="../../_images/log12.png" class="align-center" src="../../_images/log12.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/log12.png"><img alt="../../_images/log12.png" class="align-center" src="../../_images/log12.png" style="width: 500px;" />
+</a>
 <p>After clicking <em>Instance</em>, the following instance is opened in the visualizer.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_01_02/filesystem.als#L18-L24"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance116.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_01_02/filesystem.als#L18-L24"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance116.png" style="width: 500px;" />
+</a>
 <p id="index-6">Another distinguishing feature of Alloy is that the instances returned by the analysis commands are, by default, depicted graphically as graph-like structures in a pop-up window, just as the one above: atoms belonging to the different signatures are nodes (depicted as boxes by default) and associations between atoms are edges (depicted as arrows). In this instance we have two objects, one of them is a directory and the other a file. We can ask the Analyzer to generate a different instance, by pressing <span class="guilabel">New</span> in the visualizer toolbar, or selecting menu option <span class="menuselection">Instance ‣ Show New Solution</span> (shortcut <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">cmd</kbd>-<kbd class="kbd docutils literal notranslate">n</kbd></kbd>). As mentioned before, atoms have no intrinsic semantics. In particular, the names the Analyzer generates for them are meaningless: <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object0</span></code> isn’t the name of a particular file existing in a real-world file system, but just a name to help us distinguish it from other elements in the domain. As such, two instances that only differ in the names of the atoms are in fact the same instance (they are isomorphic up to atom renaming), and showing both to the user would just encumber the understanding of the specification. To avoid this, and also to speed up analysis, the Analyzer implements a powerful <em>symmetry breaking</em> mechanism that excludes from the analysis most isomorphic (i.e., symmetric) instances. This feature is also very convenient for validation, as we can quickly see many truly different instances of our model. For example, after pressing <span class="guilabel">New</span> we could get the following instance. Re-enforcing the fact that name are meaningless, if there is a single atom in a signature it is not numbered in the visualization by default.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_01_02/filesystem.als#L26-L32"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance25.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_01_02/filesystem.als#L26-L32"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance25.png" style="width: 500px;" />
+</a>
 <p id="index-7">If you  try to run these commands in the Analyzer it is possible that you get different instances. The Analyzer relies on lower-level
 <a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_satisfiability_problem">SAT</a>
 solvers to perform the analysis. Depending on the Analyzer version
@@ -400,7 +403,8 @@ instances using <span class="guilabel">New</span> we will no longer see objects 
 are simultaneously files and directories, but we will eventually get an instance
 such as the following, where we have the problem of having an object (named <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Object</span></code>)
 that is neither a file nor a directory.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_03/filesystem.als#L18-L24"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance34.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_03/filesystem.als#L18-L24"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance34.png" style="width: 500px;" />
+</a>
 <p id="index-10">A frequent requirement for extension signatures is that they
 actually form a partition of the parent signature, meaning that the parent signature must not contain atoms besides those
 contained in its extensions. In this case, the parent signature should be declared as <em>abstract</em>, by
@@ -430,7 +434,8 @@ declared with <code class="code highlight alloy practicalalloy docutils literal 
 <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Root</span></code> in the instance visualizer. A possible instance returned
 by the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command is the following, where we have three
 directories, one of them being (necessarily, due to multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span></code>) the root directory.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_04_05/filesystem.als#L28-L34"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance43.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_04_05/filesystem.als#L28-L34"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance43.png" style="width: 500px;" />
+</a>
 <p>Objects inside directories have an associated name, so we will need a
 signature to represent the latter.  In our file system model we will
 also allow files to be (hard) linked, meaning that the same file can have
@@ -445,7 +450,8 @@ object inside a directory and the respective name.</p>
 <p>With these new signature declarations, a possible instance of our specification is the following, with
 two different names, two entries, one file, and two directories, one
 of which is the root.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_04_05/filesystem.als#L36-L44"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance53.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_04_05/filesystem.als#L36-L44"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance53.png" style="width: 500px;" />
+</a>
 <p id="index-12">To enable automatic analysis,
 Alloy imposes a bound on the size of all signatures. This bound is
 defined by a <em>scope</em> on commands. By default the scope is 3 for all
@@ -479,44 +485,44 @@ set a different scope.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/signature-declaration/"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/signature-declaration/"><span>https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/signature-declaration/</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Subset signatures</div>
 <p class="sd-card-text">A signature can be declared as a subset of a union of signatures. Learn how this allows us to simulate multiple inheritance.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/subset-signatures/index.html#subset-signatures"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/subset-signatures/index.html#subset-signatures"><span class="std std-ref">Subset signatures</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Enumeration signatures</div>
 <p class="sd-card-text">Learn how to declare enumeration signatures with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">one</span> <span class="kd">sig</span></code> extensions or with the keyword <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="kd">enum</span></code>.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/enumerations/index.html#enumerations"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/enumerations/index.html#enumerations"><span class="std std-ref">Enumeration signatures</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Commands in detail</div>
 <p class="sd-card-text">Learn more about Alloy’s analysis commands and associated scopes.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/commands/index.html#commands"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/commands/index.html#commands"><span class="std std-ref">Commands in detail</span></a></div>
 </div>
 </section>
 <section id="field-declaration">
@@ -556,7 +562,8 @@ explicitly state the multiplicity of a field, even if it is
 </pre></div>
 </div>
 <p>By executing it, we could now get the following instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_06/filesystem.als#L28-L37"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance63.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_06/filesystem.als#L28-L37"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance63.png" style="width: 500px;" />
+</a>
 <p id="index-15">Binary relations are depicted by the Analyzer using labelled arrows: each
 arrow is a pair contained in the relation, whose first atom is the
 source of the arrow and whose second atom is the target. In this instance,
@@ -595,7 +602,8 @@ associated with each entry. With these two fields, an entry acts like a record t
 </pre></div>
 </div>
 <p>After executing this command we could get the following instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_07_08/filesystem.als#L32-L43"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance73.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_07_08/filesystem.als#L32-L43"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance73.png" style="width: 500px;" />
+</a>
 <p id="index-17">In this instance some problems with our specification are evident, for example
 entries shared between directories or files not belonging to any directory. As
 our specification grows, instances become increasingly difficult to understand.
@@ -604,48 +612,49 @@ which can make instances easier to understand. For our file system model, we
 will use different colours and shapes for entries and file system objects, and
 show entry names as attributes rather than edges. After the customization, the
 instance will be depicted as follows.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_07_08/filesystem.als#L45-L56"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance83.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_07_08/filesystem.als#L45-L56"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance83.png" style="width: 500px;" />
+</a>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/field-declaration"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/field-declaration"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/field-declaration</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Visualization customization</div>
 <p class="sd-card-text">Learn in detail how to customize themes and how to get the above visualization.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/visualization/index.html#viz-customization"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/visualization/index.html#viz-customization"><span class="std std-ref">Visualization customization</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Higher-arity relations</div>
 <p class="sd-card-text">Instead of declaring entries, the association between directories, their contents, and the respective names could alternatively be modelled by a ternary relation.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/nary-relations/index.html#nary-relations"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/nary-relations/index.html#nary-relations"><span class="std std-ref">Higher-arity relations</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 The instance evaluator</div>
 <p class="sd-card-text">The Alloy Analyzer has an evaluator that can be very useful for debugging.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/evaluator/index.html#evaluator-instance"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/evaluator/index.html#evaluator-instance"><span class="std std-ref">The instance evaluator</span></a></div>
 </div>
 </section>
 <section id="specifying-constraints">
@@ -819,7 +828,8 @@ enforce that this set is equal the set of all objects minus the root.</p>
 <p>After adding these four facts, if we re-execute the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> command and
 iterate with <span class="guilabel">New</span>, we’ll notice that the problems identified above
 seem to be gone. However, we will still get instances such as the following.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_09/filesystem.als#L57-L68"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance93.png" style="width: 500px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_09/filesystem.als#L57-L68"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance93.png" style="width: 500px;" />
+</a>
 <p>This instance makes clear two additional issues in our model (the second
 was actually already present in the previous problematic instance):</p>
 <ul class="simple">
@@ -855,54 +865,54 @@ the file system contains no partitions.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/specifying-constraints"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/specifying-constraints"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/specifying-constraints</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Arrow multiplicity checks</div>
 <p class="sd-card-text">Alloy has a special syntax to impose multiplicity constraints in both ends of binary relations. Learn about the full bestiary of binary relations we can get by varying these multiplicities.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/bestiary/index.html#bestiary"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/bestiary/index.html#bestiary"><span class="std std-ref">Arrow multiplicity constraints</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Type system</div>
 <p class="sd-card-text">Alloy has a nice type system that helps detecting many mistakes while specifying properties.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/type-system/index.html#type-system"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/type-system/index.html#type-system"><span class="std std-ref">Type system</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Modules</div>
 <p class="sd-card-text">Modules can help you break a big specification into separate, reusable specifications. Learn about the module system of Alloy.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/modules/index.html#modules"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/modules/index.html#modules"><span class="std std-ref">Module system</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 The predefined <code class="code docutils literal notranslate"><span class="pre">ordering</span></code> module</div>
 <p class="sd-card-text">Alloy has a pre-defined module that can be used to impose a total order in a signature. This could be used, for example, to model the creation timestamps of entries in a file-system.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/ordering/index.html#ordering"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/ordering/index.html#ordering"><span class="std std-ref">The predefined ordering module</span></a></div>
 </div>
 </section>
 <section id="a-question-of-style">
@@ -974,34 +984,34 @@ all formulas of relational logic to this style in Alloy.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/a-question-of-style"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/a-question-of-style"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/a-question-of-style</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 A relational logic primer</div>
 <p class="sd-card-text">To start using a more pointfree style you first should know all operators in Alloy’s relational logic.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/relational-logic/index.html#relational-logic"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/relational-logic/index.html#relational-logic"><span class="std std-ref">tocdepth</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Model finding</div>
 <p class="sd-card-text">Learn how relational logic formulas can be checked with a model finding procedure implemented with off-the-shelf SAT solvers.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/model-finding/index.html#analysis"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/model-finding/index.html#analysis"><span class="std std-ref">Model finding</span></a></div>
 </div>
 </section>
 <section id="verifying-assertions">
@@ -1081,7 +1091,8 @@ have been imposed before, we can use a <code class="code highlight alloy practic
 </pre></div>
 </div>
 <p>Unfortunately, executing this command reveals a counter-example.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_10/filesystem.als#L73-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance102.png" style="width: 400px;" /></a>
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/structural-modeling/instance_10/filesystem.als#L73-L84"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance102.png" style="width: 400px;" />
+</a>
 <p>The problem is that we have two directories that contain each
 other. Fortunately, this counter-example is not an issue in real file
 systems, but exposes a problem in our specification. One of the facts
@@ -1095,7 +1106,8 @@ alone is not sufficient: a directory cannot be one of its own descendants. To fi
 </div>
 <p>Re-executing the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> command no longer yields
 counter-examples, reporting a message such as the following.</p>
-<a class="reference internal image-reference" href="../../_images/log22.png"><img alt="../../_images/log22.png" class="align-center" src="../../_images/log22.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/log22.png"><img alt="../../_images/log22.png" class="align-center" src="../../_images/log22.png" style="width: 500px;" />
+</a>
 <p>Note that the Analyzer only reports that no counter-example was found, so the
 assertion <em>may be valid</em>, since with the bounded analysis performed by the
 Analyzer we can never be entirely sure that an assertion is valid.
@@ -1121,17 +1133,17 @@ consistent and admits non-trivial file systems.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 010 1.5h-3.5A1.75 1.75 0 011 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 011.508.862.75.75 0 11-1.289.768.25.25 0 00-.219-.13h-8z"></path><path fill-rule="evenodd" d="M8 7a4 4 0 116.49 3.13l.995 4.973a.75.75 0 01-.991.852l-2.409-.876a.25.25 0 00-.17 0l-2.409.876a.75.75 0 01-.991-.852l.994-4.973A3.993 3.993 0 018 7zm4-2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0 6.5a4 4 0 001.104-.154l.649 3.243-1.155-.42c-.386-.14-.81-.14-1.196 0l-1.155.42.649-3.243A4 4 0 0012 11z"></path></svg> Alloy model</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-badge" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h3.5a.75.75 0 0 1 0 1.5h-3.5A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8a1.75 1.75 0 0 1 1.508.862.75.75 0 1 1-1.289.768.25.25 0 0 0-.219-.13h-8Z"></path><path d="M8 7a3.999 3.999 0 0 1 7.605-1.733 4 4 0 0 1-1.115 4.863l.995 4.973a.75.75 0 0 1-.991.852l-2.409-.876a.248.248 0 0 0-.17 0l-2.409.876a.75.75 0 0 1-.991-.852l.994-4.973A3.994 3.994 0 0 1 8 7Zm4-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 6.5c-.373 0-.745-.051-1.104-.154l-.649 3.243 1.155-.42c.386-.14.81-.14 1.196 0l1.155.42-.649-3.243A4.004 4.004 0 0 1 12 11Z"></path></svg> Alloy model</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Full model for the section</div>
 <p class="sd-card-text">Download and explore the files relevant for the model at this point of the book.</p>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/verifying-assertions"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/verifying-assertions"><span>https://github.com/practicalalloy/models/tree/2024-02-28/structural-modeling/verifying-assertions</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
@@ -1140,27 +1152,27 @@ Encoding test instances</div>
 that behave like unit tests that directly search for specific
 instances.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/testing-instances/index.html#testing-instances"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/testing-instances/index.html#testing-instances"><span class="std std-ref">Encoding test instances</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Handling recursion</div>
 <p class="sd-card-text">Transitive closure is very powerful but some properties require a recursive definition that cannot be defined with closure. Learn how to specify such recursive definitions in Alloy.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/recursion/index.html#recursion"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/recursion/index.html#recursion"><span class="std std-ref">Handling recursion</span></a></div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 010-1.5h6.5a.75.75 0 010 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 01-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 019.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 01-.633 1.153H3.233a.75.75 0 01-.633-1.153z"></path></svg> Further reading</p>
+<p class="sd-card-text"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-beaker" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"></path></svg> Further reading</p>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Working with integers</div>
 <p class="sd-card-text">Alloy has a predefined integer type which can be handy so model some quantitative constraints.</p>
 </div>
-<a class="sd-stretched-link reference internal" href="../structural-topics/topics/integers/index.html#integers"><span class="std std-ref"></span></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="../structural-topics/topics/integers/index.html#integers"><span class="std std-ref">Working with integers</span></a></div>
 </div>
 </section>
 </section>
@@ -1239,11 +1251,11 @@ Working with integers</div>
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
-    <script src="../../_static/clipboard.min.js?v=66b4909c"></script>
-    <script src="../../_static/copybutton.js?v=71494f10"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -1278,6 +1290,6 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
-    <script src="../../_static/design-tabs.js?v=70e5c12e"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     </body>
 </html>

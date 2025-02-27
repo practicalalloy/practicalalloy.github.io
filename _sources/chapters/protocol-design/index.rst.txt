@@ -194,7 +194,7 @@ to one of these two).
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-network-configuration
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/specifying-the-network-configuration
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -675,7 +675,7 @@ himself as leader.
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/specifying-the-protocol-dynamics
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/specifying-the-protocol-dynamics
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -940,7 +940,7 @@ scopes, as expected.
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/verifying-the-expected-properties
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/verifying-the-expected-properties
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -1189,7 +1189,7 @@ In the next state, binary relation `inbox` should have one less tuple, correspon
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/making-the-specification-more-abstract
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/making-the-specification-more-abstract
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -1565,7 +1565,7 @@ The reader might wonder if instead of having a static `Message` signature we cou
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/explicit-messages-as-signatures
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/explicit-messages-as-signatures
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -1764,7 +1764,7 @@ Using tuples to direct represent messages has many advantages as we have seen. U
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/messages-as-tuples
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/messages-as-tuples
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -1860,7 +1860,7 @@ The issue is that the inbox of `Node2`, the potential leader, is already at full
 .. card-carousel:: 2
    
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/protocol-design/refining-the-network-model
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/protocol-design/refining-the-network-model
 
       :octicon:`file-badge` Alloy model 
       ^^^

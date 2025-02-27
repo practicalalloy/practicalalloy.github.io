@@ -1,6 +1,6 @@
 .. _macros: 
 
-Macros
+Macro system
 ----------------------------------------
 
 .. index::
@@ -133,7 +133,7 @@ Note that the parentheses in `(x)'` are *absolutely required*: when calling `unc
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/macros/a-macro-for-frame-conditions
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/macros/a-macro-for-frame-conditions
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -167,14 +167,16 @@ A better solution would be to create a  parameterized constraint. This is precis
 
   let fair [ev] { always (eventually (ev)) }
 
-  fact fairness_on_empty { fair[empty] }
+  fact fairness_on_empty { 
+    fair[empty] 
+  }
 
 Notice, again, that we write `ev` between parentheses in case the actual parameter contains logical connectives of lower precedence than `always` (such as `or`, if we wanted to impose the constraint on a disjunction of events). Without parentheses, `fair[a or b]` would expand to `always (eventually a or b)`, which is not equivalent to `always (eventually (a or b))`, which is what we wanted to enforce.
 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/macros/defining-constraint-schemas
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/macros/defining-constraint-schemas
 
       :octicon:`file-badge` Alloy model 
       ^^^

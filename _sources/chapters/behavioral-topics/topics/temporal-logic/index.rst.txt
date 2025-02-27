@@ -39,7 +39,7 @@ Let us define this scenario in Alloy terms. The set of atoms (the universe) cons
 .. image:: instance1.png
    :align: center
    :width: 600px
-   :target: https://github.com/practicalalloy/models/blob/d9d168e8382a114614e1fa527ad9b3b113555840/behavioral-topics/temporal-logic/instance_1_2/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/temporal-logic/instance_01_02/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
    
 All along the trace, the signatures :alloy:`File` and :alloy:`Token` have a constant value (because they are static signatures), which is the following.
@@ -59,7 +59,7 @@ By pressing pressing :guilabel:`→` a couple of times we can focus on the 3rd a
 .. image:: instance2.png
    :align: center
    :width: 600px
-   :target: https://github.com/practicalalloy/models/blob/d9d168e8382a114614e1fa527ad9b3b113555840/behavioral-topics/temporal-logic/instance_1_2/filesharing.als#L77-L83
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/temporal-logic/instance_01_02/filesharing.als#L84-L90
    :alt: Get the code to generate this instance.
 
 We can see that in state 2 (left-hand side) :alloy:`shared` is empty and that :alloy:`uploaded = {(File0),(File1)}`, and that in state 3 (right-hand side) :alloy:`shared = {(File1,Token1)}`.
@@ -68,6 +68,13 @@ In the following, we will use this scenario to illustrate the semantics of tempo
 
 .. card-carousel:: 2
 
+   .. card:: Full model for the section
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/temporal-logic/everything-is-a-trace
+
+      :octicon:`file-badge` Alloy model 
+      ^^^
+      Download and explore the files relevant for the model at this point of the book.
+      
    .. card:: Mutable top-level signatures
       :link-type: ref
       :link: mutable-toplevel-signatures

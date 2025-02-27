@@ -84,7 +84,7 @@ The distinction between safety and liveness properties has a direct impact on th
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/fairness/safety-vs-liveness
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/fairness/safety-vs-liveness
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -210,7 +210,7 @@ You can find a more detailed discussion about fairness properties in the literat
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/fairness/fairness-properties
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/fairness/fairness-properties
 
       :octicon:`file-badge` Alloy model 
       ^^^

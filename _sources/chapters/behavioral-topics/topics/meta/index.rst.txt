@@ -117,13 +117,13 @@ calling :alloy:`File` directly).
 .. image:: evaluator1.png
    :width: 750 px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/d7906c088d9e67fd0a1bd6ca194fb40dff5ecd34/behavioral-topics/meta/instance_01/filesharing.als#L92-L102
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/meta/instance_01/filesharing.als#L100-L110
    :alt: Get the code to generate this instance.
 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/meta/the-alloy-meta-model
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/meta/the-alloy-meta-model
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -220,7 +220,7 @@ This feature can also be used to quickly specify rich scenarios. For instance, l
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/meta/specifying-meta-constraints
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/meta/specifying-meta-constraints
 
       :octicon:`file-badge` Alloy model 
       ^^^

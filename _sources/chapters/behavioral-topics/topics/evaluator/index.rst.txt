@@ -65,7 +65,7 @@ valid even if they go beyond the 2 shown states. For instance, we can see that
 .. image:: evaluator1.png
    :width: 750 px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/f0ede6261da1e97daa5b0a00653f074968bd57e8/behavioral-topics/evaluator/instance_1_2_3/filesharing.als#L82-L91
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/evaluator/instance_01_02_03/filesharing.als#L90-L99
    :alt: Get the code to generate this instance.
 
 Now, let us use button :guilabel:`→` to further explore the trace, and focus on
@@ -77,13 +77,13 @@ state.
 .. image:: evaluator2.png
    :width: 750 px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/f0ede6261da1e97daa5b0a00653f074968bd57e8/behavioral-topics/evaluator/instance_1_2_3/filesharing.als#L82-L91
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/evaluator/instance_01_02_03/filesharing.als#L90-L99
    :alt: Get the code to generate this instance.
 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/evaluator/evaluating-expressions
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/evaluator/evaluating-expressions
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -99,7 +99,7 @@ You can also call any function and predicate defined in the model. This has an i
 .. image:: evaluator3.png
    :width: 750 px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/f0ede6261da1e97daa5b0a00653f074968bd57e8/behavioral-topics/evaluator/instance_1_2_3/filesharing.als#L82-L91
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/evaluator/instance_01_02_03/filesharing.als#L90-L99
    :alt: Get the code to generate this instance.
 
 .. card-carousel:: 2

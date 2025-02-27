@@ -28,9 +28,9 @@ A trace is comprised of a (immutable) configuration and a (mutable) state. The f
 .. code-block::
 
     run scenario_two_shared {
-       some f : File, disj t1, t2 : Token {
-          File = f
-          Token = t1 + t2
+       some f : File, disj t0, t1 : Token {
+          File  = f
+          Token = t0 + t1
           // ...
        }
     } for 1 File, 2 Token
@@ -45,7 +45,7 @@ the first 4 states of the desired scenario we could write the following.
 .. code-block::
 
     no uploaded and after (uploaded = f and after (uploaded = f and after uploaded = f))
-    no shared and after (no shared and after (shared = f->t1 and after shared = f->t1 + f->t2))
+    no shared and after (no shared and after (shared = f->t0 and after shared = f->t0 + f->t1))
     no trashed and after (no trashed and after (no trashed and after no trashed))
     
 Or, alternatively, the following.
@@ -53,7 +53,7 @@ Or, alternatively, the following.
 .. code-block::
 
     no uploaded and uploaded' = f and uploaded'' = f and uploaded''' = f
-    no shared and no shared' and shared'' = f->t1 and shared''' = f->t1 + f->t2
+    no shared and no shared' and shared'' = f->t0 and shared''' = f->t0 + f->t1
     no trashed and no trashed' and no trashed'' and no trashed'''
     
 Some of these formulas could of course be simplified (for instance, we could
@@ -62,7 +62,7 @@ just state :alloy:`always no trash`), but they quickly become unmanageable.
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/scenarios/state-oriented-scenario-encoding
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/scenarios/state-oriented-scenario-encoding
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -85,12 +85,12 @@ we can now encode our scenario with the following command.
 .. code-block::
 
     run scenario_two_shared {
-      some f : File, disj t1, t2 : Token {
-        File = f
-        Token = t1 + t2
+      some f : File, disj t0, t1 : Token {
+        File  = f
+        Token = t0 + t1
 
         no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; no uploaded
-        no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    no shared
+        no shared;   no shared;    shared = f->t0; shared = f->t0 + f->t1; shared = f->t0; no shared;    no shared
         no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  no trashed
       }
     } for 1 File, 2 Token
@@ -102,7 +102,7 @@ overview that it has the expected 7 states.
 .. image:: instance1.png
    :width: 650px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/1f057ad379afa4496a2120e95ddc04e1c05f3dd0/behavioral-topics/scenarios/instance_1_2_3/filesharing.als#L94-L103
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/scenarios/instance_01_02_03/filesharing.als#L102-L111
    :alt: Get the code to generate this instance.
 
 Recall that due to the mechanics already explained, the quantified variables are
@@ -116,7 +116,7 @@ theme for those sets.
 .. image:: instance2.png
    :width: 550px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/1f057ad379afa4496a2120e95ddc04e1c05f3dd0/behavioral-topics/scenarios/instance_1_2_3/filesharing.als#L94-L103
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/scenarios/instance_01_02_03/filesharing.als#L102-L111
    :alt: Get the code to generate this instance.
 
 Since we've fully restricted the first 7 states of the trace, we might think
@@ -130,7 +130,7 @@ stuttering after emptying the trash, uploads the deleted file again and deletes 
 .. image:: instance3.png
    :width: 550px
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/1f057ad379afa4496a2120e95ddc04e1c05f3dd0/behavioral-topics/scenarios/instance_1_2_3/filesharing.als#L105-L114
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/scenarios/instance_01_02_03/filesharing.als#L113-L122
    :alt: Get the code to generate this instance.
    
 Exploring the possible continuations of a scenario may or not be something
@@ -153,12 +153,12 @@ point onwards.
 .. code-block::
 
     run scenario_two_shared_stutter {
-       some f : File, disj t1, t2 : Token {
-          File = f
-          Token = t1 + t2
+       some f : File, disj t0, t1 : Token {
+          File  = f
+          Token = t0 + t1
           
           no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; always no uploaded
-          no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    always no shared
+          no shared;   no shared;    shared = f->t0; shared = f->t0 + f->t1; shared = f->t0; no shared;    always no shared
           no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  always no trashed
        }
     } for 1 File, 2 Token
@@ -175,27 +175,27 @@ the command.
 
 .. code-block::
 
-    pred two_tokens [f : File, t1, t2 : Token] {
-      File = f
-      Token = t1 + t2
+    pred two_tokens [f : File, t0, t1 : Token] {
+      File  = f
+      Token = t0 + t1
     }
 
     run scenario_two_shared {
-      some f : File, disj t1, t2 : Token {
-        two_tokens[f, t1, t2]
+      some f : File, disj t0, t1 : Token {
+        two_tokens[f, t0, t1]
 
         no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; no uploaded
-        no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    no shared
+        no shared;   no shared;    shared = f->t0; shared = f->t0 + f->t1; shared = f->t0; no shared;    no shared
         no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  no trashed
       }
     } for 1 File, 2 Token
 
     run scenario_two_shared_stutter {
-      some f : File, disj t1, t2 : Token {
-        two_tokens[f, t1, t2]
+      some f : File, disj t0, t1 : Token {
+        two_tokens[f, t0, t1]
         
         no uploaded; uploaded = f; uploaded = f;   uploaded = f;           uploaded = f;   uploaded = f; always no uploaded
-        no shared;   no shared;    shared = f->t1; shared = f->t1 + f->t2; shared = f->t1; no shared;    always no shared
+        no shared;   no shared;    shared = f->t0; shared = f->t0 + f->t1; shared = f->t0; no shared;    always no shared
         no trashed;  no trashed;   no trashed;     no  trashed;            no trashed;     trashed = f;  always no trashed
       }
     } for 1 File, 2 Token
@@ -203,7 +203,7 @@ the command.
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/scenarios/the-temporal-sequence-operator
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/scenarios/the-temporal-sequence-operator
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -222,14 +222,14 @@ precedence).
 .. code-block::
 
     run scenario_two_shared_stutter {
-      some f : File, disj t1, t2 : Token {
-        two_tokens[f, t1, t2]
+      some f : File, disj t0, t1 : Token {
+        two_tokens[f, t0, t1]
         
         no uploaded + trashed and no shared; 
         uploaded = f and no shared and no trashed; 
-        uploaded = f and shared = f->t1 and no trashed; 
-        uploaded = f and shared = f->t1 + f->t2 and no trashed;
-        uploaded = f and shared = f->t1 and no trashed;
+        uploaded = f and shared = f->t0 and no trashed; 
+        uploaded = f and shared = f->t0 + f->t1 and no trashed;
+        uploaded = f and shared = f->t0 and no trashed;
         uploaded = f and no shared and trashed = f;
         always (no uploaded + trashed and no shared)
       }
@@ -254,10 +254,10 @@ Let us get back to the scenario above. The same command could be written instead
 .. code-block::
 
     run scenario_two_shared_event {
-       some f : File, disj t1, t2 : Token {
-          two_tokens[f, t1, t2]
+       some f : File, disj t0, t1 : Token {
+          two_tokens[f, t0, t1]
           
-          upload[f]; share[f, t1]; share[f, t2]; download[t1]; delete[f]; empty; always stutter
+          upload[f]; share[f, t0]; share[f, t1]; download[t0]; delete[f]; empty; always stutter
        }
     } for 1 File, 2 Token
 
@@ -268,7 +268,7 @@ This idiom is the one used throughout the book to encode the presented example t
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/scenarios/event-oriented-scenario-encoding
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/scenarios/event-oriented-scenario-encoding
 
       :octicon:`file-badge` Alloy model 
       ^^^

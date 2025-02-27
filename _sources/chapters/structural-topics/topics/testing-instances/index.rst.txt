@@ -222,20 +222,20 @@ above, but imposing instead invalid constraints.
 Let us try to generate an instance similar to the previous one, but where the
 same name is assigned to the file and the directory contained in the root. The
 following is similar to the command :alloy:`test_root_file_dir_same_name` but
-without name  :alloy:`n2`.
+without name  :alloy:`n1`.
 
 .. code::
 
   run test_root_file_dir_bad_name {
-    some disj d1, d2 : Dir, disj f1, f2 : File, disj e1, e2, e3 : Entry, disj n1, n3 : Name { 
-      Root  = d1
-      Dir   = d1 + d2
-      File  = f1 + f2
-      Entry = e1 + e2 + e3
-      Name  = n1 + n3
-      entries = d1 -> e1 + d1 -> e2 + d2 -> e3
-      name    = e1 -> n1 + e2 -> n1 + e3 -> n3
-      object  = e1 -> d2 + e2 -> f1 + e3 -> f2
+    some disj d0, d1 : Dir, disj f0, f1 : File, disj e0, e1, e2 : Entry, disj n0, n2 : Name { 
+      Root    = d0
+      Dir     = d0 + d1
+      File    = f0 + f1
+      Entry   = e0 + e1 + e2
+      Name    = n0 + n2
+      entries = d0 -> e0 + d0 -> e1 + d1 -> e2
+      name    = e0 -> n0 + e1 -> n0 + e2 -> n2
+      object  = e0 -> d1 + e1 -> f0 + e2 -> f1
     }
   } for 4 Object, 3 Entry, 2 Name
 

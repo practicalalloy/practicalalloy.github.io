@@ -33,7 +33,7 @@ Sequences can only be used in fields, meaning they must be used as signature att
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/sequences/declaring-sequences
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/sequences/declaring-sequences
 
       :octicon:`file-badge` Alloy model 
       ^^^
@@ -122,14 +122,14 @@ To see how sequences are visualized by the Analyzer, let us ask for instances wh
 .. code-block::
 
   run two_deleted {
-    eventually some disj f1, f2 : File | f1 + f2 in elems[Trash.trashed]
+    eventually some disj f0, f1 : File | f0 + f1 in elems[Trash.trashed]
   }
 
 The following is a possibly returned instance where two files are uploaded and then deleted in sequence. Only the transition corresponding to the last deletion is depicted. Notice that, since `trashed` is a ternary relation of type :alloy:`Trash -> seq/Int -> File`, indexes appear as labels in the edges of `trashed`. Also, notice how the last deleted file is added to the end of the sequence, at index 1.
 
 .. image:: instance1.png
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/d6b17667144a090f68df2d1dc651131594d2154b/behavioral-topics/sequences/instance_01/filesharing.als#L83-L93
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/behavioral-topics/sequences/instance_01/filesharing.als#L150-L160
    :alt: Get the code to generate this instance.
 
 The change of :alloy:`trashed` to a sequence has no significant impact in the specification of the assertions we checked in the original version, and only some minor and trivial changes are required. For example, to check that all shared files are not in the trash we should use the following assertion, where we just replaced :alloy:`trashed` by :alloy:`elems[Trash.trashed]`.
@@ -176,7 +176,7 @@ In this version with sequences we can also add a new assertion that checks that 
 .. card-carousel:: 2
 
    .. card:: Full model for the section
-      :link: https://github.com/practicalalloy/models/tree/main/behavioral-topics/sequences/replacing-sets-with-sequences
+      :link: https://github.com/practicalalloy/models/tree/2024-02-28/behavioral-topics/sequences/replacing-sets-with-sequences
 
       :octicon:`file-badge` Alloy model 
       ^^^
