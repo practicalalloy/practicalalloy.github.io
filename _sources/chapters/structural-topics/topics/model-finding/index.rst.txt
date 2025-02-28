@@ -326,7 +326,7 @@ Skolemization
 
 Before deploying the solver, Kodkod performs a process called *Skolemization*
 whenever outermost existential quantifications occur in :alloy:`run` commands
-(or universal quantifications for :alloy:`check` commands). Instead of flattening the existential quantifier to a disjunction, skolemization transforms the problem to a equisatisfiable one, by creating a new free singleton set (a unary relation) for the existentially quantified variable, and then removing the quantifier and leaving just the quantified formula. The solver will then try to search for a value for the new free variable that satisfies the formula. This largely
+(or universal quantifications for :alloy:`check` commands). Instead of flattening the existential quantifier to a disjunction, skolemization transforms the problem to an equisatisfiable one, by creating a new free singleton set (a unary relation) for the existentially quantified variable, and then removing the quantifier and leaving just the quantified formula. The solver will then try to search for a value for the new free variable that satisfies the formula. This largely
 improves the efficiency of the analysis procedures, and as a side-effect such
 singleton sets are now also part of the generated instance. Moreover,
 Skolemization allows the analysis of some commands with *higher-order

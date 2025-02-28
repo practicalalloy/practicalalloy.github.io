@@ -91,7 +91,7 @@ transitions are identified in red.
    :align: center
    :width: 550px
 
-In the first trace we have an invalid initial state where there exist already uploaded files, and a transition where simultaneously an file is restored and another file is deleted. In the second trace we have two invalid transitions: in the first we have a simultaneous upload and delete, and in the second we have a file that is no longer uploaded without being first put in the trash bin with a deletion. In the third trace we also have two invalid transitions: in the first we have two files that are simultaneously deleted, and in the second a transition where the trash bin is not fully emptied. Some readers might argue that these two transitions are not problematic and could be allowed. In our specification they will be ruled out, but indeed it is perfectly reasonable to conceive a file sharing app where they are possible. One of the goals of the design phase is precisely to explore such alternative behaviors and choose the one that better fits our goals.
+In the first trace we have an invalid initial state where there exist already uploaded files, and a transition where simultaneously a file is restored and another file is deleted. In the second trace we have two invalid transitions: in the first we have a simultaneous upload and delete, and in the second we have a file that is no longer uploaded without being first put in the trash bin with a deletion. In the third trace we also have two invalid transitions: in the first we have two files that are simultaneously deleted, and in the second a transition where the trash bin is not fully emptied. Some readers might argue that these two transitions are not problematic and could be allowed. In our specification they will be ruled out, but indeed it is perfectly reasonable to conceive a file sharing app where they are possible. One of the goals of the design phase is precisely to explore such alternative behaviors and choose the one that better fits our goals.
 
 .. index::
    transition system; initial state
@@ -375,7 +375,7 @@ To allow stuttering in our system we need to change the fact that specifies the 
       ^^^
       Download and explore the files relevant for the model at this point of the book.
 
-   .. card:: Macros
+   .. card:: Macro system
       :link-type: ref
       :link: macros
 
@@ -613,7 +613,7 @@ We can confirm this by pressing :guilabel:`New Fork` and see if the "The are no 
       ^^^
       Download and explore the files relevant for the model at this point of the book.
 
-   .. card:: Event depiction
+   .. card:: An idiom for event depiction
       :link-type: ref
       :link: event-depiction
 
@@ -621,7 +621,7 @@ We can confirm this by pressing :guilabel:`New Fork` and see if the "The are no 
       ^^^
       Learn a simple Alloy idiom that can be used to depict which events occurred in each transition of a trace.
 
-   .. card:: Encoding scenarios
+   .. card:: Encoding trace scenarios
       :link-type: ref
       :link: scenarios
 
@@ -654,7 +654,7 @@ both specify the system and its expected properties. In many formal
 specification languages and verification tools (namely, most model
 checkers), a different language is used for each. In Alloy we use
 linear temporal logic, of which we already presented some operators, namely the fundamental :alloy:`always` and :alloy:`eventually` operators, and also the :alloy:`after` operator, that requires a formula to be true in the next state (which always exists because traces are infinite).
-These are examples of operators that constrain the future behavior in a trace, but in Alloy we also have operators that constrain the past behavior. We already saw one example of the latter, namely the :alloy:`historically` operator that forces a formula to always be true in the past (including the current state). Alloy has a few more temporal operators. For example, we have :alloy:`once` that requires a formula to be true sometime in the past (or in the current state), and :alloy:`before` that requires a formula to be true in the previous state (if evaluated in a initial state it will always be false because there is no previous state). All these are unary operators, but Alloy also has a few binary temporal operators. One of the most useful is :alloy:`releases`, that enforces the right-hand side formula to only stop being true after the left-hand side formula becomes true.
+These are examples of operators that constrain the future behavior in a trace, but in Alloy we also have operators that constrain the past behavior. We already saw one example of the latter, namely the :alloy:`historically` operator that forces a formula to always be true in the past (including the current state). Alloy has a few more temporal operators. For example, we have :alloy:`once` that requires a formula to be true sometime in the past (or in the current state), and :alloy:`before` that requires a formula to be true in the previous state (if evaluated in an initial state it will always be false because there is no previous state). All these are unary operators, but Alloy also has a few binary temporal operators. One of the most useful is :alloy:`releases`, that enforces the right-hand side formula to only stop being true after the left-hand side formula becomes true.
 
 
 .. index::

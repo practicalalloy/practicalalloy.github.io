@@ -28,7 +28,7 @@ identifier to its successor in the ring; upon receiving an identifier, a node on
 forwards it if it is higher than its own; a node receiving back its
 own identifier designates itself as leader; finally the leader
 broadcasts its newly found role to the network. In our specification
-we will start by omitting this second last phase of the protocol and will only be concerned
+we will start by omitting this last phase of the protocol and will only be concerned
 with the fundamental property of a leader election protocol:
 eventually exactly one node will designate itself as the
 leader.
@@ -83,7 +83,7 @@ get the following instance, which is of course not a valid ring.
 .. image:: instance1.png
    :width: 400
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_1/leaderelection.als#L9-L14
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_01/leaderelection.als#L17-L22
    :alt: Get the code to generate this instance.
 
 
@@ -119,7 +119,7 @@ If we now iterate over all instances returned by command :alloy:`example` we wil
 .. image:: instance2.png
    :width: 400
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_2/leaderelection.als#L12-L19
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_02/leaderelection.als#L22-L27
    :alt: Get the code to generate this instance.
 
 To enforce that we have at least one node that can be elected we can add the following fact.
@@ -134,7 +134,6 @@ To enforce that we have at least one node that can be elected we can add the fol
 .. index::
   util/ordering module
 
-   
 Besides being organized in a ring, nodes must also have unique identifiers. Since we are going to need to compare identifiers, one possibility would be to just use integers to represent them. However, besides being totally ordered, integers carry additional semantics that is not necessary here. In particular, integers support arithmetic operations that will not be required in this example. When developing a formal specification it is good practice to be as abstract as possible and use the simplest structure that fulfills our needs. Also, the analysis of Alloy specifications with integers has some subtleties which makes it better to avoid, unless strictly necessary. As such, we will introduce a signature :alloy:`Id`, to denote identifiers, and declare that this signature is totally ordered using a call to module `util/ordering` at the top of the file. Doing so implicitly extends the model with a binary relation :alloy:`next` that given an identifier will yield the next identifier in the total order, two singleton signatures to denote the :alloy:`first` and :alloy:`last` identifiers of the order, and a binary predicate `gt` to compare if the first argument is greater than the second. All identifiers but one (the `last`) have a :alloy:`next`. 
 
 .. code-block::
@@ -188,7 +187,7 @@ to one of these two).
 .. image:: instance3.png
    :width: 400
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_3/leaderelection.als#L30-L38
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_03/leaderelection.als#L38-L46
    :alt: Get the code to generate this instance.
 
 .. card-carousel:: 2
@@ -261,7 +260,7 @@ If we now run the :alloy:`example3` command we might get the following instance.
 .. image:: instance4.png
    :width: 700
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_4/leaderelection.als#L34-L45
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_04/leaderelection.als#L42-L53
    :alt: Get the code to generate this instance.
 
 
@@ -273,7 +272,7 @@ To simplify the visualization, we can configure the theme so that node identifie
 .. image:: instance5.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_5/leaderelection.als#L34-L45
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_05/leaderelection.als#L42-L53
    :alt: Get the code to generate this instance.
 
 
@@ -297,7 +296,7 @@ systems remains indefinitely in a valid initial state.
 .. image:: instance6.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L41-L52
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_06_07/leaderelection.als#L49-L60
    :alt: Get the code to generate this instance.
 
 .. index::
@@ -308,7 +307,7 @@ We can explore additional instances by using the instance exploration buttons in
 .. image:: instance7.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L54-L70
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_06_07/leaderelection.als#L62-L78
    :alt: Get the code to generate this instance.
 
 This trace displays a behavior that should not be allowed in a correct execution of the protocol: in the second state all of a sudden several identifiers appeared in the inbox and outbox of :alloy:`Node1`. Moreover, this node was also randomly designated as leader. So far this is allowed because we added no constraints to our specification that restrict how the system can transition from one state to another. If there are no constraints then any transition is possible.
@@ -395,8 +394,6 @@ m.outbox`, that quantifies over all nodes except the initiating one. The final s
      Elected' = Elected                         // frame condition on Elected
    }
 
-
-
 .. index::
    always keyword
    
@@ -422,7 +419,7 @@ Running command :alloy:`example3` yields the following trace, where
 .. image:: instance8.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_8/leaderelection.als#L63-L79
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_08/leaderelection.als#L71-L87
    :alt: Get the code to generate this instance.
 
 .. index::
@@ -533,7 +530,7 @@ trace where :alloy:`Node0` initiates the protocol after :alloy:`Node2`.
 .. image:: instance9.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_9/leaderelection.als#L66-L77
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_09/leaderelection.als#L74-L85
    :alt: Get the code to generate this instance.
 
 By exploring a bit more the possible traces we can get some confidence
@@ -616,7 +613,6 @@ valid behaviors of our system. We will also factorize all node events into a sep
     initiate[n] or
     (some i : Id | send[n, i]) or
     (some i : Id | process[n, i])
-  
   }
 
   fact events {
@@ -657,7 +653,7 @@ the protocol.
 .. image:: instance10.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_10_11/leaderelection.als#L114-L126
    :alt: Get the code to generate this instance.
 
 In the last transition, that can be focused by pressing :guilabel:`→` 6 times or
@@ -668,7 +664,7 @@ himself as leader.
 .. image:: instance11.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_10_11/leaderelection.als#L114-L126
    :alt: Get the code to generate this instance.
 
    
@@ -681,7 +677,7 @@ himself as leader.
       ^^^
       Download and explore the files relevant for the model at this point of the book.
 
-   .. card:: Encoding scenarios
+   .. card:: Encoding trace scenarios
       :link-type: ref
       :link: scenarios
 
@@ -689,7 +685,7 @@ himself as leader.
       ^^^
       Learn how to specify richer :alloy:`run` commands to search for specific scenarios, where a particular sequence of events occurred.
 
-   .. card:: Event depiction
+   .. card:: An idiom for event depiction
       :link-type: ref
       :link: event-depiction
 
@@ -854,7 +850,7 @@ leader is elected. This counter-example can be replicated in trivial configurati
 .. image:: instance12.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_12/leaderelection.als#L123-L134
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_12/leaderelection.als#L131-L142
    :alt: Get the code to generate this instance.
 
 .. index::
@@ -1020,7 +1016,7 @@ Running this command yields the following instance (with the theme already custo
 .. image:: instance13.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_13/leaderelection.als#L103-L113
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_13/leaderelection.als#L111-L121
    :alt: Get the code to generate this instance.
 
 Another signature we can remove is :alloy:`Elected`, since actually we can infer which node has been elected by looking at what happened in the past: if at some point in the past a node had its identifier in the inbox and processed it, then it necessarily became a leader. Instead of declaring a subset signature we can define :alloy:`Elected` as a derived set of nodes using a function without parameters.
@@ -1096,7 +1092,7 @@ to elect a leader in a ring with three nodes with almost half the transitions.
 .. image:: instance14.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_14/leaderelection.als#L77-L86
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_14/leaderelection.als#L85-L94
    :alt: Get the code to generate this instance.
 
 With the same scope on the :alloy:`steps` we can now check much longer behaviors
@@ -1148,13 +1144,13 @@ If we ask for a trace where a leader is elected in a ring with one node, we now 
 .. image:: instance15.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_15_16/leaderelection.als#L89-L98
    :alt: Get the code to generate this instance.
 
 .. image:: instance16.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_15_16/leaderelection.als#L89-L98
    :alt: Get the code to generate this instance.
 
 So far we have specified the effects of events in a *point-wise* style, stating the effect on different projections of the `inbox` separately. Using a *point-free* style, where we specify the effect on all inboxes at once, can many times considerably simplify the specification. Consider for example the point-free version of the *initiate* event.
@@ -1278,7 +1274,7 @@ the message is smaller than its own), or propagate it (if the identifier in the 
 
 .. code-block::
 
-  pred processCandidate[n : Node, m : CandidateMsg] {
+  pred processCandidate [n : Node, m : CandidateMsg] {
     // candidate message m is read and processed by node n
 
     m in n.inbox   // guard
@@ -1295,7 +1291,7 @@ unless it's the elected leader receiving the message again, in which case it is 
 
 .. code-block::
 
-  pred processElected[n : Node, m : ElectedMsg] {
+  pred processElected [n : Node, m : ElectedMsg] {
     // elected message m is read and processed by node n
 
     m in n.inbox   // guard
@@ -1340,7 +1336,7 @@ However, depending on the selected solver, we may get the following message.
 .. image:: validation1.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_17_18/leaderelection.als#L104-L113
    :alt: Get the code to generate this instance.
 
 
@@ -1364,7 +1360,7 @@ of this trace that can be added to the successor's inbox.
 .. image:: validation2.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_17_18/leaderelection.als#L104-L113
    :alt: Get the code to generate this instance.
 
 This issue is actually evident if we inspect the available messages in the
@@ -1377,7 +1373,7 @@ initiate.
 .. image:: instance18.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L107-L116
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_17_18/leaderelection.als#L115-L124
    :alt: Get the code to generate this instance.
 
 This means that to simulate a specific scenario we must first think about which messages will be necessary and hit :guilabel:`New Config` until those messages are in scope at the initial state. Of course, this does not scale to more complex scenarios.
@@ -1497,7 +1493,7 @@ The Analyzer will reply that there is no such trace. That's because the default 
 .. image:: instance19.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_19/leaderelection.als#L166-L180
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_19/leaderelection.als#L173-L187
    :alt: Get the code to generate this instance.
 
 So, before re-running the 3 check commands defined previously for our leader
@@ -1642,7 +1638,7 @@ The `processElected` event can be specified as follows. Note that now it is agai
 
 .. code-block::
 
-  pred processElected[n : Node, i : Node] {
+  pred processElected [n : Node, i : Node] {
     // elected message m is read and processed by node n
 
     Elect->i in n.inbox   // guard
@@ -1656,7 +1652,7 @@ The specification of `processCandidate` can also be done with a couple of one-li
 
 .. code-block::
 
-  pred processCandidate[n : Node, i : Node] {
+  pred processCandidate [n : Node, i : Node] {
     // candidate msg m is read and processed by node n
 
     Candidate->i in n.inbox   // guard
@@ -1700,7 +1696,7 @@ command.
 .. image:: instance20.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_20/leaderelection.als#L135-L145
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_20/leaderelection.als#L142-L152
    :alt: Get the code to generate this instance.
 
 Notice that, without messages as signatures, messages are now represented as
@@ -1852,7 +1848,7 @@ This will now return a counter-example, for which a relevant transition is shown
 .. image:: instance21.png
    :width: 600
    :align: center
-   :target: https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_21/leaderelection.als#L126-L136
+   :target: https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_21/leaderelection.als#L133-L143
    :alt: Get the code to generate this instance.
    
 The issue is that the inbox of `Node2`, the potential leader, is already at full capacity. `Node0` is attempting to send the `Node2` identifier to `Node2`, but since the queue is already full, the message is discarded. So to ensure liveness in this version of the protocol - and in an eventual implementation with such a communication middleware - one must make sure that the inboxes are large enough to contain all possible messages. Although this counter-example uses very small queues sizes, the problem still might exist in realistic implementations at larger scales.

@@ -17,7 +17,7 @@ Safety vs liveness
 
 When considering temporal properties, there is an important theoretical distinction between two categories concerning the way one can prove them. These categories were introduced by Lamport [TSE77]_ and developed by Halpern and Schneider [IPL85]_. Roughly speaking, we can distinguish between *safety* properties, that state that *something bad will not happen*, and *liveness* properties, that state that *something good will happen*. 
 
-In order to define these categories in a more formal way, let us recall that we consider that an execution trace of a system consists in an infinite sequence of states. Then, a *property* is simply a set of infinite sequences of states. Note that when using Alloy, we can specify a property using a logic formula (the property is then the set of infinite sequences of states that satisfy this formula). In the following, if :math:`\pi` is an finite sequence of states (also called prefix) and :math:`\tau` is an infinite sequence of states (a continuation of :math:`\pi`) then :math:`\pi \cdot \tau` denotes the concatenation of :math:`\pi` and :math:`\tau`.
+In order to define these categories in a more formal way, let us recall that we consider that an execution trace of a system consists in an infinite sequence of states. Then, a *property* is simply a set of infinite sequences of states. Note that when using Alloy, we can specify a property using a logic formula (the property is then the set of infinite sequences of states that satisfy this formula). In the following, if :math:`\pi` is a finite sequence of states (also called prefix) and :math:`\tau` is an infinite sequence of states (a continuation of :math:`\pi`) then :math:`\pi \cdot \tau` denotes the concatenation of :math:`\pi` and :math:`\tau`.
 
 Now, let us define safety and liveness categories. In the definition of a safety property, the focus is made on the *bad thing* that the property prohibits: 
 
@@ -161,7 +161,7 @@ With this version of `empty`, the assumption `always eventually empty` does not 
   event; guard
   event; enabled
 
-Let us notice that we have specified the fact that `empty` is enabled by `some trashed`, which is the guard of event predicate `empty`. Most of the time, the guard of an action is indeed equivalent to its enabled condition but it is not true in general. Besides, extracting the guard of an action may be more than extracting one conjunct from the body of the action. For instance, if the body of an action is inside a quantifier `some x : E | ...` then the enabled condition should check for the non-emptiness of `E`, that is, it should include condition `some E`.
+Let us notice that we have specified the fact that `empty` is enabled by `some trashed`, which is the guard of event predicate `empty`. Most of the time, the guard of an action is indeed equivalent to its enabled condition but it is not true in general. Besides, extracting the guard of an action may be more than extracting one conjunct from the body of the action. For instance, if the body of an action is inside a quantifier `some x : E | …` then the enabled condition should check for the non-emptiness of `E`, that is, it should include condition `some E`.
 
 So, you can now check `non_restored_files_will_disappear` under the weak fairness assumption. 
 

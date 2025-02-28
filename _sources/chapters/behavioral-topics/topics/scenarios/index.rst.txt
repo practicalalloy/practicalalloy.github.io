@@ -31,7 +31,7 @@ A trace is comprised of a (immutable) configuration and a (mutable) state. The f
        some f : File, disj t0, t1 : Token {
           File  = f
           Token = t0 + t1
-          // ...
+          // …
        }
     } for 1 File, 2 Token
 

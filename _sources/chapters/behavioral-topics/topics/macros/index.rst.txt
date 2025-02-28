@@ -27,7 +27,7 @@ Macros are also reusable expressions or constraints. Syntactically, a macro is d
 
 .. code::
   
-  let m [x, y, ...] { ... }
+  let m [x, y, …] { … }
 
 But the definition, on the other hand, is less constrained: 
 

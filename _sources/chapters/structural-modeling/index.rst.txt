@@ -744,7 +744,7 @@ To prevent the third issue we can enforce that each directory is contained in at
    }
 
 
-The last issue is a an example of a broader problem: there is nothing in our
+The last issue is an example of a broader problem: there is nothing in our
 specification that forces all objects except the root to belong to an entry. To
 specify such a constraint, we can begin by determining the set of all objects
 that are contained in any entry using expression :alloy:`Entry.object`, and then
@@ -814,7 +814,7 @@ the file system contains no partitions.
       ^^^
       Download and explore the files relevant for the model at this point of the book.
 
-   .. card:: Arrow multiplicity checks
+   .. card:: Arrow multiplicity constraints
       :link-type: ref
       :link: bestiary
 
@@ -830,7 +830,7 @@ the file system contains no partitions.
       ^^^
       Alloy has a nice type system that helps detecting many mistakes while specifying properties.  
 
-   .. card:: Modules  
+   .. card:: Module system  
       :link-type: ref
       :link: modules
 

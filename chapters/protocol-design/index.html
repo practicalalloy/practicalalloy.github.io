@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2025-02-27T12:18:25+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Bibliography" href="../../bibliography.html" /><link rel="prev" title="Sequences" href="../behavioral-topics/topics/sequences/index.html" />
+    <meta property="article:modified_time" content="2025-02-28T09:29:13+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Bibliography" href="../../bibliography.html" /><link rel="prev" title="Sequences" href="../behavioral-topics/topics/sequences/index.html" />
 
     <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Protocol design - Practical Alloy</title>
@@ -315,7 +315,7 @@ identifier to its successor in the ring; upon receiving an identifier, a node on
 forwards it if it is higher than its own; a node receiving back its
 own identifier designates itself as leader; finally the leader
 broadcasts its newly found role to the network. In our specification
-we will start by omitting this second last phase of the protocol and will only be concerned
+we will start by omitting this last phase of the protocol and will only be concerned
 with the fundamental property of a leader election protocol:
 eventually exactly one node will designate itself as the
 leader.</p>
@@ -355,7 +355,7 @@ validating our specification by inspecting possible instances generated using a
 </div>
 <p>By iterating over the returned instances with <span class="guilabel">New</span> we could
 get the following instance, which is of course not a valid ring.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_1/leaderelection.als#L9-L14"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance114.png" style="width: 400px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_01/leaderelection.als#L17-L22"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance114.png" style="width: 400px;" />
 </a>
 <p id="index-2">In addition to requiring each node to have exactly one successor, a simple way to ensure that a network forms a ring is to require that
 every node is reachable from any other node. Given a node <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code>,
@@ -377,7 +377,7 @@ nodes (denoted by <code class="code highlight alloy practicalalloy docutils lite
 </pre></div>
 </div>
 <p>If we now iterate over all instances returned by command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example</span></code> we will get the 3 possible rings with up to 3 nodes and a configuration without any node, which is also allowed by our specification. The limit of 3 is due to the implicit command scope of 3 atoms per top-level signature. As an example we show the ring with 3 nodes.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_2/leaderelection.als#L12-L19"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance24.png" style="width: 400px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_02/leaderelection.als#L22-L27"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance24.png" style="width: 400px;" />
 </a>
 <p>To enforce that we have at least one node that can be elected we can add the following fact.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fact</span> <span class="nf">some_node</span> <span class="o">{</span>
@@ -419,7 +419,7 @@ ring, and another where they decrease. The latter is depicted below (notice the
 This illustrates the power of Alloy’s symmetry breaking, which in this case
 prevents the return of any other instance (that necessarily would be isomorphic
 to one of these two).</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_3/leaderelection.als#L30-L38"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance33.png" style="width: 400px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_03/leaderelection.als#L38-L46"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance33.png" style="width: 400px;" />
 </a>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
@@ -472,11 +472,11 @@ As we have seen in the <a class="reference internal" href="../behavioral-modelin
 </div>
 <p>Note that, on purpose, we did not impose a multiplicity <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">lone</span></code> in this declaration, because that constraint, that at most one node is elected leader, is one of the key assertions we will want to verify to be a consequence of the protocol dynamics, and thus should not be imposed as an assumption upfront.</p>
 <p id="index-8">If we now run the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example3</span></code> command we might get the following instance.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_4/leaderelection.als#L34-L45"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance42.png" style="width: 700px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_04/leaderelection.als#L42-L53"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance42.png" style="width: 700px;" />
 </a>
 <p>As we have seen in the <a class="reference internal" href="../behavioral-modeling/index.html#behavioral-modeling"><span class="std std-ref">Behavioral modeling</span></a> chapter, the interface of the visualizer is different when we have mutable elements: it now shows two states of a trace side-by-side, there are several new instance exploration buttons in the toolbar, and a depiction of a path just below those. In this case we have a trace where the same state 0 repeats itself indefinitely, something that is possible since so far we added no restrictions that constrain the behavior of the protocol. We recall that in the depiction of the states, by default, immutable sets and fields (the configuration of the protocol) are shown with solid lines, while mutable ones are shown with dashed lines.</p>
 <p>To simplify the visualization, we can configure the theme so that node identifiers, the inbox, and the outbox are shown as node attributes, and change the color of elected nodes to green. Since the elected nodes can now be easily distinguished by color we can also hide the respective textual label. As for the totally ordered identifiers, we will just show the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">next</span></code> relation. The result of this customization will be the following.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_5/leaderelection.als#L34-L45"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance52.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_05/leaderelection.als#L42-L53"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance52.png" style="width: 600px;" />
 </a>
 <p>Something that is clearly wrong in this execution is that in the initial
 state nodes already have identifiers in their inboxes and outboxes, and some of them are already elected. To restrict the initial value of these mutable fields we can add the following fact.</p>
@@ -492,10 +492,10 @@ state nodes already have identifiers in their inboxes and outboxes, and some of 
 it applies to the initial state of the system. Rerunning the
 <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example3</span></code> command now yields instances such as the following, where the
 systems remains indefinitely in a valid initial state.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L41-L52"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance62.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_06_07/leaderelection.als#L49-L60"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance62.png" style="width: 600px;" />
 </a>
 <p id="index-9">We can explore additional instances by using the instance exploration buttons in the toolbar. For example, the <span class="guilabel">New Fork</span> button asks the Analyzer for a different trace with the same behavior up to the left-hand side state, but a different outcome of the current transition (a different right-hand side state). By pressing this button we may get the following.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_6_7/leaderelection.als#L54-L70"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance72.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_06_07/leaderelection.als#L62-L78"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance72.png" style="width: 600px;" />
 </a>
 <p>This trace displays a behavior that should not be allowed in a correct execution of the protocol: in the second state all of a sudden several identifiers appeared in the inbox and outbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node1</span></code>. Moreover, this node was also randomly designated as leader. So far this is allowed because we added no constraints to our specification that restrict how the system can transition from one state to another. If there are no constraints then any transition is possible.</p>
 <p id="index-10">As already explained in chapter <a class="reference internal" href="../behavioral-modeling/index.html#behavioral-modeling"><span class="std std-ref">Behavioral modeling</span></a>, the simplest way to constrain the valid transitions is to consider all the possible events that can occur in the system, and for each event specify when it can occur (its <em>guard</em>) and what is its <em>effect</em> on the mutable relations. In our protocol we can distinguish three possible events:</p>
@@ -581,7 +581,7 @@ fact can be added to the specification.</p>
 </div>
 <p>Running command <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">example3</span></code> yields the following trace, where
 <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code> initiates the protocol and then nothing else happens.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_8/leaderelection.als#L63-L79"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance82.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_08/leaderelection.als#L71-L87"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance82.png" style="width: 600px;" />
 </a>
 <p id="index-13">On first glance, this may seem like an invalid trace, given that we
 required that at every state one node initiates the protocol. However,
@@ -664,7 +664,7 @@ depicted, where <code class="code highlight alloy practicalalloy docutils litera
 else happens. If we move to the next state by pressing <span class="guilabel">→</span>,
 and fork again with <span class="guilabel">New Fork</span>, we might get the following
 trace where <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node0</span></code> initiates the protocol after <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code>.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_9/leaderelection.als#L66-L77"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance92.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_09/leaderelection.als#L74-L85"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance92.png" style="width: 600px;" />
 </a>
 <p>By exploring a bit more the possible traces we can get some confidence
 that event <em>initiate</em> is well specified.</p>
@@ -734,7 +734,6 @@ valid behaviors of our system. We will also factorize all node events into a sep
   <span class="n">initiate</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="ow">or</span>
   <span class="o">(</span><span class="k">some</span> <span class="n">i</span> <span class="p">:</span> <span class="n">Id</span> <span class="o">|</span> <span class="n">send</span><span class="o">[</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="o">])</span> <span class="ow">or</span>
   <span class="o">(</span><span class="k">some</span> <span class="n">i</span> <span class="p">:</span> <span class="n">Id</span> <span class="o">|</span> <span class="n">process</span><span class="o">[</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="o">])</span>
-
 <span class="o">}</span>
 
 <span class="k">fact</span> <span class="nf">events</span> <span class="o">{</span>
@@ -767,13 +766,13 @@ the Analyzer guarantees that the shortest traces that satisfy (or refute) a
 property are returned first. The first transition of this trace is the
 following, where the node with the highest identifier (<code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Id2</span></code>) initiates
 the protocol.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance101.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_10_11/leaderelection.als#L114-L126"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance101.png" style="width: 600px;" />
 </a>
 <p>In the last transition, that can be focused by pressing <span class="guilabel">→</span> 6 times or
 by directly clicking the state numbered 6 in the trace depiction, this node
 reads back its own identifier that was passed around in the ring and elects
 himself as leader.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_10_11/leaderelection.als#L106-L118"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance115.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_10_11/leaderelection.als#L114-L126"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance115.png" style="width: 600px;" />
 </a>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm sd-card-hover docutils">
@@ -792,7 +791,7 @@ Full model for the section</div>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-Encoding scenarios</div>
+Encoding trace scenarios</div>
 <p class="sd-card-text">Learn how to specify richer <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands to search for specific scenarios, where a particular sequence of events occurred.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/scenarios/index.html#scenarios"><span class="std std-ref">Encoding trace scenarios</span></a></div>
@@ -802,7 +801,7 @@ Encoding scenarios</div>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-Event depiction</div>
+An idiom for event depiction</div>
 <p class="sd-card-text">Learn a simple Alloy idiom that can be used to depict which events occurred in each transition of a trace.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/event-depiction/index.html#event-depiction"><span class="std std-ref">An idiom for event depiction</span></a></div>
@@ -914,7 +913,7 @@ model checking, you can increase your confidence on the analysis by using
 unbounded model checking. As hinted above, running this command immediately returns a
 counter-example where the system stutters forever, and obviously no
 leader is elected. This counter-example can be replicated in trivial configurations, for example the following with a single node.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_12/leaderelection.als#L123-L134"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance121.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_12/leaderelection.als#L131-L142"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance121.png" style="width: 600px;" />
 </a>
 <p id="index-24">This behavior is currently allowed because we added a stutter event that
 captures events external to our system. At the moment this event can
@@ -1058,7 +1057,7 @@ A temporal logic primer</div>
 </pre></div>
 </div>
 <p>Running this command yields the following instance (with the theme already customized), and it is now more clear if the ring follows the increasing order of the identifiers (as happens here), or the other way around. Notice that without using <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">util</span><span class="o">/</span><span class="n">ordering</span></code>, the node identifiers are no longer representative of the total order (in the trace below, <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code> is the first element of the total order, and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node1</span></code> the last).</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_13/leaderelection.als#L103-L113"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance131.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_13/leaderelection.als#L111-L121"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance131.png" style="width: 600px;" />
 </a>
 <p>Another signature we can remove is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code>, since actually we can infer which node has been elected by looking at what happened in the past: if at some point in the past a node had its identifier in the inbox and processed it, then it necessarily became a leader. Instead of declaring a subset signature we can define <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code> as a derived set of nodes using a function without parameters.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="nf">Elected</span> <span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
@@ -1119,7 +1118,7 @@ example, event <em>process</em> can now be specified as follows.</p>
 </div>
 <p>After removing event <em>send</em> from predicate <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">node_acts</span></code>, we can run the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">eventually_elected</span></code> command and see that it is now possible
 to elect a leader in a ring with three nodes with almost half the transitions.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_14/leaderelection.als#L77-L86"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance141.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_14/leaderelection.als#L85-L94"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance141.png" style="width: 600px;" />
 </a>
 <p>With the same scope on the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">steps</span></code> we can now check much longer behaviors
 with roughly the same efficiency. If we check our three assertions they are all
@@ -1161,9 +1160,9 @@ itself.</p>
 </pre></div>
 </div>
 <p>If we ask for a trace where a leader is elected in a ring with one node, we now get the expected outcome after two events.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance151.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_15_16/leaderelection.als#L89-L98"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance151.png" style="width: 600px;" />
 </a>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/e9d9cb2eff0bb71f51de53791e5cb2a1280bafe9/protocol-design/instance_15_16/leaderelection.als#L81-L90"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance161.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_15_16/leaderelection.als#L89-L98"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance161.png" style="width: 600px;" />
 </a>
 <p>So far we have specified the effects of events in a <em>point-wise</em> style, stating the effect on different projections of the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">inbox</span></code> separately. Using a <em>point-free</em> style, where we specify the effect on all inboxes at once, can many times considerably simplify the specification. Consider for example the point-free version of the <em>initiate</em> event.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">initiate</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
@@ -1273,7 +1272,7 @@ two different events specified in different predicates: processing a <code class
 complicated, since there are now three possible effects on the successor’s
 inbox: as previously, a node receiving a candidate message may discard it (if the identifier in
 the message is smaller than its own), or propagate it (if the identifier in the message is larger than its own). But now, when a node identifies itself as the leader (the identifier in the message is the same as its own), it must also send a new elected message informing other nodes that it become the leader. One possibility to specify this event is as follows.</p>
-<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processCandidate</span><span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">m</span> <span class="p">:</span> <span class="n">CandidateMsg</span><span class="o">]</span> <span class="o">{</span>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processCandidate</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">m</span> <span class="p">:</span> <span class="n">CandidateMsg</span><span class="o">]</span> <span class="o">{</span>
   <span class="c1">// candidate message m is read and processed by node n</span>
 
   <span class="n">m</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">inbox</span>   <span class="c1">// guard</span>
@@ -1287,7 +1286,7 @@ the message is smaller than its own), or propagate it (if the identifier in the 
 <p>Due to the need to send a different type of message in the last case, it is now more difficult to specify the effect in a single case, so we keep the three cases separate.</p>
 <p>Predicate <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">processElected</span></code> is quite simple, just propagating the elected messages
 unless it’s the elected leader receiving the message again, in which case it is discarded.</p>
-<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processElected</span><span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">m</span> <span class="p">:</span> <span class="n">ElectedMsg</span><span class="o">]</span> <span class="o">{</span>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processElected</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">m</span> <span class="p">:</span> <span class="n">ElectedMsg</span><span class="o">]</span> <span class="o">{</span>
   <span class="c1">// elected message m is read and processed by node n</span>
 
   <span class="n">m</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">inbox</span>   <span class="c1">// guard</span>
@@ -1325,7 +1324,7 @@ single node and the system stutters forever (recall that bounded model checking
 guarantees minimal trace prefix length). By hitting <span class="guilabel">New Fork</span> we
 should be able to observe a different event, namely an <em>initiate</em> event.
 However, depending on the selected solver, we may get the following message.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation1.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_17_18/leaderelection.als#L104-L113"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation1.png" style="width: 600px;" />
 </a>
 <p id="index-26">Let’s try to use the evaluator to debug the trace. Recall that the evaluator for
 traces supports any formula and expression, and that this evaluation is always
@@ -1340,7 +1339,7 @@ nodes for which that guard holds. The evaluator will show us that it holds for
 the existing node. So this must be a case where the guard is not necessarily
 the same as the enabled condition of the event. The problem is in the existential quantifier  searching for the new candidate message: this cannot be satisfied because there is no available <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">CandidateMsg</span></code> message in the configuration
 of this trace that can be added to the successor’s inbox.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L96-L105"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation2.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_17_18/leaderelection.als#L104-L113"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/validation2.png" style="width: 600px;" />
 </a>
 <p>This issue is actually evident if we inspect the available messages in the
 visualizer, as there are only <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">ElectedMsg</span></code> messages in the configuration. So we
@@ -1348,7 +1347,7 @@ can hit <span class="guilabel">New Config</span> until a <code class="code highl
 closing the evaluator). This should happen after a few iterations. Then, we can
 ask again for <span class="guilabel">New Fork</span>, and this time a node will effectively
 initiate.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_17_18/leaderelection.als#L107-L116"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance181.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_17_18/leaderelection.als#L115-L124"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance181.png" style="width: 600px;" />
 </a>
 <p>This means that to simulate a specific scenario we must first think about which messages will be necessary and hit <span class="guilabel">New Config</span> until those messages are in scope at the initial state. Of course, this does not scale to more complex scenarios.</p>
 <p>Another problem occurs when we want to inspect a different network
@@ -1439,7 +1438,7 @@ message with its own identifier.</p>
 <span class="o">}</span> <span class="k">for</span> <span class="k">exactly</span> <span class="mi">3</span> <span class="n">Node</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">6</span> <span class="n">Message</span>
 </pre></div>
 </div>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_19/leaderelection.als#L166-L180"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance191.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_19/leaderelection.als#L173-L187"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance191.png" style="width: 600px;" />
 </a>
 <p>So, before re-running the 3 check commands defined previously for our leader
 election protocol, we should extend the scope of available messages. However, we must first adapt the specification of the properties to the new <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elected</span></code> relation.</p>
@@ -1571,7 +1570,7 @@ not that ‘message’ is added to the successor’s inbox.</p>
 </div>
 <p>The <em>process</em> events are also simpler, and with messages as tuples it is even simpler to specify effects in a point-free style.
 The <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">processElected</span></code> event can be specified as follows. Note that now it is again parametrized by the node identifier expected to be contained in the message to be processed.</p>
-<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processElected</span><span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processElected</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
   <span class="c1">// elected message m is read and processed by node n</span>
 
   <span class="n">Elect</span><span class="o">-&gt;</span><span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">inbox</span>   <span class="c1">// guard</span>
@@ -1582,7 +1581,7 @@ The <code class="code highlight alloy practicalalloy docutils literal highlight-
 </div>
 <p>The guard states that a message with content <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elect</span><span class="o">-&gt;</span><span class="n">i</span></code> should exist in the inbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code>. In the effect, this message is removed from the inbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span></code> and only added to the inbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span><span class="o">.</span><span class="n">succ</span></code> if the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">i</span> <span class="o">!=</span> <span class="n">n</span></code>. This conditional addition is achieved by adding message <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Elect</span><span class="o">-&gt;(</span><span class="n">i</span> <span class="o">-</span> <span class="n">n</span><span class="o">)</span></code> to the inbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">n</span><span class="o">.</span><span class="n">succ</span></code>. Note that <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">i</span> <span class="o">-</span> <span class="n">n</span></code> is empty iff <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">i</span> <span class="o">!=</span> <span class="n">n</span></code>, hence no message will be added in that case.</p>
 <p>The specification of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">processCandidate</span></code> can also be done with a couple of one-liners.</p>
-<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processCandidate</span><span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+<div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">pred</span> <span class="nf">processCandidate</span> <span class="o">[</span><span class="n">n</span> <span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
   <span class="c1">// candidate msg m is read and processed by node n</span>
 
   <span class="n">Candidate</span><span class="o">-&gt;</span><span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">inbox</span>   <span class="c1">// guard</span>
@@ -1618,7 +1617,7 @@ The <code class="code highlight alloy practicalalloy docutils literal highlight-
 </div>
 <p>In this new model all commands return the expected result. Below is a transition for the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">eventually_elected</span></code>
 command.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_20/leaderelection.als#L135-L145"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance20.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_20/leaderelection.als#L142-L152"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance20.png" style="width: 600px;" />
 </a>
 <p>Notice that, without messages as signatures, messages are now represented as
 edges in the visualizer. In this case, the inbox is a ternary relation <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node</span> <span class="o">-&gt;</span>
@@ -1748,7 +1747,7 @@ However, we might want to verify the correctness of our protocol in a more refin
 </pre></div>
 </div>
 <p>This will now return a counter-example, for which a relevant transition is shown below.</p>
-<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/40da9924bc7abef72c2bafb6875e9f779230d48a/protocol-design/instance_21/leaderelection.als#L126-L136"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance211.png" style="width: 600px;" />
+<a class="reference external image-reference" href="https://github.com/practicalalloy/models/blob/2024-02-28/protocol-design/instance_21/leaderelection.als#L133-L143"><img alt="Get the code to generate this instance." class="align-center" src="../../_images/instance211.png" style="width: 600px;" />
 </a>
 <p>The issue is that the inbox of <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code>, the potential leader, is already at full capacity. <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node0</span></code> is attempting to send the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code> identifier to <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="n">Node2</span></code>, but since the queue is already full, the message is discarded. So to ensure liveness in this version of the protocol - and in an eventual implementation with such a communication middleware - one must make sure that the inboxes are large enough to contain all possible messages. Although this counter-example uses very small queues sizes, the problem still might exist in realistic implementations at larger scales.</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
@@ -1811,7 +1810,7 @@ Sequences</div>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Feb 27, 2025</div>
+              Last updated on Feb 28, 2025</div>
           </div>
           <div class="right-details">
             

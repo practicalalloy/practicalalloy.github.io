@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2025-02-27T12:18:25+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Behavioral modelling advanced topics" href="../behavioral-topics/index.html" /><link rel="prev" title="Signature facts" href="../structural-topics/topics/signature-facts/index.html" />
+    <meta property="article:modified_time" content="2025-02-28T09:29:13+00:00" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Behavioral modelling advanced topics" href="../behavioral-topics/index.html" /><link rel="prev" title="Signature facts" href="../structural-topics/topics/signature-facts/index.html" />
 
     <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>Behavioral modeling - Practical Alloy</title>
@@ -349,7 +349,7 @@ infinite sequence of states fully describing a possible path in the respective t
 transitions are identified in red.</p>
 <a class="reference internal image-reference" href="../../_images/invalid.png"><img alt="../../_images/invalid.png" class="align-center" src="../../_images/invalid.png" style="width: 550px;" />
 </a>
-<p>In the first trace we have an invalid initial state where there exist already uploaded files, and a transition where simultaneously an file is restored and another file is deleted. In the second trace we have two invalid transitions: in the first we have a simultaneous upload and delete, and in the second we have a file that is no longer uploaded without being first put in the trash bin with a deletion. In the third trace we also have two invalid transitions: in the first we have two files that are simultaneously deleted, and in the second a transition where the trash bin is not fully emptied. Some readers might argue that these two transitions are not problematic and could be allowed. In our specification they will be ruled out, but indeed it is perfectly reasonable to conceive a file sharing app where they are possible. One of the goals of the design phase is precisely to explore such alternative behaviors and choose the one that better fits our goals.</p>
+<p>In the first trace we have an invalid initial state where there exist already uploaded files, and a transition where simultaneously a file is restored and another file is deleted. In the second trace we have two invalid transitions: in the first we have a simultaneous upload and delete, and in the second we have a file that is no longer uploaded without being first put in the trash bin with a deletion. In the third trace we also have two invalid transitions: in the first we have two files that are simultaneously deleted, and in the second a transition where the trash bin is not fully emptied. Some readers might argue that these two transitions are not problematic and could be allowed. In our specification they will be ruled out, but indeed it is perfectly reasonable to conceive a file sharing app where they are possible. One of the goals of the design phase is precisely to explore such alternative behaviors and choose the one that better fits our goals.</p>
 <p id="index-4">The formula specifying a transition system can typically be divided in two
 parts: one formula that specifies what are the valid initial states,
 and another that specifies how the system can evolve from those initial states. In the initial state of our app no files are uploaded (and, consequently, no files are trashed) and no files have access tokens assigned.
@@ -580,7 +580,7 @@ Full model for the section</div>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-Macros</div>
+Macro system</div>
 <p class="sd-card-text">Alloy has a basic macro system that can be used, for example, to define a macro to simplify the specification of frame conditions.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/macros/index.html#macros"><span class="std std-ref">Macro system</span></a></div>
@@ -725,7 +725,7 @@ Full model for the section</div>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-Event depiction</div>
+An idiom for event depiction</div>
 <p class="sd-card-text">Learn a simple Alloy idiom that can be used to depict which events occurred in each transition of a trace.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/event-depiction/index.html#event-depiction"><span class="std std-ref">An idiom for event depiction</span></a></div>
@@ -735,7 +735,7 @@ Event depiction</div>
 </div>
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-Encoding scenarios</div>
+Encoding trace scenarios</div>
 <p class="sd-card-text">Learn how to specify <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">run</span></code> commands that directly search for specific scenarios, where a particular sequence of actions occurred, namely the one used in this chapter to perform the validation.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="../behavioral-topics/topics/scenarios/index.html#scenarios"><span class="std std-ref">Encoding trace scenarios</span></a></div>
@@ -759,7 +759,7 @@ both specify the system and its expected properties. In many formal
 specification languages and verification tools (namely, most model
 checkers), a different language is used for each. In Alloy we use
 linear temporal logic, of which we already presented some operators, namely the fundamental <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">always</span></code> and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">eventually</span></code> operators, and also the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">after</span></code> operator, that requires a formula to be true in the next state (which always exists because traces are infinite).
-These are examples of operators that constrain the future behavior in a trace, but in Alloy we also have operators that constrain the past behavior. We already saw one example of the latter, namely the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">historically</span></code> operator that forces a formula to always be true in the past (including the current state). Alloy has a few more temporal operators. For example, we have <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">once</span></code> that requires a formula to be true sometime in the past (or in the current state), and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">before</span></code> that requires a formula to be true in the previous state (if evaluated in a initial state it will always be false because there is no previous state). All these are unary operators, but Alloy also has a few binary temporal operators. One of the most useful is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">releases</span></code>, that enforces the right-hand side formula to only stop being true after the left-hand side formula becomes true.</p>
+These are examples of operators that constrain the future behavior in a trace, but in Alloy we also have operators that constrain the past behavior. We already saw one example of the latter, namely the <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">historically</span></code> operator that forces a formula to always be true in the past (including the current state). Alloy has a few more temporal operators. For example, we have <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">once</span></code> that requires a formula to be true sometime in the past (or in the current state), and <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">before</span></code> that requires a formula to be true in the previous state (if evaluated in an initial state it will always be false because there is no previous state). All these are unary operators, but Alloy also has a few binary temporal operators. One of the most useful is <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">releases</span></code>, that enforces the right-hand side formula to only stop being true after the left-hand side formula becomes true.</p>
 <p id="index-17">As we have already seen, formulas that we want to verify with <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="k">check</span></code> commands can be written in
 assertions. The most frequent (and simple) temporal properties we can specify with temporal logic are <em>invariants</em>, formulas requiring some constraint to be true in all states of all possible behaviors. These can be specified with a single <code class="code highlight alloy practicalalloy docutils literal highlight-practicalalloy"><span class="ow">always</span></code> followed by the invariant property. For example, an invariant that should be valid in our app is that all shared files should still be uploaded and not in the trash. This assertion can be specified and checked as follows.</p>
 <div class="highlight-practicalalloy notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nf">shared_are_accessible</span> <span class="o">{</span>
@@ -944,7 +944,7 @@ Sequences</div>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Feb 27, 2025</div>
+              Last updated on Feb 28, 2025</div>
           </div>
           <div class="right-details">
             

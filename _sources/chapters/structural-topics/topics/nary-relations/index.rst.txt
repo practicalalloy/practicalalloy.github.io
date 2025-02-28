@@ -49,7 +49,7 @@ declared as follows:
    }
 
 The range type expression in the declaration of :alloy:`contents` is now the Cartesian product of `Name` and `Object`, meaning each
-directory is assigned a arbitrary set of pairs each with a name and object inside that
+directory is assigned an arbitrary set of pairs each with a name and object inside that
 directory. Field :alloy:`contents` itself is a ternary relation that is a subset of the Cartesian product
 :alloy:`Dir -> Name -> Object`. A ternary field is simply a set of flatted triples, and likewise binary relations can be navigated in
 both directions. 
@@ -267,7 +267,7 @@ to the ternary field as follows.
 .. index::
   util/ternary module
 
-Manipulating ternary relations can become cumbersome, so the Analyzer actually provides an utility module :alloy:`util/ternary` that defines functions to project and flip ternary relations. The one we just defined, that retrieves the first and last columns of a ternary relation, is provided by function `select13`.
+Manipulating ternary relations can become cumbersome, so the Analyzer actually provides a utility module :alloy:`util/ternary` that defines functions to project and flip ternary relations. The one we just defined, that retrieves the first and last columns of a ternary relation, is provided by function `select13`.
 
 If we now run the empty :alloy:`example` command once again, we will get
 instances such as the following, where the issues seem to have been fixed.
